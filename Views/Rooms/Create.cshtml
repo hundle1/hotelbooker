@@ -58,16 +58,17 @@
         document.addEventListener('DOMContentLoaded', function () {
             const toggleButton = document.querySelector('.toggle-status');
             const hiddenInput = document.querySelector('input[name="Status"]');
-            const releaseDateGroup = document.querySelector('.form-group input[name="ReleaseDate"]').closest('.form-group');
+            const releaseDateGroup = document.querySelector('input[name="ReleaseDate"]').closest('.form-group');
 
             function updateReleaseDateVisibility(isInUsed) {
                 if (isInUsed) {
                     releaseDateGroup.style.display = '';
                 } else {
                     releaseDateGroup.style.display = 'none';
-                    document.querySelector('input[name="ReleaseDate"]').value = ''; 
+                    document.querySelector('input[name="ReleaseDate"]').value = '';
                 }
             }
+
             toggleButton.addEventListener('click', function () {
                 const currentValue = toggleButton.getAttribute('data-value') === 'true';
                 const newValue = !currentValue;
@@ -77,9 +78,12 @@
 
                 updateReleaseDateVisibility(newValue);
             });
+
             const initialValue = hiddenInput.value === 'true';
             updateReleaseDateVisibility(initialValue);
         });
     </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
 

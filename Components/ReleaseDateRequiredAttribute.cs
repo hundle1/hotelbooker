@@ -11,6 +11,7 @@ public class ReleaseDateRequiredAttribute : ValidationAttribute
         {
             return new ValidationResult("ReleaseDate is required when the room is In Used.");
         }
+
         return ValidationResult.Success;
     }
 }
