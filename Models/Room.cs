@@ -15,5 +15,6 @@ namespace HotelBooker.Models
 
         public string? Services { get; set; }
         public decimal Price { get; set; }
+        public string? RoomImage { get; set; }
     }
 }

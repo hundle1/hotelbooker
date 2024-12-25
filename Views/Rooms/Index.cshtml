@@ -27,6 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomImage)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -47,6 +50,9 @@
             </td>
             <td>
                 USD @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <img src="@Url.Content("~/img/" + item.RoomImage)" alt="@item.RoomName" style="width:100px; height:auto;" />
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

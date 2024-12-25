@@ -29,6 +29,9 @@ namespace HotelBooker.Migrations
                     b.Property<DateTime?>("ReleaseDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("RoomImage")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("RoomName")
                         .HasColumnType("TEXT");
 

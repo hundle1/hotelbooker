@@ -19,9 +19,10 @@ namespace HotelBooker.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     RoomName = table.Column<string>(type: "TEXT", nullable: true),
                     Status = table.Column<bool>(type: "INTEGER", nullable: false),
-                    ReleaseDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ReleaseDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Services = table.Column<string>(type: "TEXT", nullable: true),
-                    Price = table.Column<decimal>(type: "TEXT", nullable: false)
+                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
+                    RoomImage = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooker.Migrations
 {
     [DbContext(typeof(HotelBookerContext))]
-    [Migration("20241225031727_UpdateReleaseDateNullable")]
-    partial class UpdateReleaseDateNullable
+    [Migration("20241225161452_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,9 @@ namespace HotelBooker.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("ReleaseDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoomImage")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RoomName")

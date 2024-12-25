@@ -60,3 +60,81 @@ body {
   }
 
 /* end nav css  */
+
+
+/* room image  */
+
+.image-selection .form-check {
+  display: inline-block;
+  margin-right: 15px;
+}
+.image-selection img {
+  border: 1px solid #ccc;
+  padding: 5px;
+  cursor: pointer;
+}
+.image-selection input[type="radio"]:checked + label img {
+  border-color: #007bff;
+}
+
+.image-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  justify-content: center;
+}
+
+.image-selection .form-check {
+  flex: 0 1 calc(33.333% - 20px); 
+  box-sizing: border-box; 
+  text-align: center; 
+}
+
+.image-selection img {
+  width: 100%; 
+  height: auto; 
+  border: 2px solid transparent; 
+  transition: border-color 0.2s ease-in-out; 
+}
+
+.image-selection input[type="radio"]:checked + label img {
+  border-color: #007bff; 
+}
+
+.image-selection img:hover {
+  border-color: #5a5a5a; 
+}
+
+    .image-selection {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Khoảng cách giữa các ảnh */
+        justify-content: center;
+    }
+
+    .image-selection .form-check {
+        flex: 0 1 calc(40% - 20px); /* 2–3 ảnh mỗi hàng, trừ khoảng cách */
+        box-sizing: border-box; /* Đảm bảo kích thước chính xác */
+        text-align: center; /* Căn giữa nội dung */
+    }
+
+    .image-selection img {
+        width: 100%; /* Đảm bảo ảnh chiếm toàn bộ chiều rộng thẻ cha */
+        height: auto; /* Tự động điều chỉnh chiều cao để giữ tỷ lệ */
+        border: 2px solid transparent; /* Đường viền mặc định */
+        transition: border-color 0.2s ease-in-out; /* Hiệu ứng khi hover */
+    }
+
+    .image-selection input[type="radio"]:checked + label img {
+        border-color: #007bff; /* Đổi màu đường viền khi chọn */
+    }
+
+    .image-selection img:hover {
+        border-color: #5a5a5a; /* Đổi màu khi hover */
+    }
+
+
+
+/* room img end  */
+
+

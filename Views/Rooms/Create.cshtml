@@ -9,7 +9,7 @@
 <h4>Room</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div>
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -41,6 +41,42 @@
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomImage" class="control-label"></label>
+                <div class="image-selection">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="RoomImage" id="room1" value="room1.jpg" checked>
+                        <label class="form-check-label" for="room1">
+                            <img src="@Url.Content("~/img/room1.jpg")" alt="Room 1" class="img-thumbnail">
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="RoomImage" id="room2" value="room2.jpg">
+                        <label class="form-check-label" for="room2">
+                            <img src="@Url.Content("~/img/room2.jpg")" alt="Room 2" class="img-thumbnail">
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="RoomImage" id="room3" value="room3.jpg">
+                        <label class="form-check-label" for="room3">
+                            <img src="@Url.Content("~/img/room3.jpg")" alt="Room 3" class="img-thumbnail">
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="RoomImage" id="room4" value="room4.jpg">
+                        <label class="form-check-label" for="room4">
+                            <img src="@Url.Content("~/img/room4.jpg")" alt="Room 4" class="img-thumbnail">
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="RoomImage" id="room5" value="room5.jpg">
+                        <label class="form-check-label" for="room5">
+                            <img src="@Url.Content("~/img/room5.jpg")" alt="Room 5" class="img-thumbnail">
+                        </label>
+                    </div>
+                </div>
+                <span asp-validation-for="RoomImage" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

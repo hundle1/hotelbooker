@@ -54,15 +54,15 @@ namespace HotelBooker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RoomName,Status,ReleaseDate,Services,Price")] Room room)
+        public async Task<IActionResult> Create(Room room)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(room);
-                await _context.SaveChangesAsync();
+                _context.Add(room); // Thêm thông tin Room, bao gồm RoomImage, vào database
+                await _context.SaveChangesAsync(); // Lưu thay đổi
                 return RedirectToAction(nameof(Index));
             }
-            return View(room);
+            return View(room); // Quay lại form nếu ModelState không hợp lệ
         }
 
         // GET: Rooms/Edit/5
