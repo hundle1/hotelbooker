@@ -8,9 +8,9 @@ namespace HotelBooker.Controllers
         {
         }
 
-        public string Index()
+        public IActionResult Index()
         {
-            return "Hiển thị danh sách phòng và chức năng book phòng";
+            return View();
         }
     }
 }
