@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using HotelBooker.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<HotelBookerContext>(options =>
