@@ -43,27 +43,27 @@ namespace HotelBooker.Controllers
             return View(room);
         }
 
-        // GET: Rooms/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Rooms/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Room room)
+        public async Task<IActionResult> Create(Room room, string[] Furniture)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(room); // Thêm thông tin Room, bao gồm RoomImage, vào database
-                await _context.SaveChangesAsync(); // Lưu thay đổi
+                room.Furniture = string.Join(", ", Furniture); 
+                _context.Add(room);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(room); // Quay lại form nếu ModelState không hợp lệ
+            return View(room);
         }
+
+
 
         // GET: Rooms/Edit/5
         public async Task<IActionResult> Edit(int? id)
