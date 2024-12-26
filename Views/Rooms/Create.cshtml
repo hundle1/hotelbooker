@@ -3,118 +3,121 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Public Room Details</h1>
-<hr />
-<div class="row">
-    <div>
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <h4><label asp-for="RoomName" class="control-label"></label></h4>
-                <input asp-for="RoomName" class="form-control" />
-                <span asp-validation-for="RoomName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <h4><label class="control-label" asp-for="Status"></label></h4>
-                <div>
-                    <button type="button" class="btn btn-primary toggle-status" data-value="false">
-                        Available
-                    </button>
-                    <input type="hidden" asp-for="Status" value="false" />
+<div class="container" style="padding-top: 100px;">
+    <h1>Public Room Details</h1>
+    <hr />
+    <div class="row">
+        <div>
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <h4><label asp-for="RoomName" class="control-label"></label></h4>
+                    <input asp-for="RoomName" class="form-control" />
+                    <span asp-validation-for="RoomName" class="text-danger"></span>
                 </div>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <h4><label asp-for="ReleaseDate" class="control-label"></label></h4>
-                <input asp-for="ReleaseDate" class="form-control" />
-                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <h4><label asp-for="Services" class="control-label"></label></h4>
-                <input asp-for="Services" class="form-control" />
-                <span asp-validation-for="Services" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <h4><label asp-for="Price" class="control-label"></label></h4>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <h4><label asp-for="RoomImage" class="control-label"></label></h4>
-                <div class="image-selection">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="RoomImage" id="room1" value="room1.jpg" checked>
-                        <label class="form-check-label" for="room1">
-                            <img src="@Url.Content("~/img/room1.jpg")" alt="Room 1" class="img-thumbnail">
-                        </label>
+                <div class="form-group">
+                    <h4><label class="control-label" asp-for="Status"></label></h4>
+                    <div>
+                        <button type="button" class="btn btn-primary toggle-status" data-value="false">
+                            Available
+                        </button>
+                        <input type="hidden" asp-for="Status" value="false" />
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="RoomImage" id="room2" value="room2.jpg">
-                        <label class="form-check-label" for="room2">
-                            <img src="@Url.Content("~/img/room2.jpg")" alt="Room 2" class="img-thumbnail">
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="RoomImage" id="room3" value="room3.jpg">
-                        <label class="form-check-label" for="room3">
-                            <img src="@Url.Content("~/img/room3.jpg")" alt="Room 3" class="img-thumbnail">
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="RoomImage" id="room4" value="room4.jpg">
-                        <label class="form-check-label" for="room4">
-                            <img src="@Url.Content("~/img/room4.jpg")" alt="Room 4" class="img-thumbnail">
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="RoomImage" id="room5" value="room5.jpg">
-                        <label class="form-check-label" for="room5">
-                            <img src="@Url.Content("~/img/room5.jpg")" alt="Room 5" class="img-thumbnail">
-                        </label>
-                    </div>
+                    <span asp-validation-for="Status" class="text-danger"></span>
                 </div>
-                <span asp-validation-for="RoomImage" class="text-danger"></span>
-            </div>
-            <div class="form-group" style="margin-top: 60px;">
-                <h4><label asp-for="Furniture" class="control-label"></label></h4>
-                <div class="d-flex flex-row justify-content-around">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="Furniture" id="bed" value="Bed">
-                        <label class="form-check-label" for="bed">Bed</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="Furniture" id="sofa" value="Sofa">
-                        <label class="form-check-label" for="sofa">Sofa</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="Furniture" id="table" value="Table">
-                        <label class="form-check-label" for="table">Table</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="Furniture" id="chair" value="Chair">
-                        <label class="form-check-label" for="chair">Chair</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="Furniture" id="wardrobe" value="Wardrobe">
-                        <label class="form-check-label" for="wardrobe">Wardrobe</label>
-                    </div>
+                <div class="form-group">
+                    <h4><label asp-for="ReleaseDate" class="control-label"></label></h4>
+                    <input asp-for="ReleaseDate" class="form-control" />
+                    <span asp-validation-for="ReleaseDate" class="text-danger"></span>
                 </div>
-                <span asp-validation-for="Furniture" class="text-danger"></span>
-            </div>
-            <div class="form-group" style="margin-top: 60px;">
-                <h4><label asp-for="Description" class="control-label"></label></h4>
-                <textarea asp-for="Description" class="form-control" rows="5"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group" style="margin-top: 20px;">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <h4><label asp-for="Services" class="control-label"></label></h4>
+                    <input asp-for="Services" class="form-control" />
+                    <span asp-validation-for="Services" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <h4><label asp-for="Price" class="control-label"></label></h4>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <h4><label asp-for="RoomImage" class="control-label"></label></h4>
+                    <div class="image-selection">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="RoomImage" id="room1" value="room1.jpg"
+                                checked>
+                            <label class="form-check-label" for="room1">
+                                <img src="@Url.Content("~/img/room1.jpg")" alt="Room 1" class="img-thumbnail">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="RoomImage" id="room2" value="room2.jpg">
+                            <label class="form-check-label" for="room2">
+                                <img src="@Url.Content("~/img/room2.jpg")" alt="Room 2" class="img-thumbnail">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="RoomImage" id="room3" value="room3.jpg">
+                            <label class="form-check-label" for="room3">
+                                <img src="@Url.Content("~/img/room3.jpg")" alt="Room 3" class="img-thumbnail">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="RoomImage" id="room4" value="room4.jpg">
+                            <label class="form-check-label" for="room4">
+                                <img src="@Url.Content("~/img/room4.jpg")" alt="Room 4" class="img-thumbnail">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="RoomImage" id="room5" value="room5.jpg">
+                            <label class="form-check-label" for="room5">
+                                <img src="@Url.Content("~/img/room5.jpg")" alt="Room 5" class="img-thumbnail">
+                            </label>
+                        </div>
+                    </div>
+                    <span asp-validation-for="RoomImage" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-top: 60px;">
+                    <h4><label asp-for="Furniture" class="control-label"></label></h4>
+                    <div class="d-flex flex-row justify-content-around">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="bed" value="Bed">
+                            <label class="form-check-label" for="bed">Bed</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="sofa" value="Sofa">
+                            <label class="form-check-label" for="sofa">Sofa</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="table" value="Table">
+                            <label class="form-check-label" for="table">Table</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="chair" value="Chair">
+                            <label class="form-check-label" for="chair">Chair</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="wardrobe"
+                                value="Wardrobe">
+                            <label class="form-check-label" for="wardrobe">Wardrobe</label>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Furniture" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-top: 60px;">
+                    <h4><label asp-for="Description" class="control-label"></label></h4>
+                    <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-<div style="margin-top: 20px;">
-    <a asp-action="Index" class="btn btn-dark">Back to List</a>
+    <div style="margin-top: 20px;">
+        <a asp-action="Index" class="btn btn-dark">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {
@@ -147,7 +150,7 @@
             updateReleaseDateVisibility(initialValue);
         });
     </script>
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
-
-
