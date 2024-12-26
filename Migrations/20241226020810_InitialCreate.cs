@@ -22,7 +22,9 @@ namespace HotelBooker.Migrations
                     ReleaseDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Services = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    RoomImage = table.Column<string>(type: "TEXT", nullable: true)
+                    RoomImage = table.Column<string>(type: "TEXT", nullable: true),
+                    Furniture = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
