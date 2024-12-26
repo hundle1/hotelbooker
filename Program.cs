@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using HotelBooker.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<HotelBookerContext>(options =>
@@ -7,6 +6,7 @@ builder.Services.AddDbContext<HotelBookerContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<HotelBooker.Services.RoomService>();
 
 var app = builder.Build();
 

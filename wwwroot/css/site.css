@@ -26,6 +26,7 @@ body {
 .navbar-img a img{
   border-radius: 5px;
   width: 48px;
+  margin-left: 80px;
 }
 
 
@@ -40,7 +41,7 @@ body {
 
   .navbar-nav{
     margin-left: 10%;
-    width: 81%;
+    width: 65%;
     justify-content:center;
   }
 
@@ -231,7 +232,7 @@ body {
 
 .video-container {
   position: relative;
-  height: 100vh;
+  height: 110vh;
   width: 100%;
   overflow: hidden;
   z-index: -1;
