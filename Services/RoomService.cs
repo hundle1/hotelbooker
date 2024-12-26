@@ -21,7 +21,9 @@ namespace HotelBooker.Services
 
         public Room GetRoomById(int id)
         {
+#pragma warning disable CS8603 // Possible null reference return.
             return _context.Room.FirstOrDefault(r => r.Id == id);
+#pragma warning restore CS8603 // Possible null reference return.
         }
     }
 }
