@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-modified border-bottom box-shadow">
             <div class="container-fluid">
                 <div class="navbar-img">
                     <a class="navbar-brand" href="@Url.Action("Index", "Home")">
@@ -41,13 +41,13 @@
                         </li>
                     </ul>
                     <li class="nav-item2">
-                        <a class="nav-link2 text-white" asp-area="" asp-controller="Rooms" asp-action="Index">Room - For admin account</a>
+                        <a class="nav-link2 text-white btn btn-info" asp-area="" asp-controller="Rooms" asp-action="Index">Room - For admin account</a>
                     </li>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" style="max-width: 100%;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

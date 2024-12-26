@@ -138,3 +138,37 @@ body {
 /* room img end  */
 
 
+/* home page  */
+
+.pos-adjust{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:1;
+  color: #fff;
+}
+
+.bg-modified{
+  background-color:rgba(112, 112, 112, 0.43);
+}
+
+.vid-adjust{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:-1;
+  color: #fff;
+  object-fit: cover;
+}
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Đảm bảo video bao phủ toàn bộ màn hình */
+}
+
+
+
+/* end home page  */
