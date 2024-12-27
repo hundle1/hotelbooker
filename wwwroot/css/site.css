@@ -29,7 +29,9 @@ body {
   margin-left: 80px;
 }
 
-
+.nav-link2:hover {
+  color: #000000 !important;
+}
 /* end nav css  */
 
 
