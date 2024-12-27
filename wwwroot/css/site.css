@@ -282,3 +282,31 @@ body {
 }
 
 /* end Booker  */
+
+
+
+/* item room  */
+.item-hov {
+  position: relative;
+  overflow: hidden; /* Đảm bảo hình ảnh không tràn ra ngoài viền */
+  display: inline-block;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.item-hov img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s; /* Thêm hiệu ứng mượt mà khi zoom */
+}
+
+.item-hov:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.item-hov:hover img {
+  transform: scale(1.1); /* Zoom ảnh bên trong */
+}
+
+
+/* item room end  */

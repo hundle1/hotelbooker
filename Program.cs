@@ -1,22 +1,28 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using HotelBooker.Data;
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<HotelBookerContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("HotelBookerContext") ?? throw new InvalidOperationException("Connection string 'HotelBookerContext' not found.")));
+using HotelBooker.Services; // Đảm bảo import đúng namespace
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+
+// Configure DbContext for SQLite
+builder.Services.AddDbContext<HotelBookerContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("HotelBookerContext") 
+                      ?? throw new InvalidOperationException("Connection string 'HotelBookerContext' not found.")));
+
+// Add services to the container
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<HotelBooker.Services.RoomService>();
+
+// Register RoomService
+builder.Services.AddScoped<RoomService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseHsts(); // Configure HSTS for production
 }
 
 app.UseHttpsRedirection();
@@ -26,10 +32,11 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// app.MapControllerRoute(
-//     name: "Admin",
-//     pattern: "{area.exists}/{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
+// Map default controller route
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
