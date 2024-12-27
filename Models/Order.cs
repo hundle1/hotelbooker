@@ -5,26 +5,13 @@ namespace HotelBooker.Models
     public class Order
     {
         public int Id { get; set; }
-
+        public int HotelId { get; set; }
         [StringLength(60, MinimumLength = 3)]
         [Required]
-        public string? RoomName { get; set; }
-        public bool Status { get; set; }
-
-        [ReleaseDateRequired]
+        public required string? CustomerName { get; set; }
         [DataType(DataType.Date)]
-        public DateTime? ReleaseDate { get; set; } 
-
-        public string? Services { get; set; }
-
-        [Range(1, 5000)]
-        [Required]
-        public decimal Price { get; set; }
-        public string? RoomImage { get; set; }
-
-        public string? Furniture { get; set; }
-
-        [Required]
-        public string? Description { get; set; }
+        public required DateTime CheckInDate { get; set; }
+        public required DateTime CheckOutDate { get; set; }
+        public string? ServiceWanted { get; set; }
     }
 }
