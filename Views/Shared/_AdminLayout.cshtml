@@ -2,23 +2,14 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-</head>
-
-<head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@ViewData["Title"] | HotelBooker</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
     <!-- Place favicon.ico in the root directory -->
-
     <!-- CSS here -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -36,9 +27,42 @@
     <link rel="stylesheet" href="~/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
-
 <body>
-    @(await Component.InvokeAsync("Navbar"))
+    <header>
+        <div id="sidebar" class="sidebar active">
+            <button class="close-btn" onclick="toggleSidebar()" ><i class="fa fa-bars"></i></button>
+            <nav style="margin-top: 70px;">
+                <ul id="navigation">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="fa fa-home"></i> <span class="text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="fa fa-image"></i> <span class="text">Gallery</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Book" asp-action="Index">
+                            <i class="fa fa-book"></i> <span class="text">Booker</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="fa fa-newspaper-o"></i> <span class="text">Blogs</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                            <i class="fa fa-lock"></i> <span class="text">Privacy</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </header>
     <div class="" style="max-width: 100%;">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -73,7 +97,6 @@
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/gijgo.min.js"></script>
-
     <!--contact js-->
     <script src="js/contact.js"></script>
     <script src="js/jquery.ajaxchimp.min.js"></script>
@@ -86,17 +109,33 @@
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
             icons: {
-             rightIcon: '<span class="fa fa-caret-down"></span>'
-         }
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
         });
         $('#datepicker2').datepicker({
             iconsLibrary: 'fontawesome',
             icons: {
-             rightIcon: '<span class="fa fa-caret-down"></span>'
-         }
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
 
         });
+
+        @* sidebar BarProp  *@
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            const body = document.body;
+            sidebar.classList.toggle("collapsed");
+            body.classList.toggle("sidebar-collapsed");
+        }
+
+        window.onload = () => {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.add("active");
+        };
+
+
     </script>
+
 </body>
 
 </html>
