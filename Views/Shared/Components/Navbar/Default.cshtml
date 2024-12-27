@@ -1,79 +1,78 @@
 <header>
-        <div class="header-area">
-            <div id="sticky-header" class="main-header-area">
-                <div class="container-fluid p-0">
-                    <div class="row align-items-center no-gutters">
-                        <div class="col-xl-5 col-lg-6">
-                            <div class="main-menu  d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation" style="color: #ccc !important;">
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white" asp-area="" asp-controller="Home"
-                                                asp-action="Index">Home</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white" asp-area="" asp-controller="Home"
-                                                asp-action="Index">Gallery</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white" asp-area="" asp-controller="Book"
-                                                asp-action="Index">Booker</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white" asp-area="" asp-controller="Home"
-                                                asp-action="Index">Blogs</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">blog</a></li>
-                                                <li><a href="single-blog.html">single-blog</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white" asp-area="" asp-controller="Home"
-                                                asp-action="Privacy">Privacy</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+    <div class="header-area">
+        <div id="sticky-header" class="main-header-area">
+            <div class="container-fluid p-0">
+                <div class="row align-items-center no-gutters">
+                    <div class="col-xl-5 col-lg-6">
+                        <div class="main-menu  d-none d-lg-block">
+                            <nav>
+                                <ul id="navigation" style="color: #ccc !important;">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Home"
+                                            asp-action="Index">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Home"
+                                            asp-action="Index">Gallery</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Book"
+                                            asp-action="Index">Booker</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Home"
+                                            asp-action="Index">Blogs</a>
+                                        <ul class="submenu">
+                                            <li><a href="blog.html">blog</a></li>
+                                            <li><a href="single-blog.html">single-blog</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Home"
+                                            asp-action="Privacy">Privacy</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="navbar-img">
+                            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                                <img src="@Url.Content("~/img/logo.jpg")" alt="Logo" style="height:40px;" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-5 d-none d-lg-block">
+                        <div class="book_room">
+                            <div class="socail_links">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link2 text-white btn btn-dark" asp-area=""
+                                            asp-controller="Book" asp-action="Order"><i class="fa fa-bell-o"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="book_btn d-none d-lg-block">
+                                <a class="nav-link2 text-white btn btn-dark" asp-area="Admin" asp-controller="Rooms"
+                                    asp-action="Index">ADMIN</a>
                             </div>
                         </div>
-                        <div class="col-lg-2">
-                            <div class="navbar-img">
-                                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-                                    <img src="@Url.Content("~/img/logo.jpg")" alt="Logo" style="height:40px;" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-5 d-none d-lg-block">
-                            <div class="book_room">
-                                <div class="socail_links">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-facebook-square"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-instagram"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="book_btn d-none d-lg-block">
-                                    <a class="nav-link2 text-white btn btn-dark" asp-area="Admin" asp-controller="Rooms"
-                                        asp-action="Index">ADMIN</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>

@@ -18,5 +18,10 @@ namespace HotelBooker.Controllers
             var rooms = _roomService.GetAllRooms();
             return View(rooms);
         }
+
+        public IActionResult Order()
+        {
+            return View();
+        }
     }
 }

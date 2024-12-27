@@ -44,14 +44,14 @@
                             <img src="@Url.Content("~/img/" + room.RoomImage)" class="card-img-top" alt="@room.RoomName" style="height: 200px; object-fit: cover;">
                             <div class="card-body">
                                 <h5 align="center" style="padding-top: 10px;">Status: @(room.Status ? "In Used" : "Available")</h5>
-                                <h5 class="card-title">@room.RoomName</h5>
+                                <h4 class="card-title" style="font-family: sans-serif;">@room.RoomName</h4>
                                     Price: @room.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-US"))<br />
                                     Category: @room.Services<br />
                                 <p class="card-text">
                                     <div class="furniture-list">
                                         @foreach (var furniture in room.Furniture.Split(','))
                                         {
-                                            <div class="furniture-item">@furniture</div>
+                                            <div class="furniture-item" style="font-family: sans-serif;">@furniture</div>
                                         }
                                     </div>
                                 </p>

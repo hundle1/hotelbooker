@@ -259,7 +259,7 @@ body {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .furniture-item {
@@ -323,7 +323,7 @@ body {
     left: 0;
     width: 250px;
     height: 100%;
-    background-color: #2c3e50;
+    background-color:rgb(0, 0, 0);
     color: white;
     transition: 0.3s;
     overflow-x: hidden;
