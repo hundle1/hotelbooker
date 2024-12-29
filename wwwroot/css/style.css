@@ -11,7 +11,7 @@
 .home__container__slider {
     margin: auto;
     position: absolute;
-    top: 22%;
+    top: 7%;
     left: 50%;
     transform: translateX(-50%);
 }

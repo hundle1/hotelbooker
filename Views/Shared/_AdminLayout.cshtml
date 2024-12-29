@@ -27,15 +27,16 @@
     <link rel="stylesheet" href="~/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
+
 <body>
     <header>
-        <div id="sidebar" class="sidebar active">
-            <button class="close-btn" onclick="toggleSidebar()" ><i class="fa fa-bars"></i></button>
+        <div id="sidebar" class="sidebar " style="display:flex; flex-wrap:wrap; justify-content:space-between; flex-direction:column;">
+            <button class="close-btn nav-link" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
             <nav style="margin-top: 70px;">
                 <ul id="navigation">
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                            <i class="fa fa-home"></i> <span class="text">Home</span>
+                        <a class="nav-link active-admin" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i  style="margin-left: -3px;" class="fa fa-home"></i> <span class="text">Dash Board</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -60,6 +61,11 @@
                     </li>
                 </ul>
             </nav>
+            <div class="">
+                <a class="nav-link back-home-hov" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="text">Back to Home (Travelix) </span>
+                </a>
+            </div>
         </div>
 
     </header>
@@ -69,7 +75,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="position: relative; top: 422px;">
         <div class="container">
             &copy; 2024 - HotelBooker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
@@ -121,12 +127,12 @@
         });
 
         @* sidebar BarProp  *@
-        function toggleSidebar() {
-            const sidebar = document.getElementById("sidebar");
-            const body = document.body;
-            sidebar.classList.toggle("collapsed");
-            body.classList.toggle("sidebar-collapsed");
-        }
+            function toggleSidebar() {
+                const sidebar = document.getElementById("sidebar");
+                const body = document.body;
+                sidebar.classList.toggle("collapsed");
+                body.classList.toggle("sidebar-collapsed");
+            }
 
         window.onload = () => {
             const sidebar = document.getElementById("sidebar");
