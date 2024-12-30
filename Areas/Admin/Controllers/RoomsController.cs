@@ -1,85 +1,46 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using HotelBooker.Data;
 using HotelBooker.Models;
+using HotelBooker.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HotelBooker.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class RoomsController : Controller
     {
-        private readonly HotelBookerContext _context;
+        private readonly RoomService _roomService;
 
-        public RoomsController(HotelBookerContext context)
+        public RoomsController(RoomService roomService)
         {
-            _context = context;
+            _roomService = roomService;
         }
 
         // GET: Rooms
-        public IActionResult Index(string SearchString, string PriceRange, string Status)
+        public async Task<IActionResult> Index()
         {
-            var rooms = _context.Room.AsQueryable();
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                rooms = rooms.Where(r => r.RoomName.Contains(SearchString));
-            }
-            if (!string.IsNullOrEmpty(PriceRange))
-            {
-                switch (PriceRange)
-                {
-                    case "1":
-                        rooms = rooms.Where(r => r.Price >= 0 && r.Price <= 500);
-                        break;
-                    case "2":
-                        rooms = rooms.Where(r => r.Price > 500 && r.Price <= 1000);
-                        break;
-                    case "3":
-                        rooms = rooms.Where(r => r.Price > 1000);
-                        break;
-                }
-            }
-            // Lọc theo trạng thái (Status)
-            if (!string.IsNullOrEmpty(Status))
-            {
-                var isAvailable = Status == "true";
-                rooms = rooms.Where(r => r.Status == isAvailable);
-            }
-
-            // Truyền giá trị của `SearchString` vào ViewData để giữ trạng thái input
-            ViewData["CurrentFilter"] = SearchString;
-
-            return View(rooms.ToList());
+            var rooms = await _roomService.GetAllRoomsAsync();
+            return View(rooms);
         }
 
         // GET: Rooms/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var room = await _context.Room
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (room == null)
-            {
-                return NotFound();
-            }
+            var room = await _roomService.GetRoomByIdAsync(id.Value);
+            if (room == null) return NotFound();
 
             return View(room);
         }
 
+        // GET: Rooms/Create
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
+        // POST: Rooms/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Room room, string[] Furniture)
@@ -87,61 +48,33 @@ namespace HotelBooker.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 room.Furniture = string.Join(", ", Furniture);
-                _context.Add(room);
-                await _context.SaveChangesAsync();
+                await _roomService.CreateRoomAsync(room);
                 return RedirectToAction(nameof(Index));
             }
             return View(room);
         }
 
-
-
         // GET: Rooms/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var room = await _context.Room.FindAsync(id);
-            if (room == null)
-            {
-                return NotFound();
-            }
+            var room = await _roomService.GetRoomByIdAsync(id.Value);
+            if (room == null) return NotFound();
+
             return View(room);
         }
 
         // POST: Rooms/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RoomName,Status,ReleaseDate,Services,Price")] Room room)
+        public async Task<IActionResult> Edit(int id, Room room)
         {
-            if (id != room.Id)
-            {
-                return NotFound();
-            }
+            if (id != room.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(room);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RoomExists(room.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _roomService.UpdateRoomAsync(room);
                 return RedirectToAction(nameof(Index));
             }
             return View(room);
@@ -150,17 +83,10 @@ namespace HotelBooker.Areas.Admin.Controllers
         // GET: Rooms/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var room = await _context.Room
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (room == null)
-            {
-                return NotFound();
-            }
+            var room = await _roomService.GetRoomByIdAsync(id.Value);
+            if (room == null) return NotFound();
 
             return View(room);
         }
@@ -170,19 +96,16 @@ namespace HotelBooker.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var room = await _context.Room.FindAsync(id);
-            if (room != null)
-            {
-                _context.Room.Remove(room);
-            }
-
-            await _context.SaveChangesAsync();
+            await _roomService.DeleteRoomAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RoomExists(int id)
+        // GET: HotelRooms
+        public async Task<IActionResult> HotelRooms(string SearchString, string PriceRange, string Status)
         {
-            return _context.Room.Any(e => e.Id == id);
+            var rooms = await _roomService.SearchRoomsAsync(SearchString, PriceRange, Status);
+            ViewData["CurrentFilter"] = SearchString;
+            return View(rooms);
         }
     }
 }

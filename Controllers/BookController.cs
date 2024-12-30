@@ -13,11 +13,12 @@ namespace HotelBooker.Controllers
             _roomService = roomService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var rooms = _roomService.GetAllRooms();
+            var rooms = await _roomService.GetAllRoomsAsync(); 
             return View(rooms);
         }
+
 
         public IActionResult Order()
         {

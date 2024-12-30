@@ -27,49 +27,74 @@
     <link rel="stylesheet" href="~/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
+<style>
+    .main-body,
+    footer {
+        margin-left: 250px;
+        max-width: calc(100% - 250px);
+        transition: margin-left 0.3s, max-width 0.3s;
+    }
+    body.sidebar-collapsed .main-body,
+    body.sidebar-collapsed footer {
+        margin-left: 100px;
+        max-width: calc(100% - 80px);
+        transition: margin-left 0.3s, max-width 0.3s;
+    }
+    #sidebar {
+        width: 250px;
+        transition: width 0.3s;
+    }
+    #sidebar.collapsed {
+        width: 80px;
+    }
+</style>
+
 
 <body>
     <header>
-        <div id="sidebar" class="sidebar " style="display:flex; flex-wrap:wrap; justify-content:space-between; flex-direction:column;">
-            <button class="close-btn nav-link" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
+        <div id="sidebar" class="sidebar "
+            style="display:flex; flex-wrap:wrap; justify-content:space-between; flex-direction:column;">
+            <button class="close-btn" style="color: black;" onclick="toggleSidebar()"><i
+                    class="fa fa-bars"></i></button>
             <nav style="margin-top: 70px;">
                 <ul id="navigation">
                     <li class="nav-item">
-                        <a class="nav-link active-admin" asp-area="" asp-controller="Home" asp-action="Index">
-                            <i  style="margin-left: -3px;" class="fa fa-home"></i> <span class="text">Dash Board</span>
+                        <a class="nav-link active-admin" asp-area="Admin" asp-controller="Rooms" asp-action="Index">
+                            <i style="margin-left: -5px;" class="fa fa-home"></i> <span class="text">Dash Board</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                            <i style="margin-left: -2px;" class="fa fa-image"></i> <span class="text">Gallery</span>
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">
+                            <i style="margin-left: -5px;" class="fa fa-image"></i> <span class="text">Gallery</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Book" asp-action="Index">
-                            <i style="margin-left: -2px;" class="fa fa-book"></i> <span class="text">Booker</span>
+                        <a class="nav-link " asp-area="Admin" asp-controller="Rooms" asp-action="HotelRooms">
+                            <i style="margin-left: -3px;" class="fa fa-book"></i> <span class="text">Rooms</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                            <i style="margin-left: -4px;" class="fa fa-newspaper-o"></i> <span class="text">Blogs</span>
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">
+                            <i style="margin-left: -6px;" class="fa fa-newspaper-o"></i> <span class="text">Blogs</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
-                            <i style="margin-left: 2px;" class="fa fa-lock"></i> <span class="text">Privacy</span>
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">
+                            <i style="margin-left: 0px;" class="fa fa-lock"></i> <span class="text">Privacy</span>
                         </a>
                     </li>
                 </ul>
             </nav>
             <div class="">
                 <a class="nav-link back-home-hov" asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="text">Back to Home (Travelix) </span>
+                    <i style="margin-left: 2px;" class="fa fa-arrow-left"> </i> <span class="text">Back to Home
+                        (Travelix) </span>
                 </a>
             </div>
         </div>
 
     </header>
-    <div class="" style="max-width: 100%;">
+    <div class="main-body" style="max-width: 100%;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -109,6 +134,15 @@
     <script src="js/jquery.form.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            const body = document.body;
+            sidebar.classList.toggle("collapsed");
+            body.classList.toggle("sidebar-collapsed");
+        }
+    </script>
+
 
     <script src="js/main.js"></script>
     <script>
