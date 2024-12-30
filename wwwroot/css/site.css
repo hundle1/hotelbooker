@@ -276,6 +276,10 @@ body {
 }
 
 
+
+
+
+
 /* end home page  */
 
 
@@ -286,7 +290,106 @@ body {
   
 }
 
+
+.heart-hov:hover{
+  background-color:rgba(197, 197, 197, 0.23);
+  border-radius: 10%;
+}
+
+.back-hov:hover{
+  color:rgb(0, 0, 0);
+  font-weight: bold;
+}
+.arrow-hov{
+  color: #f1c40f;
+  font-weight: bold;
+  transform:scale(1.2);
+}
+
+.room-details {
+  display: flex; 
+  gap: 20px; 
+  font-family: Arial, sans-serif;
+}
+
+.room-details .info {
+  flex: 65%;
+  padding-right: 50px;
+}
+
+.room-details .furniture-section {
+  flex: 30%; 
+  height: 400px;
+  border: 1px solid #ccc; 
+  border-radius: 10px; 
+  padding: 15px; 
+  background-color: #f9f9f9; 
+}
+
+.room-details .description {
+  text-align: justify; 
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.furniture-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.furniture-item {
+  margin-bottom: 10px; 
+  padding: 8px; 
+  border: 1px solid #ddd; 
+  border-radius: 5px; 
+  background-color: #ffffff; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+.textarea {
+  white-space: pre-wrap; /* Giữ khoảng trắng và xuống dòng */
+  overflow-wrap: break-word; /* Bẻ dòng khi quá dài */
+}
+
+
+
 /* end Booker  */
+
+
+/* tool tip  */
+
+.tooltip2 {
+  color: blue; /* Màu xanh cho "per Night" */
+  cursor: pointer; /* Con trỏ chuột chuyển thành pointer */
+  position: relative; /* Để định vị tooltip */
+  display: inline-block;
+}
+
+.tooltip2-text {
+  visibility: hidden; /* Tooltip ẩn mặc định */
+  background-color: #333; /* Màu nền tối cho tooltip */
+  color: #000; /* Màu chữ trắng */
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px; /* Bo tròn góc */
+  position: absolute;
+  z-index: 2; /* Tooltip sẽ hiển thị phía trước các phần tử khác */
+  bottom: 120%; /* Định vị phía trên phần tử cha */
+  left: 50%;
+  transform: translateY(150%) translateX(20%); /* Canh giữa tooltip */
+  opacity: 0; /* Ban đầu ẩn */
+  transition: opacity 0.3s; /* Hiệu ứng chuyển mờ */
+  font-size: 14px; /* Kích thước chữ */
+  white-space: nowrap; /* Không cho phép xuống dòng */
+  font-style: italic sans; /* Chữ nghiêng */
+  border: 1px solid #000000;
+}
+
+.tooltip2:hover .tooltip2-text {
+  visibility: visible; /* Hiện tooltip khi hover */
+  opacity: 1; /* Hiển thị tooltip */
+  background-color: #ffffff; /* Màu nền tối cho tooltip */
+}
 
 
 

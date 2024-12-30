@@ -15,7 +15,7 @@ namespace HotelBooker.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var rooms = await _roomService.GetAllRoomsAsync(); 
+            var rooms = await _roomService.GetAllRoomsAsync();
             return View(rooms);
         }
 
@@ -23,6 +23,15 @@ namespace HotelBooker.Controllers
         public IActionResult Order()
         {
             return View();
+        }
+        public async Task<IActionResult> Detail(int id)
+        {
+            var room = await _roomService.GetRoomByIdAsync(id);
+            if (room == null)
+            {
+                return NotFound();
+            }
+            return View(room);
         }
     }
 }

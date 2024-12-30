@@ -187,10 +187,12 @@ body {
 
 .header__nav__container--list a:hover::after {
     opacity: 1;
+    background: linear-gradient(to right, #fa9e1b, #8d4fff);
 }
 
 .header__nav__container--list a.active::after {
     opacity: 1;
+    background: linear-gradient(to right, #fa9e1b, #8d4fff);
 }
 
 .header__nav__container--search {
