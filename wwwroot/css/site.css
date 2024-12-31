@@ -276,6 +276,18 @@ body {
 }
 
 
+.warping {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 10px; 
+  justify-content: space-between; 
+}
+
+.form-warp {
+  flex: 1 1 calc(20% - 10px); 
+  max-width: calc(20% - 10px);
+  box-sizing: border-box; 
+}
 
 
 
@@ -359,36 +371,57 @@ body {
 /* tool tip  */
 
 .tooltip2 {
-  color: blue; /* Màu xanh cho "per Night" */
-  cursor: pointer; /* Con trỏ chuột chuyển thành pointer */
-  position: relative; /* Để định vị tooltip */
+  color: blue; 
+  cursor: pointer;
+  position: relative; 
   display: inline-block;
 }
 
 .tooltip2-text {
-  visibility: hidden; /* Tooltip ẩn mặc định */
-  background-color: #333; /* Màu nền tối cho tooltip */
-  color: #000; /* Màu chữ trắng */
+  visibility: hidden; 
+  background-color: #333; 
+  color: #000; 
   text-align: center;
   padding: 5px 10px;
-  border-radius: 5px; /* Bo tròn góc */
+  border-radius: 5px;
   position: absolute;
-  z-index: 2; /* Tooltip sẽ hiển thị phía trước các phần tử khác */
-  bottom: 120%; /* Định vị phía trên phần tử cha */
+  z-index: 2; 
+  bottom: 120%;
   left: 50%;
-  transform: translateY(150%) translateX(20%); /* Canh giữa tooltip */
-  opacity: 0; /* Ban đầu ẩn */
-  transition: opacity 0.3s; /* Hiệu ứng chuyển mờ */
-  font-size: 14px; /* Kích thước chữ */
-  white-space: nowrap; /* Không cho phép xuống dòng */
-  font-style: italic sans; /* Chữ nghiêng */
+  transform: translateY(140%) translateX(0%); 
+  opacity: 0; 
+  transition: opacity 0.3s; 
+  font-size: 14px;
+  white-space: nowrap;
+  font-style: italic sans; 
   border: 1px solid #000000;
 }
 
-.tooltip2:hover .tooltip2-text {
-  visibility: visible; /* Hiện tooltip khi hover */
-  opacity: 1; /* Hiển thị tooltip */
-  background-color: #ffffff; /* Màu nền tối cho tooltip */
+.tooltip3-text {
+  visibility: hidden; 
+  background-color: #333; 
+  color: #000; 
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 2; 
+  bottom: 120%;
+  left: 50%;
+  transform: translateY(101.5%) translateX(53%); 
+  opacity: 0; 
+  transition: opacity 0.3s; 
+  font-size: 14px;
+  white-space: nowrap;
+  font-style: italic sans; 
+  border: 1px solid rgb(201, 201, 201);
+}
+
+.tooltip2:hover .tooltip2-text,
+.tooltip2:hover .tooltip3-text{
+  visibility: visible; 
+  opacity: 1;
+  background-color: #ffffff; 
 }
 
 
@@ -396,7 +429,7 @@ body {
 /* item room  */
 .item-hov {
   position: relative;
-  overflow: hidden; /* Đảm bảo hình ảnh không tràn ra ngoài viền */
+  overflow: hidden;
   display: inline-block;
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -404,7 +437,7 @@ body {
 .item-hov img {
   width: 100%;
   height: auto;
-  transition: transform 0.3s; /* Thêm hiệu ứng mượt mà khi zoom */
+  transition: transform 0.3s;
 }
 
 .item-hov:hover {
@@ -414,7 +447,7 @@ body {
 }
 
 .item-hov:hover img {
-  transform: scale(1.1); /* Zoom ảnh bên trong */
+  transform: scale(1.1); 
   transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 

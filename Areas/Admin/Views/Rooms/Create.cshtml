@@ -4,9 +4,14 @@
     ViewData["Title"] = "Create";
 }
 <div style="background-color: black; width: 100%; height: 100px;"></div>
-<div class="container" style="padding-top: 150px;">
-    <h1>Public Room Details</h1>
-    <hr />
+<div class="container"
+    style="padding-top: 150px; display: flex; gap: 20px; padding-top:50px; display:flex; flex-direction:column;">
+    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+        <a asp-action="Index" class="btn btn-dark">Back to List <i class="fa fa-chevron-circle-left"
+            style="color: red;"></i></a>
+        <h1>Public Room Details</h1>
+        <div style="width:150px;"></div>
+    </div>
     <div class="row">
         <div>
             <form asp-action="Create">
@@ -80,34 +85,51 @@
                 </div>
                 <div class="form-group" style="margin-top: 60px;">
                     <h4><label asp-for="Furniture" class="control-label"></label></h4>
-                    <div class="d-flex flex-row justify-content-around">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="First bed" value="First Bed">
+                    <div class="d-flex flex-row justify-content-around warping" style="display:flex; flex-wrap:wrap;">
+                        <div class="form-check form-warp">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="First bed"
+                                value="First Bed">
                             <label class="form-check-label" for="First bed">First Bed </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="Second bed" value="Second Bed">
+                        <div class="form-check form-warp">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="Second bed"
+                                value="Second Bed">
                             <label class="form-check-label" for="Second bed">Second Bed </label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check form-warp">
                             <input class="form-check-input" type="checkbox" name="Furniture" id="sofa" value="Sofa">
                             <label class="form-check-label" for="sofa">Sofa</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="Round table" value="Round Table">
+                        <div class="form-check form-warp">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="Round table"
+                                value="Round Table">
                             <label class="form-check-label" for="Round table">Round Table</label>
                         </div>
-                        <div class="form-check">
+                        <div class="form-check form-warp">
                             <input class="form-check-input" type="checkbox" name="Furniture" id="chairs" value="Chairs">
                             <label class="form-check-label" for="chairs">Chairs</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="wardrobe" value="Wardrobe">
+                        <div class="form-check form-warp">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="wardrobe"
+                                value="Wardrobe">
                             <label class="form-check-label" for="wardrobe">Wardrobe</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="Balcony" value="Balcony">
+                        <div class="form-check form-warp">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="Balcony"
+                                value="Balcony">
                             <label class="form-check-label" for="Balcony">Balcony</label>
+                        </div>
+                        <div class="form-check form-warp">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="Wifi" value="Wifi">
+                            <label class="form-check-label" for="Wifi">Wifi</label>
+                        </div>
+                        <div class="form-check form-warp">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="AC" value="AC">
+                            <label class="form-check-label" for="AC">AC</label>
+                        </div>
+                        <div class="form-check form-warp">
+                            <input class="form-check-input" type="checkbox" name="Furniture" id="Snacks" value="Snacks">
+                            <label class="form-check-label" for="Snacks">Snacks</label>
                         </div>
                     </div>
                     <span asp-validation-for="Furniture" class="text-danger"></span>
@@ -117,39 +139,39 @@
                     <textarea asp-for="Description" class="form-control" rows="5"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-                <div class="form-group" style="margin-top: 20px;">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
+
                 <div class="form-group">
                     <h4><label class="control-label" asp-for="Discount"></label></h4>
                     <div>
-                        <button type="button" class="btn btn-primary toggle-status" data-value="false">
+                        <button type="button" class="btn btn-primary toggle-discount" data-value="false">
                             None
                         </button>
                         <input type="hidden" asp-for="Discount" value="false" />
                     </div>
                     <span asp-validation-for="Discount" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group discount-details">
                     <h4><label asp-for="DiscountStart" class="control-label"></label></h4>
                     <input asp-for="DiscountStart" class="form-control" />
-                    <span asp-validation-for="DiscountStart" class="text-spandanger"></span>
+                    <span asp-validation-for="DiscountStart" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group discount-details">
                     <h4><label asp-for="DiscountEnd" class="control-label"></label></h4>
                     <input asp-for="DiscountEnd" class="form-control" />
                     <span asp-validation-for="DiscountEnd" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group discount-details">
                     <h4><label asp-for="DiscountPercent" class="control-label"></label></h4>
                     <input asp-for="DiscountPercent" class="form-control" />
                     <span asp-validation-for="DiscountPercent" class="text-danger"></span>
                 </div>
+                <div>
+                    <input type="submit" value="Create" class="btn btn-primary"
+                        style="margin-right: 30px; width: 130px;" />
+                </div>
+
             </form>
         </div>
-    </div>
-    <div style="margin-top: 20px;">
-        <a asp-action="Index" class="btn btn-dark">Back to List</a>
     </div>
 </div>
 
@@ -181,6 +203,33 @@
 
             const initialValue = hiddenInput.value === 'true';
             updateReleaseDateVisibility(initialValue);
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const discountToggleButton = document.querySelector('.toggle-discount');
+            const discountHiddenInput = document.querySelector('input[name="Discount"]');
+            const discountDetailsGroups = document.querySelectorAll('.discount-details');
+            function updateDiscountDetailsVisibility(isApplyDiscount) {
+                discountDetailsGroups.forEach(group => {
+                    group.style.display = isApplyDiscount ? '' : 'none';
+                });
+                if (!isApplyDiscount) {
+                    document.querySelector('input[name="DiscountStart"]').value = '';
+                    document.querySelector('input[name="DiscountEnd"]').value = '';
+                    document.querySelector('input[name="DiscountPercent"]').value = '';
+                }
+            }
+            discountToggleButton.addEventListener('click', function () {
+                const currentValue = discountToggleButton.getAttribute('data-value') === 'true';
+                const newValue = !currentValue;
+                discountToggleButton.setAttribute('data-value', newValue);
+                discountToggleButton.textContent = newValue ? 'Apply Discount' : 'None';
+                discountHiddenInput.value = newValue;
+                updateDiscountDetailsVisibility(newValue);
+            });
+            const initialDiscountValue = discountHiddenInput.value === 'true';
+            updateDiscountDetailsVisibility(initialDiscountValue);
         });
     </script>
     @{

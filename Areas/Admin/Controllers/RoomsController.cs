@@ -40,6 +40,11 @@ namespace HotelBooker.Areas.Admin.Controllers
             return View();
         }
 
+        public IActionResult Discount()
+        {
+            return View();
+        }
+
         // POST: Rooms/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
