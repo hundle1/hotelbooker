@@ -24,7 +24,11 @@ namespace HotelBooker.Migrations
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
                     RoomImage = table.Column<string>(type: "TEXT", nullable: true),
                     Furniture = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: false)
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Discount = table.Column<bool>(type: "INTEGER", nullable: false),
+                    DiscountStart = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    DiscountEnd = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    DiscountPercent = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {

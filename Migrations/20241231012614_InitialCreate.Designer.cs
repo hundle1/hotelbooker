@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooker.Migrations
 {
     [DbContext(typeof(HotelBookerContext))]
-    [Migration("20241228064803_InitialCreate")]
+    [Migration("20241231012614_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -28,6 +28,18 @@ namespace HotelBooker.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Discount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("DiscountEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("DiscountPercent")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("DiscountStart")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Furniture")

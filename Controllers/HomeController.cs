@@ -17,10 +17,10 @@ public class HomeController : Controller
     }
 
     public async Task<IActionResult> Index()
-        {
-            var rooms = await _roomService.GetAllRoomsAsync(); 
-            return View(rooms);
-        }
+    {
+        var rooms = await _roomService.GetAllRoomsAsync();
+        return View(rooms);
+    }
 
     public IActionResult Privacy()
     {

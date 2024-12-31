@@ -26,5 +26,13 @@ namespace HotelBooker.Models
 
         [Required]
         public string? Description { get; set; }
+
+        public bool Discount { get; set; }
+
+        public DateTime? DiscountStart { get; set; }
+
+        public DateTime? DiscountEnd { get; set; }
+
+        public int? DiscountPercent { get; set; }
     }
 }

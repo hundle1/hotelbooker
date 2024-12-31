@@ -27,6 +27,18 @@ namespace HotelBooker.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Discount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("DiscountEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("DiscountPercent")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("DiscountStart")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Furniture")
                         .HasColumnType("TEXT");
 
