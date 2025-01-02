@@ -13,7 +13,9 @@ namespace HotelBooker.Models
         public string? HotelLocation { get; set; }
         [Range(1, 5)]
         public int? HotelRate { get; set; }
-        public int NumberOfRoom { get; set; }
+
+        [Range(1, 2000)]
+        public int? NumberOfRoom { get; set; }
         public string? HotelServices { get; set; }
         public string? HotelContact { get; set; }
         public string? HotelEmail { get; set; }

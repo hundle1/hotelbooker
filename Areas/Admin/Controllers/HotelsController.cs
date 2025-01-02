@@ -1,7 +1,6 @@
 using HotelBooker.Models;
 using HotelBooker.Services;
 using Microsoft.AspNetCore.Mvc;
-
 namespace HotelBooker.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -99,5 +98,6 @@ namespace HotelBooker.Areas.Admin.Controllers
             _ = _hotelService.DeleteHotelAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

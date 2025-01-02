@@ -2,165 +2,160 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>@ViewData["Title"] | HotelBooker</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- <link rel="manifest" href="site.webmanifest"> -->
+  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+  <!-- Place favicon.ico in the root directory -->
 
-</head>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>@ViewData["Title"] | HotelBooker</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <!-- Place favicon.ico in the root directory -->
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="~/css/grid.css" />
-    <link rel="stylesheet" href="~/css/base.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/css/responsive.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/HotelBooker.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/css/magnific-popup.css">
-    <link rel="stylesheet" href="~/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/themify-icons.css">
-    <link rel="stylesheet" href="~/css/nice-select.css">
-    <link rel="stylesheet" href="~/css/flaticon.css">
-    <link rel="stylesheet" href="~/css/gijgo.css">
-    <link rel="stylesheet" href="~/css/animate.css">
-    <link rel="stylesheet" href="~/css/slicknav.css">
-    <link rel="stylesheet" href="~/css/style.css">
-    <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css'/>
-    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
-    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+  <!-- CSS here -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="~/css/grid.css" />
+  <link rel="stylesheet" href="~/css/base.css" />
+  <link rel="stylesheet" href="~/css/style.css" />
+  <link rel="stylesheet" href="~/css/responsive.css" />
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/HotelBooker.styles.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/bootstrap.min.css">
+  <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="~/css/magnific-popup.css">
+  <link rel="stylesheet" href="~/css/font-awesome.min.css">
+  <link rel="stylesheet" href="~/css/themify-icons.css">
+  <link rel="stylesheet" href="~/css/nice-select.css">
+  <link rel="stylesheet" href="~/css/flaticon.css">
+  <link rel="stylesheet" href="~/css/gijgo.css">
+  <link rel="stylesheet" href="~/css/animate.css">
+  <link rel="stylesheet" href="~/css/slicknav.css">
+  <link rel="stylesheet" href="~/css/style.css">
+  <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet'
+    type='text/css' />
+  <script type='text/javascript'
+    src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
+  <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 
 <body>
-    @(await Component.InvokeAsync("Navbar"))
-    <div class="" style="max-width: 100%; padding-bottom: 150px;">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    
-   <footer>
-  <div class="footer-container">
-    <div class="footer-column ">
-      <img src="@Url.Content("~/img/logo.webp")" alt="Travelix Logo">
-      <h3 class="styled-heading">Travelix</h3>
-      <div class="footer-bottom text-center">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vulputate eros, iaculis consequat nisl. Nunc et suscipit uma. Integer eleme ntum orci eu vehicula pretium.</p>
-        <p class="copyright">&copy; 2025 - HotelBooker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
-      </div>
-    </div>
-    <div class="footer-column blog-posts">
-      <h3 class="styled-heading">BLOG POSTS</h3>
-      <div class="blog-post">
-        <img src="img/blog2.jpg" alt="">
-        <div class="blog-details">
-          <a href="#" class="blog-title">Travel with us this year</a>
-          <span>July 21, 2025</span>
+  @(await Component.InvokeAsync("Navbar"))
+  <div class="" style="max-width: 100%; padding-bottom: 150px;">
+    <main role="main" class="pb-3">
+      @RenderBody()
+    </main>
+  </div>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column ">
+        <img src="@Url.Content("~/img/logo.webp")" alt="Travelix Logo">
+        <h3 class="styled-heading">Travelix</h3>
+        <div class="footer-bottom text-center">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vulputate eros, iaculis consequat
+            nisl. Nunc et suscipit uma. Integer eleme ntum orci eu vehicula pretium.</p>
+          <p class="copyright">&copy; 2025 - HotelBooker - <a asp-area="" asp-controller="Home"
+              asp-action="Privacy">Privacy</a></p>
         </div>
       </div>
-      <div class="blog-post">
-        <img src="img/blog3.jpg" alt="">
-        <div class="blog-details">
-          <a href="#" class="blog-title">New destinations for you</a>
-          <span>July 22, 2025</span>
+      <div class="footer-column blog-posts">
+        <h3 class="styled-heading">BLOG POSTS</h3>
+        <div class="blog-post">
+          <img src="img/blog2.jpg" alt="">
+          <div class="blog-details">
+            <a href="#" class="blog-title">Travel with us this year</a>
+            <span>July 21, 2025</span>
+          </div>
+        </div>
+        <div class="blog-post">
+          <img src="img/blog3.jpg" alt="">
+          <div class="blog-details">
+            <a href="#" class="blog-title">New destinations for you</a>
+            <span>July 22, 2025</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3 class="styled-heading">Tags</h3>
+        <button>Design</button>
+        <button>Fashion</button>
+        <button>Music</button>
+        <button>Video</button>
+        <button>Party</button>
+        <button>Relax</button>
+      </div>
+      <div class="footer-column">
+        <h3 class="styled-heading">Contact Info</h3>
+        <div class="contact-item">
+          <img src="img/Location.png" alt="Location icon">
+          <p>82 Dịch Vọng Hậu, Cầu Giấy</p>
+        </div>
+        <div class="contact-item">
+          <img src="img/Phone.png" alt="Phone icon">
+          <p>+84 945 999 917</p>
+        </div>
+        <div class="contact-item">
+          <img src="img/Email.png" alt="Email icon">
+          <p>Khoa0255@gmail.com</p>
+        </div>
+        <div class="contact-item">
+          <img src="img/Website.png" alt="Website icon">
+          <p>www.newbiedev.com</p>
         </div>
       </div>
     </div>
-    <div class="footer-column">
-      <h3 class="styled-heading">Tags</h3>
-      <button>Design</button>
-      <button>Fashion</button>
-      <button>Music</button>
-      <button>Video</button>
-      <button>Party</button>
-      <button>Relax</button>
-    </div>
-   <div class="footer-column">
-  <h3 class="styled-heading">Contact Info</h3>
-  <div class="contact-item">
-    <img src="img/Location.png" alt="Location icon">
-    <p>82 Dịch Vọng Hậu, Cầu Giấy</p>
-  </div>
-  <div class="contact-item">
-    <img src="img/Phone.png" alt="Phone icon">
-    <p>+84 945 999 917</p>
-  </div>
-  <div class="contact-item">
-    <img src="img/Email.png" alt="Email icon">
-    <p>Khoa0255@gmail.com</p>
-  </div>
-  <div class="contact-item">
-    <img src="img/Website.png" alt="Website icon">
-    <p>www.newbiedev.com</p>
-  </div>
-</div>
-  </div>
-</footer>
+  </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-    <!-- JS here -->
-    <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="~/js/popper.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/js/owl.carousel.min.js"></script>
-    <script src="~/js/isotope.pkgd.min.js"></script>
-    <script src="~/js/ajax-form.js"></script>
-    <script src="~/js/waypoints.min.js"></script>
-    <script src="~/js/jquery.counterup.min.js"></script>
-    <script src="~/js/imagesloaded.pkgd.min.js"></script>
-    <script src="~/js/scrollIt.js"></script>
-    <script src="~/js/jquery.scrollUp.min.js"></script>
-    <script src="~/js/wow.min.js"></script>
-    <script src="~/js/nice-select.min.js"></script>
-    <script src="~/js/jquery.slicknav.min.js"></script>
-    <script src="~/js/jquery.magnific-popup.min.js"></script>
-    <script src="~/js/plugins.js"></script>
-    <script src="~/js/gijgo.min.js"></script>
+  <script src="~/lib/jquery/dist/jquery.min.js"></script>
+  <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="~/js/site.js" asp-append-version="true"></script>
+  @await RenderSectionAsync("Scripts", required: false)
+  <!-- JS here -->
+  <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
+  <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+  <script src="~/js/popper.min.js"></script>
+  <script src="~/js/bootstrap.min.js"></script>
+  <script src="~/js/owl.carousel.min.js"></script>
+  <script src="~/js/isotope.pkgd.min.js"></script>
+  <script src="~/js/ajax-form.js"></script>
+  <script src="~/js/waypoints.min.js"></script>
+  <script src="~/js/jquery.counterup.min.js"></script>
+  <script src="~/js/imagesloaded.pkgd.min.js"></script>
+  <script src="~/js/scrollIt.js"></script>
+  <script src="~/js/jquery.scrollUp.min.js"></script>
+  <script src="~/js/wow.min.js"></script>
+  <script src="~/js/nice-select.min.js"></script>
+  <script src="~/js/jquery.slicknav.min.js"></script>
+  <script src="~/js/jquery.magnific-popup.min.js"></script>
+  <script src="~/js/plugins.js"></script>
+  <script src="~/js/gijgo.min.js"></script>
 
-    <!--contact js-->
-    <script src="~/js/contact.js"></script>
-    <script src="~/js/jquery.ajaxchimp.min.js"></script>
-    <script src="~/js/jquery.form.js"></script>
-    <script src="~/js/jquery.validate.min.js"></script>
-    <script src="~/js/mail-script.js"></script>
+  <!--contact js-->
+  <script src="~/js/contact.js"></script>
+  <script src="~/js/jquery.ajaxchimp.min.js"></script>
+  <script src="~/js/jquery.form.js"></script>
+  <script src="~/js/jquery.validate.min.js"></script>
+  <script src="~/js/mail-script.js"></script>
 
-    <script src="~/js/main.js"></script>
-    <script>
-        var editor = new FroalaEditor('#editor-view');
-        $('#datepicker').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-                rightIcon: '<span class="fa fa-caret-down"></span>'
-            }
-        });
-        $('#datepicker2').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-                rightIcon: '<span class="fa fa-caret-down"></span>'
-            }
+  <script src="~/js/main.js"></script>
+  <script>
+    var editor = new FroalaEditor('#editor-view');
+    $('#datepicker').datepicker({
+      iconsLibrary: 'fontawesome',
+      icons: {
+        rightIcon: '<span class="fa fa-caret-down"></span>'
+      }
+    });
+    $('#datepicker2').datepicker({
+      iconsLibrary: 'fontawesome',
+      icons: {
+        rightIcon: '<span class="fa fa-caret-down"></span>'
+      }
 
-        });
-    </script>
+    });
+  </script>
 </body>
 
 </html>
