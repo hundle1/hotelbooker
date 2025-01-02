@@ -36,46 +36,60 @@
                         </span>
                     </span>
                 </h3>
-                <span class="tooltip2"
-                    style="border: 2px dashed  #ccc; border-radius: 5px; padding: 5px; width: 230px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                    <i class="fa fa-gift" style="color: brown; font-size: 30px;"></i>
-                    Adapted Discount
-                    <div style="display: flex; align-items: center;">
-                        <i class="fa fa-percent" style="color: green; font-size: 18px;"></i>
-                        <span style="margin-left: 5px; font-weight: bold; font-size: 16px;">@Model.DiscountPercent%</span>
-                    </div>
-                    <span class="tooltip3-text" style="height: 400px; width: 350px;">
+                @if (Model.Discount)
+                {
+                    <span class="tooltip2"
+                        style="border: 2px dashed  #ccc; border-radius: 5px; padding: 5px; width: 230px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                        <i class="fa fa-gift" style="color: brown; font-size: 30px;"></i>
+                        Adapted Discount
+                        <div style="display: flex; align-items: center;">
+                            <i class="fa fa-percent" style="color: green; font-size: 18px;"></i>
+                            <span
+                                style="margin-left: 5px; font-weight: bold; font-size: 16px;">@Model.DiscountPercent%</span>
+                        </div>
+                        <span class="tooltip3-text" style="height: 400px; width: 350px;">
                             Discount for @Model.DiscountPercent% of Price<br>
                             <div style="display: flex; flex-direction: row; align-items: center;">
                                 <div>
                                     <i class="fa fa-chevron-circle-right" style="color: green;"></i> Day start :
-                                </div> 
-                                <div style="border: 1px solid #ccc; padding: 5px; border-radius: 5px; margin-left: 5px; width: 100%;">
-                                    @Model.DiscountStart
+                                </div>
+                                <div
+                                    style="border: 1px solid #ccc; padding: 5px; border-radius: 5px; margin-left: 5px; width: 100%;">
+                                    @Model.DiscountStart?.ToString("yyyy-MM-dd")
                                 </div>
                             </div>
                             <div style="display: flex; flex-direction: row; align-items: center;">
                                 <div>
                                     <i class="fa fa-chevron-circle-left" style="color: red;"></i> Day end &nbsp;:
                                 </div>
-                                <div style="border: 1px solid #ccc; padding: 5px; border-radius: 5px; margin-left: 5px; width: 100%;">
-                                    @Model.DiscountEnd
+                                <div
+                                    style="border: 1px solid #ccc; padding: 5px; border-radius: 5px; margin-left: 5px; width: 100%;">
+                                    @Model.DiscountEnd?.ToString("yyyy-MM-dd")
                                 </div>
                             </div>
                         </span>
-                </span>
+                    </span>
+                }
+
             </div>
             <h4>Status: @(Model.Status ? "In Used" : "Available") <i class="fa fa-check-circle"
                     style="color: green; font-size: 18px;"></i></h4>
             <h4>Category: @Model.Services</h4>
-            <p class="textarea">@Html.Raw(Model.Description.Replace("\n", "<br>"))</p>
+            <p class="textarea">@Html.Raw(Model.Description?.Replace("\n", "<br>") ?? string.Empty)</p>
         </div>
         <div class="furniture-section">
             <h4>Furnitures:</h4>
             <ul class="furniture-list">
-                @foreach (var furniture in Model.Furniture.Split(','))
+                @if (!string.IsNullOrEmpty(Model.Furniture))
                 {
-                    <li class="furniture-item">@furniture</li>
+                    @foreach (var furniture in Model.Furniture.Split(','))
+                    {
+                        <li class="furniture-item">@furniture</li>
+                    }
+                }
+                else
+                {
+                    <div class="furniture-item" style="font-family: sans-serif; color: gray;">No furniture available</div>
                 }
             </ul>
         </div>

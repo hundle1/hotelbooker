@@ -1,0 +1,90 @@
+@model HotelBooker.Models.Hotel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div style="background-color: black; width: 100%; height: 100px;"></div>
+<div class="container" style="padding-top: 150px; display: flex; gap: 20px; padding-top:50px; display:flex; flex-direction:column;">
+    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+        <a asp-action="Index" class="btn btn-dark">Back to List <i class="fa fa-chevron-circle-left" style="color: red;"></i></a>
+        <h1>Public Hotel Details</h1>
+        <div style="width:150px;"></div>
+    </div>
+    <div class="row">
+        <div>
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <h4><label asp-for="HotelName" class="control-label"></label></h4>
+                    <input asp-for="HotelName" class="form-control" />
+                    <span asp-validation-for="HotelName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <h4><label asp-for="HotelImage" class="control-label"></label></h4>
+                    <input type="file" asp-for="HotelImage" class="form-control" multiple />
+                    <span asp-validation-for="HotelImage" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <h4><label asp-for="HotelDescription" class="control-label"></label></h4>
+                    <textarea id="editor-view" asp-for="HotelDescription" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="HotelDescription" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <h4><label asp-for="HotelLocation" class="control-label"></label></h4>
+                    <input asp-for="HotelLocation" class="form-control" />
+                    <span asp-validation-for="HotelLocation" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <h4><label asp-for="HotelRate" class="control-label"></label></h4>
+                    <input asp-for="HotelRate" class="form-control" type="number" min="1" max="5" />
+                    <span asp-validation-for="HotelRate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <h4><label asp-for="NumberOfRoom" class="control-label"></label></h4>
+                    <input asp-for="NumberOfRoom" class="form-control" type="number" />
+                    <span asp-validation-for="NumberOfRoom" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <h4><label asp-for="HotelServices" class="control-label"></label></h4>
+                    <input asp-for="HotelServices" class="form-control" />
+                    <span asp-validation-for="HotelServices" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <h4><label asp-for="HotelContact" class="control-label"></label></h4>
+                    <input asp-for="HotelContact" class="form-control" />
+                    <span asp-validation-for="HotelContact" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <h4><label asp-for="HotelEmail" class="control-label"></label></h4>
+                    <input asp-for="HotelEmail" class="form-control" type="email" />
+                    <span asp-validation-for="HotelEmail" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <h4><label asp-for="HotelWebsite" class="control-label"></label></h4>
+                    <input asp-for="HotelWebsite" class="form-control" type="url" />
+                    <span asp-validation-for="HotelWebsite" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <input type="submit" value="Create" class="btn btn-primary" style="margin-right: 30px; width: 130px;" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

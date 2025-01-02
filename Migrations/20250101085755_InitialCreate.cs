@@ -12,6 +12,28 @@ namespace HotelBooker.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Hotel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    HotelName = table.Column<string>(type: "TEXT", maxLength: 60, nullable: false),
+                    HotelImage = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelDescription = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelLocation = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelRate = table.Column<int>(type: "INTEGER", nullable: true),
+                    NumberOfRoom = table.Column<int>(type: "INTEGER", nullable: false),
+                    HotelServices = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelContact = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelEmail = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelWebsite = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hotel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Room",
                 columns: table => new
                 {
@@ -39,6 +61,9 @@ namespace HotelBooker.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Hotel");
+
             migrationBuilder.DropTable(
                 name: "Room");
         }

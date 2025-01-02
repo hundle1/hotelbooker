@@ -16,7 +16,10 @@ namespace HotelBooker.Data
 
         public DbSet<HotelBooker.Models.Room> Room { get; set; } = default!;
 
-        internal async Task<string?> GetFilteredRoomsAsync(string searchString, string priceRange, string status)
+        public DbSet<HotelBooker.Models.Hotel> Hotel { get; set; }
+
+
+        internal string? GetFilteredRooms(string searchString, string priceRange, string status)
         {
             throw new NotImplementedException();
         }

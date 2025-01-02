@@ -52,12 +52,19 @@
                             Price: @room.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-US"))<br />
                             Category: @room.Services<br />
                             <p class="card-text">
-                            <div class="furniture-list">
-                                    @foreach (var furniture in room.Furniture.Split(','))
+                                <div class="furniture-list">
+                                    @if (!string.IsNullOrEmpty(room.Furniture))
                                     {
-                                    <div class="furniture-item" style="font-family: sans-serif;">@furniture</div>
+                                        @foreach (var furniture in room.Furniture.Split(','))
+                                        {
+                                            <div class="furniture-item" style="font-family: sans-serif;">@furniture</div>
+                                        }
                                     }
-                            </div>
+                                    else
+                                    {
+                                        <div class="furniture-item" style="font-family: sans-serif; color: gray;">No furniture available</div>
+                                    }
+                                </div>
                             </p>
                         </div>
                     </a>

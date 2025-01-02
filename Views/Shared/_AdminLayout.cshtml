@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="~/css/animate.css">
     <link rel="stylesheet" href="~/css/slicknav.css">
     <link rel="stylesheet" href="~/css/style.css">
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css'/>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 <style>
@@ -64,13 +66,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">
-                            <i style="margin-left: -5px;" class="fa fa-image"></i> <span class="text">Gallery</span>
+                        <a class="nav-link " asp-area="Admin" asp-controller="Hotels" asp-action="Index">
+                            <i style="margin-left: -5px;" class="fa fa-image"></i> <span class="text">Hotels Manage</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " asp-area="Admin" asp-controller="Rooms" asp-action="HotelRooms">
-                            <i style="margin-left: -3px;" class="fa fa-book"></i> <span class="text">Rooms</span>
+                            <i style="margin-left: -3px;" class="fa fa-book"></i> <span class="text">Rooms Manage</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -135,6 +137,7 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
     <script>
+        var editor = new FroalaEditor('#editor-view');
         function toggleSidebar() {
             const sidebar = document.getElementById("sidebar");
             const body = document.body;

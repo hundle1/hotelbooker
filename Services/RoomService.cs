@@ -21,9 +21,9 @@ namespace HotelBooker.Services
             return await _context.Room.ToListAsync();
         }
 
-        public async Task<Room> GetRoomByIdAsync(int id)
+        public async Task<Room?> GetRoomByIdAsync(int id)
         {
-            return await _context.Room.FirstOrDefaultAsync(r => r.Id == id);
+            return await _context.Room.FindAsync(id);
         }
 
         public async Task CreateRoomAsync(Room room)
@@ -53,7 +53,7 @@ namespace HotelBooker.Services
             var query = _context.Room.AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
-                query = query.Where(r => r.RoomName.Contains(searchString));
+                query = query.Where(r => r.RoomName != null && r.RoomName.Contains(searchString));
 
             if (!string.IsNullOrEmpty(priceRange))
             {

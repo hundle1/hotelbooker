@@ -17,6 +17,49 @@ namespace HotelBooker.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
+            modelBuilder.Entity("HotelBooker.Models.Hotel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("HotelContact")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HotelDescription")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HotelEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HotelImage")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HotelLocation")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HotelName")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("HotelRate")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("HotelServices")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HotelWebsite")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("NumberOfRoom")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hotel");
+                });
+
             modelBuilder.Entity("HotelBooker.Models.Room", b =>
                 {
                     b.Property<int>("Id")
