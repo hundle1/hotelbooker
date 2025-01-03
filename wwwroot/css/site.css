@@ -23,6 +23,14 @@ body {
 
 
 /* nav css  */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999; /* Đảm bảo navbar luôn ở trên các phần tử khác */
+}
+
 .navbar-img a img{
   border-radius: 5px;
   width: 50px;
@@ -628,6 +636,26 @@ footer p {
 .container {
   display: flex;
   align-items: center;
+  padding: 10px;
+}
+
+.container__sidebar--list-img img {
+  border-radius: 5px;
+}
+
+.container__sidebar--list h5 {
+  font-size: 24px;
+  font-weight: bold; 
+  margin-bottom: 10px; 
+}
+
+.container__sidebar--list ul {
+  margin: 0; 
+  padding: 0; 
+}
+
+.container__sidebar--list ul li {
+  margin-bottom: 10px; 
 }
 
 .contact-info-container {
@@ -665,39 +693,6 @@ footer p {
   cursor: pointer;
 }
 
-.blog-post {
-  display: flex;
-  align-items: center;
-  color: #fff;
-  margin-bottom: 20px;
-}
-
-.blog-post img {
-  width: 150px; 
-  height: auto;
-  margin-right: 20px;
-}
-
-.blog-details {
-  flex: 1; 
-}
-
-.blog-title {
-  font-size: 18px; 
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
-}
-
-.blog-title:hover {
-  color: #ffcc00;
-}
-
-.blog-details span {
-  font-size: 14px; 
-  color: #ffd700;
-}
-
 button {
   background-color: #ffcc00;
   color: #fff;
@@ -723,16 +718,20 @@ button:hover {
 
 .styled-heading {
   font-weight: bold; 
-  color: #ffcc00; 
-  margin-bottom: 10px; 
+  color: #fff; 
+  margin-bottom: 20px; 
   text-decoration: none; 
-  font-size: 20px; 
+  font-size: 36px; 
+  position: relative;
+  justify-content: center;
 }
 
-
-
-
+.styled-heading h1{
+  width: 200px;
+    margin: 0 auto;
+}
 /* end footer  */
+
 
 /* world css  */
 .map-info{
@@ -789,3 +788,126 @@ button:hover {
   translate: ease 0.8s;
 }
 /* end world css  */
+
+/* Blog Posts */
+.blog-post {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.blog-post img {
+  width: 150px; 
+  height: auto;
+  margin-right: 20px;
+}
+
+.blog-details {
+  flex: 1; 
+}
+
+.blog-title {
+  font-size: 18px; 
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+.blog-title:hover {
+  color: #ffcc00;
+}
+
+.blog-details span {
+  font-size: 14px; 
+  color: #ffd700;
+}
+
+.blog-meta {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+  display: flex; 
+  gap: 5px; 
+}
+
+.blog-meta li {
+  display: inline; 
+}
+
+.blog__container__post{
+border-radius: 8px;
+overflow: hidden;
+margin-bottom: 20px;
+transition: transform 0.3s;
+}
+
+.blog__container__post:hover {
+  transform: scale(1.02);
+}
+
+.blog__container__post img {
+  width: 100%;
+  height: auto;
+}
+.blog__container__post--title {
+  font-size: 1.5em;
+  color: #333;
+  text-decoration: none;
+}
+
+.blog__container__post--btn {
+  color: #ffd700;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.container {
+  position: relative;
+}
+
+
+.container-text-center{
+  color: var(--white-color);
+    cursor: default;
+}
+
+.container-text-center h1:first-child{
+  font-size: 112px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.container-text-center h1:last-child{
+  font-family: 'Beyond';
+    font-size: 100px;
+    color: #fff;
+    text-align: center;
+}
+
+
+
+.hero-section {
+  position: relative;
+  height: 100vh; 
+  overflow: hidden; 
+}
+
+.hero-section {
+  position: relative;
+  height: 100vh; 
+  overflow: hidden; 
+  background-size: cover; /* Đảm bảo hình nền lấp đầy không gian */
+  background-position: center; /* Căn giữa hình nền */
+  background-repeat: no-repeat; /* Không lặp lại hình nền */
+}
+
+.blog__background{
+  width: 100%;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center center;
+}
