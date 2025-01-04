@@ -1,1 +1,116 @@
-<p style="padding-top: 400px;">Blog của khoa</p>
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<div class="blog-container" style="padding-top: 100px;">
+    <!-- Hero Section -->
+    <section class="hero-section" style="position: relative; height: 100vh; overflow: hidden;">
+        <div style="position: absolute; z-index: -1; width: 100%; height: 100%; top: 0; left: 0;background-size: cover;">
+            <img src="@Url.Content("~/img/Nen1.jpg")" alt="Hero Background" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="container-text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white;">
+            <h1 class="styled-heading" style="font-size: 112px;; font-weight: bold; text-shadow: 0 2px 5px rgba(0,0,0,0.8);">
+                THE BLOG
+            </h1>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blogs">
+        <div class="container">
+            <div class="row">
+                <!-- Blog Posts -->
+                <div class="col-md-8">
+                    <div class="blog__container__post">
+                        <img src="~/img/room1.jpg" alt="Blog Image">
+                        <ul class="blog-meta">
+                            <li><a href="#">by Lore Papp |</a></li>
+                            <li><a href="#">Uncategorized |</a></li>
+                            <li><a href="#">3 Comments</a></li>
+                        </ul>
+                        <a href="#" class="blog__container__post--title">Top 5 hotel 5 star in Berlin </a>
+                        <p>
+                            Aenean in lacus ligula. Phasellus euismod gravida eros. Aenean nec ipsum aliquet, 
+                            pharetra magna id, interdum sapien. Etiam id lorem eu nisl pellentesque semper. 
+                            Nullam tincidunt metus placerat, suscipit leo ut, tempus nulla. Fusce at eleifend tellus. 
+                            Ut eleifend dui nunc, non fermentum qua.
+                        </p>
+                        <div class="blog__container__post--time">
+                            <span>29</span>
+                            <span>July, 2022</span>
+                        </div>
+                        <a href="#" class="blog__container__post--btn">Read More</a>
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                <div class="col-md-4">
+                    <div class="blog__container__sidebar">
+                        <input type="text" placeholder="Search..." class="form-control mb-3">
+
+                        <div class="container__sidebar--list">
+                            <h5>Archives</h5>
+                            <ul>
+                                <li><a href="#">March 2022</a></li>
+                                <li><a href="#">April 2023</a></li>
+                                <li><a href="#">May 2023</a></li>
+                            </ul>
+                        </div>
+                        <div class="container__sidebar--list">
+                            <h5>Categories</h5>
+                            <ul>
+                                <li><a href="#">Travel</a></li>
+                                <li><a href="#">Exotic Destinations</a></li>
+                                <li><a href="#">City Breaks</a></li>
+                                <li><a href="#">Travel Tips</a></li>
+                                <li><a href="#">Lifestyle &amp; Travel</a></li>
+                                <li><a href="#">Uncategorized</a></li>
+                            </ul>
+                        </div>
+                        <div class="container__sidebar--list">
+                            <h5>Instagram</h5>
+                            <div class="container__sidebar--list-img d-flex flex-wrap">
+                                <img src="~/img/blog5.webp" style="width: 90px;height: 90px;margin: 5px;" class="container__sidebar--list-img">
+                                <img src="~/img/blog6.webp" style="width: 90px;height: 90px;margin: 5px;" class="container__sidebar--list-img">
+                                <img src="~/img/blog7.jpg" style="width: 90px;height: 90px;margin: 5px;" class="container__sidebar--list-img">
+                                <img src="~/img/blog8.jpg" style="width: 90px;height: 90px;margin: 5px;" class="container__sidebar--list-img">
+                                <img src="~/img/blog9.jpg" style="width: 90px;height: 90px;margin: 5px;" class="container__sidebar--list-img">
+                                <img src="~/img/blog10.jpg" style="width: 90px;height: 90px;margin: 5px;" class="container__sidebar--list-img">
+                            </div>
+                        </div>
+                        <div class="container__sidebar--list">
+                            <h5>Categories</h5>
+                            <ul>
+                                <li><a href="#">Travel</a></li>
+                                <li><a href="#">Exotic Destinations</a></li>
+                                <li><a href="#">City Breaks</a></li>
+                                <li><a href="#">Travel Tips</a></li>
+                                <li><a href="#">Lifestyle &amp; Travel</a></li>
+                                <li><a href="#">Uncategorized</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="blog__container__post">
+                        <img src="~/img/room10.jpg" alt="Blog Image">
+                        <ul class="blog-meta">
+                            <li><a href="#">by Lore Papp |</a></li>
+                            <li><a href="#">Uncategorized |</a></li>
+                            <li><a href="#">3 Comments</a></li>
+                        </ul>
+                        <a href="#" class="blog__container__post--title">The Power of Hotel Branding: Key Strategies and Success Stories at Minor Hotels</a>
+                        <p>
+                            Hotel branding plays a main role in how the hospitality industry develops. It is said to have...
+                        </p>
+                        <div class="blog__container__post--time">
+                            <span>20</span>
+                            <span>Aug, 2024</span>
+                        </div>
+                        <a href="#" class="blog__container__post--btn">Read More</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+</div>
