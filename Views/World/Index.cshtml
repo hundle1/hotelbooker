@@ -2,6 +2,13 @@
 
 @{
     ViewData["Title"] = "World Map";
+    var hotelsByContinent = new Dictionary<string, List<HotelBooker.Models.Hotel>> {
+        { "Asia", Model.Where(h => h.HotelLocation == "Asia").ToList() },
+        { "Europe", Model.Where(h => h.HotelLocation == "Europe").ToList() },
+        { "Africa", Model.Where(h => h.HotelLocation == "Africa").ToList() },
+        { "America", Model.Where(h => h.HotelLocation == "America").ToList() },
+        { "Australia", Model.Where(h => h.HotelLocation == "Australia").ToList() },
+    };
 }
 
 <div style="background-color: black; width: 100%; height: 150px;"></div>
@@ -10,49 +17,136 @@
         <div style="width: 100%; height: 650px;">
             <img src="@Url.Content("~/img/worldmap-bw.png")" alt="" style="width: 100%; height: auto;">
             <div>
-                <div class="map-marker-Asia" style="display: inline; width: auto;">
+                <div class="map-marker-Asia" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Asia')">
                     Asia (@ViewBag.ContinentHotelCount["Asia"])
                 </div>
-                <div class="map-marker-Europe" style="display: inline; width: auto;">
+                <div class="map-marker-Europe" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Europe')">
                     Europe (@ViewBag.ContinentHotelCount["Europe"])
                 </div>
-                <div class="map-marker-Africa" style="display: inline; width: auto;">
+                <div class="map-marker-Africa" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Africa')">
                     Africa (@ViewBag.ContinentHotelCount["Africa"])
                 </div>
-                <div class="map-marker-America" style="display: inline; width: auto;">
+                <div class="map-marker-America" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('America')">
                     America (@ViewBag.ContinentHotelCount["America"])
                 </div>
-                <div class="map-marker-Australia" style="display: inline; width: auto;">
+                <div class="map-marker-Australia" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Australia')">
                     Australia (@ViewBag.ContinentHotelCount["Australia"])
                 </div>
             </div>
         </div>
-        <div class="map-info">
-            Map of the world - Choose a location by hovering over a continent.
-        </div>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 10px; max-height: auto; overflow-y: auto; width: 20%; border-left: 1px solid gray; padding-left: 40px;">
+    <div style="display: flex; flex-direction: column; gap: 10px; max-height: 600px; overflow-y: auto; width: 20%; border-left: 1px solid gray; padding-left: 10px;">
         <h1>Hotels</h1>
         @foreach (var hotel in Model)
         {
-            <div style="cursor: pointer; border: 1px solid gray; padding: 10px; display: flex; flex-direction: column; gap: 10px; width: 280px;">
+            <div style="cursor: pointer; border: 1px solid gray; padding: 10px; display: flex; flex-direction: column; gap: 10px; width: 280px; font-size: 12px;">
                 @if (!string.IsNullOrEmpty(hotel.HotelImage))
                 {
                     <img src="@hotel.HotelImage" alt="@hotel.HotelName" style="width: auto; height: 100px; object-fit: cover;">
                 }
-                <div style="font-weight: bold; font-size: 14px;">
+                <div style="font-weight: bold; font-size: 14px; margin-bottom: 5px;">
                     @hotel.HotelName
                 </div>
-                <div style="display: flex; gap: 47px; font-size: 12px; color: #555; width: auto; height: auto;">
+                <div style="display: flex; justify-content: space-between; font-size: 12px; color: #555;">
                     <div>
-                        <strong>Rating:</strong> @hotel.HotelRate / 5 <br/>
+                        <strong>Rating:</strong> @hotel.HotelRate ★<br/>
                         <strong>Rooms:</strong> @hotel.NumberOfRoom
                     </div>
                     <div>
-                        <strong>Location:</strong> @hotel.HotelLocation
+                        <strong>Email:</strong> @hotel.HotelEmail<br/>
+                        <strong>Phone:</strong> @hotel.HotelContact
                     </div>
                 </div>
+                <button style="margin-top: 10px; background-color: #007bff; color: white; border: none; padding: 5px 10px; cursor: pointer; font-weight: bold; font-size: 12px; border-radius: 5px;">View Hotel</button>
             </div>
         }
     </div>
 </div>
+<!-- Modal -->
+<div id="continentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 999;">
+    <div style="background-color: white; margin: 5% auto; padding: 20px; width: 70%; position: relative; border-radius: 8px; max-height: 80%; overflow-y: auto;">
+        <button style="position: absolute; top: 10px; right: 10px; background-color: transparent; border: none; font-size: 20px; cursor: pointer;" onclick="closeModal()">
+            <i class="fa fa-times"></i>
+        </button>
+        <h2 id="continentTitle" style="text-align: center; margin-bottom: 20px;"></h2>
+        <div id="hotelList" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+            <!-- Hotels will be dynamically added here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal(continent) {
+        const hotelData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(hotelsByContinent));
+        const modal = document.getElementById('continentModal');
+        const hotelList = document.getElementById('hotelList');
+        const continentTitle = document.getElementById('continentTitle');
+
+        continentTitle.textContent = `Hotels in ${continent}`;
+        hotelList.innerHTML = '';
+
+        hotelData[continent].forEach(hotel => {
+            const hotelDiv = document.createElement('div');
+            hotelDiv.style.border = "1px solid gray";
+            hotelDiv.style.padding = "15px";
+            hotelDiv.style.borderRadius = "8px";
+            hotelDiv.style.width = "30%";
+            hotelDiv.style.display = "flex";
+            hotelDiv.style.flexDirection = "column";
+            hotelDiv.style.alignItems = "center";
+            hotelDiv.style.height = "auto";
+
+            if (hotel.HotelImage) {
+                const hotelImage = document.createElement('img');
+                hotelImage.src = hotel.HotelImage;
+                hotelImage.alt = hotel.HotelName;
+                hotelImage.style.width = "100%";
+                hotelImage.style.height = "150px";
+                hotelImage.style.objectFit = "cover";
+                hotelImage.style.borderRadius = "8px";
+                hotelDiv.appendChild(hotelImage);
+            }
+
+            const hotelName = document.createElement('h3');
+            hotelName.textContent = hotel.HotelName;
+            hotelName.style.textAlign = "center";
+            hotelName.style.fontWeight = "bold";
+            hotelName.style.fontSize = "18px";
+            hotelName.style.height = "100%";
+            hotelDiv.appendChild(hotelName);
+
+            const hotelDetails = document.createElement('div');
+            hotelDetails.style.textAlign = "center";
+            hotelDetails.style.width = "100%";
+            hotelDetails.style.marginBottom = "0%";
+            hotelDetails.style.display = "flex";
+            hotelDetails.style.justifyContent = "space-between";
+            hotelDetails.style.color = "#555";
+            hotelDetails.style.flexDirection = "row";
+
+            const leftDiv = document.createElement('div');
+            leftDiv.style.width = "40%";
+            leftDiv.innerHTML = `
+                <p style="font-size:22px;"> ${hotel.HotelRate || 'N/A'} ★</p>
+                <p style="font-size:16px;"><strong>Rooms:</strong> ${hotel.NumberOfRoom || 'N/A'}</p>
+            `;
+            hotelDetails.appendChild(leftDiv);
+
+            const rightDiv = document.createElement('div');
+            rightDiv.innerHTML = `
+                <input type="button" value="View Hotel" style="background-color: #007bff; color: white; border: none; padding: 10px 60px; cursor: pointer; font-weight: bold; font-size: 22px; border-radius: 5px;">
+            `;
+            hotelDetails.appendChild(rightDiv);
+
+            hotelDiv.appendChild(hotelDetails);
+            hotelList.appendChild(hotelDiv);
+        });
+
+        modal.style.display = 'block';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('continentModal');
+        modal.style.display = 'none';
+    }
+</script>

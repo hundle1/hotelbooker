@@ -788,4 +788,63 @@ button:hover {
   scale: 1.2;
   translate: ease 0.8s;
 }
+
+#continentModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+#continentModal > div {
+  background-color: white;
+  margin: 5% auto;
+  padding: 20px;
+  width: 70%;
+  position: relative;
+  border-radius: 8px;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+#continentModal button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#hotelList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+#hotelList div {
+  border-radius: 8px;
+  width: 100%;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#hotelList img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+
 /* end world css  */
