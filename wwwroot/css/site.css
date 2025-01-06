@@ -21,6 +21,26 @@ body {
   margin-bottom: 60px;
 }
 
+/* Global Styles */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+/* Xử lý số */
+body, input, textarea {
+  font-variant-numeric: lining-nums; /* Đồng nhất kiểu số */
+  font-feature-settings: "lnum"; /* Đảm bảo sử dụng số đều nhau */
+}
+
+
+/* Các yếu tố cụ thể */
+.footer-column p,
+.footer-column button {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
 
 /* nav css  */
 .navbar {
@@ -846,6 +866,34 @@ button:hover {
 
 
 
+.star-btn{
+  width: 120px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 10px; 
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+
+}
+.star-btn-blue{
+  background-color:rgba(0, 123, 255, 0.84); 
+}
+.star-btn-primary{
+
+  background-color:rgb(94, 0, 148); 
+  color: white;
+}
+.star-btn:hover{
+  background-color:rgb(0, 72, 150); 
+}
+.star-btn-primary:hover{
+  background-color: #350a4e;
+  color: white;
+}
+
 /* end world css  */
 
 /* Blog Posts */
@@ -958,9 +1006,9 @@ transition: transform 0.3s;
   position: relative;
   height: 100vh; 
   overflow: hidden; 
-  background-size: cover; /* Đảm bảo hình nền lấp đầy không gian */
-  background-position: center; /* Căn giữa hình nền */
-  background-repeat: no-repeat; /* Không lặp lại hình nền */
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
 }
 
 .blog__background{

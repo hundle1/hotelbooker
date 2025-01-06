@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "World Map";
     var hotelsByContinent = new Dictionary<string, List<HotelBooker.Models.Hotel>> {
-        { "Asia", Model.Where(h => h.HotelLocation == "Asia").ToList() },
-        { "Europe", Model.Where(h => h.HotelLocation == "Europe").ToList() },
-        { "Africa", Model.Where(h => h.HotelLocation == "Africa").ToList() },
-        { "America", Model.Where(h => h.HotelLocation == "America").ToList() },
-        { "Australia", Model.Where(h => h.HotelLocation == "Australia").ToList() },
+        { "Asia", Model.Where(h => h.HotelLocation == "Asia" ).ToList() },
+        { "Europe", Model.Where(h => h.HotelLocation == "Europe" ).ToList() },
+        { "Africa", Model.Where(h => h.HotelLocation == "Africa" ).ToList() },
+        { "America", Model.Where(h => h.HotelLocation == "America" ).ToList() },
+        { "Australia", Model.Where(h => h.HotelLocation == "Australia" ).ToList() },
     };
 }
 
@@ -18,26 +18,26 @@
             <img src="@Url.Content("~/img/worldmap-bw.png")" alt="" style="width: 100%; height: auto;">
             <div>
                 <div class="map-marker-Asia" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Asia')">
-                    Asia (@ViewBag.ContinentHotelCount["Asia"])
+                    Asia (@hotelsByContinent["Asia"].Count)
                 </div>
                 <div class="map-marker-Europe" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Europe')">
-                    Europe (@ViewBag.ContinentHotelCount["Europe"])
+                    Europe (@hotelsByContinent["Europe"].Count)
                 </div>
                 <div class="map-marker-Africa" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Africa')">
-                    Africa (@ViewBag.ContinentHotelCount["Africa"])
+                    Africa (@hotelsByContinent["Africa"].Count)
                 </div>
                 <div class="map-marker-America" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('America')">
-                    America (@ViewBag.ContinentHotelCount["America"])
+                    America (@hotelsByContinent["America"].Count)
                 </div>
                 <div class="map-marker-Australia" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Australia')">
-                    Australia (@ViewBag.ContinentHotelCount["Australia"])
+                    Australia (@hotelsByContinent["Australia"].Count)
                 </div>
             </div>
         </div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 10px; max-height: 600px; overflow-y: auto; width: 20%; border-left: 1px solid gray; padding-left: 10px;">
-        <h1>Hotels</h1>
-        @foreach (var hotel in Model)
+        <h2>Best 5 Stars Hotels</h2>
+        @foreach (var hotel in Model.Where(h => h.HotelRate == 5))
         {
             <div style="cursor: pointer; border: 1px solid gray; padding: 10px; display: flex; flex-direction: column; gap: 10px; width: 280px; font-size: 12px;">
                 @if (!string.IsNullOrEmpty(hotel.HotelImage))
@@ -57,7 +57,19 @@
                         <strong>Phone:</strong> @hotel.HotelContact
                     </div>
                 </div>
-                <button style="margin-top: 10px; background-color: #007bff; color: white; border: none; padding: 5px 10px; cursor: pointer; font-weight: bold; font-size: 12px; border-radius: 5px;">View Hotel</button>
+                <div style="display: flex; justify-content: space-around;  ">
+                    <a style="color:white;" href="/World/Detail/@hotel.Id">
+                        <button class="star-btn star-btn-primary">
+                            Booking
+                        </button>
+                    </a>
+                
+                    <a href="@hotel.HotelWebsite" target="_blank" style="color: white;">
+                        <button class="star-btn star-btn-blue">
+                            Visit Website
+                        </button>
+                    </a>
+                </div>
             </div>
         }
     </div>

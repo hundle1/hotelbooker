@@ -1,0 +1,112 @@
+@model HotelBooker.Models.Hotel
+
+@{
+    ViewData["Title"] = Model.HotelName;
+}
+
+<div style="background-color: black; width: 100%; height: 150px;"></div>
+<div class="container-xl" style="padding-top: 50px; padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+    <div>
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="back-hov">Home </a>
+        <i class="fa fa-chevron-left arrow-hov"></i>
+        <a asp-area="" asp-controller="World" asp-action="Index" class="back-hov"> World View </a>
+        <i class="fa fa-chevron-left arrow-hov"></i>
+        <a style="font-weight: bold; cursor: pointer;">@Model.HotelName</a>
+    </div>
+    <div class="container-xxl" style=" display: flex; gap: 20px; flex-direction: column;">
+        <h1 class="card-title text-center mb-4 bold">@Model.HotelName</h1>
+        <div class="card-body" style="">
+            <div style="display:flex; justify-content: space-between; width: 100%; padding-bottom: 40px;">
+                <div style="width:70%; display: flex; flex-direction: column; gap: 20px; jusstify-content: center; align-items: center;">
+                <h2><strong>Rooms:</strong> @Model.NumberOfRoom</h2>
+                    <div id="room-buttons" style="display: flex; flex-direction: row; gap: 20px;">
+                        @{
+                            int totalRooms = Model.NumberOfRoom ?? 0;
+                            int columns = (int)Math.Ceiling((double)totalRooms / 50);
+                            int roomsPerColumn = (int)Math.Ceiling((double)totalRooms / columns);
+                            string[] prefixes = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+                            int currentPrefixIndex = 0;
+                            int roomStart = 101;
+                            for (int col = 0; col < columns; col++)
+                            {
+                                <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 5px;">
+                                    @for (int i = col * roomsPerColumn + 1; i <= Math.Min((col + 1) * roomsPerColumn, totalRooms); i++)
+                                    {
+                                        // Skip rooms from A111 to A200
+                                        if ((i >= 111 && i <= 200) || (i >= 911))
+                                        {
+                                            continue;
+                                        }
+
+                                        string roomLabel = $"{prefixes[currentPrefixIndex]}{roomStart}";
+
+                                        // Increment room number and move to next prefix after reaching the max number
+                                        if (roomStart == 110)
+                                        {
+                                            roomStart = 201;
+                                        }
+                                        else if (roomStart == 210)
+                                        {
+                                            roomStart = 301;
+                                        }
+                                        else if (roomStart == 310)
+                                        {
+                                            roomStart = 401;
+                                        }
+                                        else if (roomStart == 410)
+                                        {
+                                            roomStart = 501;
+                                        }
+                                        else if (roomStart == 510)
+                                        {
+                                            roomStart = 601;
+                                        }
+                                        else if (roomStart == 610)
+                                        {
+                                            roomStart = 701;
+                                        }
+                                        else if (roomStart == 710)
+                                        {
+                                            roomStart = 801;
+                                        }
+                                        else if (roomStart == 810)
+                                        {
+                                            roomStart = 901;
+                                        }
+                                        else if (roomStart == 910)
+                                        {
+                                            currentPrefixIndex++;
+                                            roomStart = 101;
+                                        }
+                                        else{
+                                            roomStart++;
+                                        }
+
+                                        <button class="btn btn-outline-primary" style="width: 70px; height: 50px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                                            @roomLabel
+                                        </button>
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+                    <a class="btn btn-primary" style="color: aliceblue; margin-top: 30px;">Book Now</a>
+                </div>
+                <div style="border-left: 1px solid gray; width: 30%; padding-left: 20px;">
+                    <img src="@Model.HotelImage" class="img-fluid rounded shadow-lg" alt="@Model.HotelImage" style="max-width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                    <div>
+                        <p><strong>Location:</strong> @Model.HotelLocation</p>
+                        <p><strong>Rating:</strong> @Model.HotelRate &#9733;</p>
+                        <p><strong>Rooms:</strong> @Model.NumberOfRoom</p>
+                        <p><strong>Email:</strong> <a href="mailto:@Model.HotelEmail">@Model.HotelEmail</a></p>
+                        <p><strong>Contact:</strong> @Model.HotelContact</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <h5 class="text-primary">HotelDescription:</h5>
+                <p>@Html.Raw(Model.HotelDescription?.Replace("\n", "<br>") ?? "No HotelDescription available.")</p>
+            </div>
+        </div>
+    </div>
+</div>

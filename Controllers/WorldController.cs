@@ -34,5 +34,15 @@ namespace HotelBooker.Controllers
             ViewBag.ContinentHotelCount = continentHotelCount;
             return View(hotels);
         }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var hotel = await _hotelService.GetHotelByIdAsync(id);
+            if (hotel == null)
+            {
+                return NotFound();
+            }
+            return View(hotel);
+        }
     }
 }
