@@ -16,7 +16,7 @@ namespace HotelBooker.Data
 
         public DbSet<HotelBooker.Models.Room> Room { get; set; } = default!;
 
-        public DbSet<HotelBooker.Models.Hotel> Hotel { get; set; }
+        public DbSet<HotelBooker.Models.Hotel> Hotel { get; set; } = default!;
 
 
         internal string? GetFilteredRooms(string searchString, string priceRange, string status)

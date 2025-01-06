@@ -2,33 +2,47 @@
     <div class="header__topbar">
         <div class="grid wide">
             <div class="header__topbar__container" style="height: 40px;">
-                <div class=" style="height: 40px;">
-                    <div class="l-6 m-8 c-8">
-                        <div class="header__topbar__container--contacts">
-                            <span>+84 945 000 917</span>
-                            <a href="#"><i class="fab fa-pinterest"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-dribbble"></i></a>
-                            <a href="#"><i class="fab fa-behance"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
+                <div class="l-6 m-8 c-8">
+                    <div class="header__topbar__container--contacts">
+                        <span>+84 945 000 917</span>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
-                    <div class="l-6 m-4 c-4" >
-                        <ul class="header__topbar__container--register">
-                            <a href="#">
-                                <li>Login</li>
-                            </a>
+                </div>
+                <div class="l-6 m-4 c-4">
+                    <ul class="header__topbar__container--register">
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            <li>Hello @User.Identity.Name!</li>
                             <li>|</li>
-                            <a href="#">
-                                <li><a asp-area="Admin" asp-controller="Rooms" asp-action="Index">ADMIN</a></li>
-                            </a>
-                        </ul>
-                    </div>
+
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li><a asp-area="Admin" asp-controller="Rooms" asp-action="Index">Admin Management</a></li>
+                            }
+                            else if(User.IsInRole("User"))
+                            {
+                                <li><a asp-area="" asp-controller="User" asp-action="Index">User Info</a></li>
+                            }
+                            <li>|</li>
+                            <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                            <li>|</li>
+                            <li><a asp-controller="Account" asp-action="SignUp">Sign Up</a></li>
+                        }
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+
     <nav class="header__nav">
         <div class="header__nav__container">
             <div class="grid wide">
@@ -74,7 +88,6 @@
             </div>
         </div>
     </nav>
-
     <div class="header__menu">
         <div class="header__menu__overlay"></div>
         <div class="header__menu__body--content">
