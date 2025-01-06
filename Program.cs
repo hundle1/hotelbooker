@@ -17,6 +17,7 @@ builder.Services.AddDbContext<HotelBookerContext>(options =>
 
 // Đăng ký dịch vụ RoomService vào container DI
 builder.Services.AddScoped<RoomService>();  // Thêm dòng này
+builder.Services.AddScoped<HotelService>();  // Đảm bảo dịch vụ được đăng ký ở đâ
 
 // Add services to the container
 builder.Services.AddControllersWithViews();
@@ -65,6 +66,10 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication(); // Thêm middleware xác thực
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

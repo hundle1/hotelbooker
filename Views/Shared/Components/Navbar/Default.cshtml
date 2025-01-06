@@ -17,8 +17,8 @@
                     <ul class="header__topbar__container--register">
                         @if (User.Identity?.IsAuthenticated ?? false)
                         {
-                            <li>Hello @User.Identity.Name!</li>
-                            <li>|</li>
+                            <li style="color: white;">Hello @User.Identity.Name</li>
+                            <li style="color: white;"> / </li>
 
                             if (User.IsInRole("Admin"))
                             {
@@ -28,7 +28,7 @@
                             {
                                 <li><a asp-area="" asp-controller="User" asp-action="Index">User Info</a></li>
                             }
-                            <li>|</li>
+                            <li style="color: white;"> / </li>
                             <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
                         }
                         else
