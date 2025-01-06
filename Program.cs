@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using HotelBooker.Data;
+using HotelBooker.Models;
+using HotelBooker.Services; // Thêm dòng này để sử dụng RoomService
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ builder.Services.AddDbContext<UserDbContext>(options =>
 // Configure DbContext cho HotelBooker
 builder.Services.AddDbContext<HotelBookerContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("HotelBookerContext") ?? throw new InvalidOperationException("Connection string 'HotelBookerContext' not found.")));
+
+// Đăng ký dịch vụ RoomService vào container DI
+builder.Services.AddScoped<RoomService>();  // Thêm dòng này
 
 // Add services to the container
 builder.Services.AddControllersWithViews();

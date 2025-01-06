@@ -3,16 +3,19 @@ using System;
 using HotelBooker.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HotelBooker.Migrations
+namespace HotelBooker.Migrations.HotelBooker
 {
     [DbContext(typeof(HotelBookerContext))]
-    partial class HotelBookerContextModelSnapshot : ModelSnapshot
+    [Migration("20250106041340_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
@@ -52,7 +55,7 @@ namespace HotelBooker.Migrations
                     b.Property<string>("HotelWebsite")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("NumberOfRoom")
+                    b.Property<int?>("NumberOfRoom")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

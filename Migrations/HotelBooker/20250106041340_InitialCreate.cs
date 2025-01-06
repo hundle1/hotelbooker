@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace HotelBooker.Migrations
+namespace HotelBooker.Migrations.HotelBooker
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -22,7 +22,7 @@ namespace HotelBooker.Migrations
                     HotelDescription = table.Column<string>(type: "TEXT", nullable: true),
                     HotelLocation = table.Column<string>(type: "TEXT", nullable: true),
                     HotelRate = table.Column<int>(type: "INTEGER", nullable: true),
-                    NumberOfRoom = table.Column<int>(type: "INTEGER", nullable: false),
+                    NumberOfRoom = table.Column<int>(type: "INTEGER", nullable: true),
                     HotelServices = table.Column<string>(type: "TEXT", nullable: true),
                     HotelContact = table.Column<string>(type: "TEXT", nullable: true),
                     HotelEmail = table.Column<string>(type: "TEXT", nullable: true),

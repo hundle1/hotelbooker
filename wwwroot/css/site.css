@@ -977,7 +977,6 @@ transition: transform 0.3s;
   display: flex;
   justify-content: center;
   align-items: flex-start; /* Align items to the start for better spacing */
-  padding: 20px;
   min-height: 100vh;
   background-color: #f9f9f9; /* Light background for contrast */
 }
@@ -991,7 +990,7 @@ transition: transform 0.3s;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
   background-color: #ffffff; /* White background for content */
-  margin-top: 200px; /* Reduced margin for better alignment */
+  margin-top: 80px; /* Reduced margin for better alignment */
 }
 
 /* Tiêu đề */
