@@ -7,10 +7,6 @@ using HotelBooker.Services; // Thêm dòng này để sử dụng RoomService
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure DbContext cho User
-builder.Services.AddDbContext<UserDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("UserDbContext") ?? throw new InvalidOperationException("Connection string 'UserDbContext' not found.")));
-
 // Configure DbContext cho HotelBooker
 builder.Services.AddDbContext<HotelBookerContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("HotelBookerContext") ?? throw new InvalidOperationException("Connection string 'HotelBookerContext' not found.")));
@@ -37,8 +33,8 @@ var app = builder.Build();
 // Tạo admin mặc định
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<UserDbContext>();
-    db.Database.EnsureCreated(); 
+    var db = scope.ServiceProvider.GetRequiredService<HotelBookerContext>(); 
+    db.Database.EnsureCreated();
 
     if (!db.Users.Any())
     {
@@ -53,6 +49,7 @@ using (var scope = app.Services.CreateScope())
         db.SaveChanges();
     }
 }
+
 
 // Middleware pipeline
 if (!app.Environment.IsDevelopment())

@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 
 public class AccountController : Controller
 {
-    private readonly UserDbContext _context;
+    private readonly HotelBookerContext _context;
 
-    public AccountController(UserDbContext context)
+    public AccountController(HotelBookerContext context)
     {
         _context = context;
     }
@@ -57,44 +57,59 @@ public class AccountController : Controller
     }
 
     // GET: /Account/SignUp
+    [HttpGet]
     public IActionResult SignUp()
     {
         return View();
     }
 
-    // POST: /Account/SignUp
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SignUp(User user, string confirmPassword)
+    public async Task<IActionResult> SignUp(Account model, string confirmPassword)
     {
+        // Kiểm tra tính hợp lệ của dữ liệu đầu vào
         if (ModelState.IsValid)
         {
-            // Kiểm tra nếu mật khẩu và xác nhận mật khẩu khớp
-            if (user.Password != confirmPassword)
+            // Kiểm tra nếu mật khẩu và xác nhận mật khẩu không khớp
+            if (model.Password != confirmPassword)
             {
                 ModelState.AddModelError(string.Empty, "Passwords do not match.");
-                return View(user);
+                return View(model);
             }
 
             // Kiểm tra xem email đã tồn tại chưa
-            if (_context.Users.Any(u => u.Email == user.Email))
+            if (_context.Users.Any(u => u.Email == model.Email))
             {
                 ModelState.AddModelError(string.Empty, "Email is already registered.");
-                return View(user);
+                return View(model);
             }
 
-            // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
-            user.HashPassword();
+            // Gán vai trò mặc định là "User"
+            model.Role = "User";
+
+            // Mã hóa mật khẩu trước khi lưu
+            model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
             // Thêm người dùng vào cơ sở dữ liệu
+            var user = new User
+            {
+                UserName = model.Name,
+                Email = model.Email,
+                Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
+                Role = "User", 
+                Address = null,
+                Phone = null,
+            };
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             // Đăng nhập ngay sau khi đăng ký thành công
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.UserName ?? string.Empty),
-                new Claim(ClaimTypes.Role, user.Role ?? string.Empty)
+                new Claim(ClaimTypes.Name, model.Name ?? string.Empty),
+                new Claim(ClaimTypes.Email, model.Email ?? string.Empty),
+                new Claim(ClaimTypes.Role, model.Role ?? "User")
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -106,11 +121,14 @@ public class AccountController : Controller
                 authProperties
             );
 
+            // Điều hướng về trang chủ sau khi đăng ký thành công
             return RedirectToAction("Index", "Home");
         }
 
-        return View(user);
+        // Trả về view với thông báo lỗi
+        return View(model);
     }
+
 
     [Authorize]
     public async Task<IActionResult> Logout()

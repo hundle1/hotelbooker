@@ -1,37 +1,39 @@
-@model HotelBooker.Models.User
+@model HotelBooker.Models.Account
 
 @{
     ViewData["Title"] = "Sign Up";
 }
 
-<div style="background-color: black; width: 100%; height: 150px; display: flex; justify-content: center; align-items: center;"></div>
+<div style="background-color: black; width: 100%; height: 150px; display: flex; justify-content: center; align-items: center;">
+</div>
 
 <div class="container-xxl" style="padding-top: 50px; display: flex; gap: 20px; flex-direction: column; align-items: center;">
     <h2 class="text-center">Create Your Account</h2>
-    <div class="container" style=" display: flex; gap: 20px; flex-direction: column;">
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <div class="container" style="display: flex; gap: 20px; flex-direction: column;">
         <form asp-action="SignUp" method="post" class="w-50" style="max-width: 400px; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             <div class="form-group mb-3">
-                <label asp-for="UserName" class="form-label">Username</label>
-                <input asp-for="UserName" class="form-control" required />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
                 <label asp-for="Email" class="form-label">Email</label>
                 <input asp-for="Email" type="email" class="form-control" required />
                 <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="Phone" class="form-label">Phone</label>
-                <input asp-for="Phone" type="tel" class="form-control" required />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="Address" class="form-label">Address</label>
-                <input asp-for="Address" class="form-control" required />
-                <span asp-validation-for="Address" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
