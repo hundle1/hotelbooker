@@ -895,14 +895,15 @@ button:hover {
 }
 
 .blog__container__post{
-border-radius: 8px;
+border-radius: 10px;
 overflow: hidden;
-margin-bottom: 20px;
+margin-bottom: 40px;
+margin-top: 50px;
 transition: transform 0.3s;
 }
 
 .blog__container__post:hover {
-  transform: scale(1.02);
+  transform: translateY(10px);
 }
 
 .blog__container__post img {
@@ -969,4 +970,73 @@ transition: transform 0.3s;
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center center;
+}
+
+/* Container chính */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the start for better spacing */
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #f9f9f9; /* Light background for contrast */
+}
+
+/* Container của trang Privacy */
+.privacy-container {
+  max-width: 900px;
+  width: 100%;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  background-color: #ffffff; /* White background for content */
+  margin-top: 200px; /* Reduced margin for better alignment */
+}
+
+/* Tiêu đề */
+h1, h2 {
+  color: #2c3e50; /* Darker color for better readability */
+  font-weight: 700;
+  margin-bottom: 20px; /* Added margin for spacing */
+}
+
+/* Thụt đầu dòng và khoảng cách cho các mục */
+ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+ul li {
+  margin-bottom: 15px; /* Increased spacing between list items */
+}
+
+/* Thêm một khoảng cách giữa các section */
+section {
+  margin-bottom: 40px; /* Increased spacing between sections */
+}
+
+/* Các đoạn văn bản */
+p {
+  line-height: 1.8; /* Increased line height for better readability */
+  color: #000000; /* Softer text color */
+}
+
+/* Liên kết trong trang Privacy */
+a {
+  color: #2980b9; /* Blue color for links */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Mẫu icon cho những phần mục thêm vào */
+ul li strong {
+  color: #000000; 
+}
+
+ul li {
+  color: #000000; 
 }
