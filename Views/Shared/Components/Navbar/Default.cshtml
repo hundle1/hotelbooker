@@ -17,16 +17,14 @@
                     <ul class="header__topbar__container--register">
                         @if (User.Identity?.IsAuthenticated ?? false)
                         {
-                            <li style="color: white;">Hello @User.Identity.Name</li>
-                            <li style="color: white;"> / </li>
-
                             if (User.IsInRole("Admin"))
                             {
+                                <li><a asp-area="" asp-controller="Account" asp-action="UserInfor">Hello @User.Identity.Name</a></li>
                                 <li><a asp-area="Admin" asp-controller="Rooms" asp-action="Index">Admin Management</a></li>
                             }
                             else if(User.IsInRole("User"))
                             {
-                                <li><a asp-area="" asp-controller="User" asp-action="Index">User Info</a></li>
+                                <li><a asp-area="" asp-controller="UserInfor" asp-action="Index">Hello @User.Identity.Name</a></li>
                             }
                             <li style="color: white;"> / </li>
                             <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>

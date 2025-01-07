@@ -1,0 +1,41 @@
+@{
+    Layout = "_Layout";
+}
+
+@using HotelBooker.Models
+@model User
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Chỉnh sửa thông tin người dùng</h2>
+    <form method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="UserName" class="form-label">Tên người dùng</label>
+                    <input type="text" class="form-control" id="UserName" name="UserName" value="@Model.UserName" required />
+                </div>
+                <div class="mb-3">
+                    <label for="Email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" required />
+                </div>
+                <div class="mb-3">
+                    <label for="Phone" class="form-label">Số điện thoại</label>
+                    <input type="text" class="form-control" id="Phone" name="Phone" value="@Model.Phone" />
+                </div>
+                <div class="mb-3">
+                    <label for="Address" class="form-label">Địa chỉ</label>
+                    <input type="text" class="form-control" id="Address" name="Address" value="@Model.Address" />
+                </div>
+                <div class="mb-3">
+                    <label for="Gender" class="form-label">Giới tính</label>
+                    <input type="text" class="form-control" id="Gender" name="Gender" value="@Model.Gender" />
+                </div>
+                <div class="mb-3">
+                    <label for="Password" class="form-label">Mật khẩu mới (nếu có)</label>
+                    <input type="password" class="form-control" id="Password" name="Password" />
+                </div>
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+            </div>
+        </div>
+    </form>
+</div>

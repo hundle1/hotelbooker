@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooker.Migrations
 {
     [DbContext(typeof(HotelBookerContext))]
-    [Migration("20250106142913_MergeUserContext")]
-    partial class MergeUserContext
+    [Migration("20250107095652_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,14 +115,24 @@ namespace HotelBooker.Migrations
 
             modelBuilder.Entity("HotelBooker.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Address")
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime?>("Birth")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Image")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
@@ -143,7 +153,7 @@ namespace HotelBooker.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });

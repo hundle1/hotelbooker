@@ -29,7 +29,7 @@ public class AccountController : Controller
         var user = _context.Users.FirstOrDefault(u => u.Email == email);
 
         // Kiểm tra thông tin tài khoản
-        if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
+        if (user != null && password == user.Password)
         {
             // Tạo claims
             var claims = new List<Claim>
@@ -65,51 +65,42 @@ public class AccountController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SignUp(Account model, string confirmPassword)
+    public async Task<IActionResult> SignUp(User model, string confirmPassword)
     {
-        // Kiểm tra tính hợp lệ của dữ liệu đầu vào
         if (ModelState.IsValid)
         {
-            // Kiểm tra nếu mật khẩu và xác nhận mật khẩu không khớp
             if (model.Password != confirmPassword)
             {
                 ModelState.AddModelError(string.Empty, "Passwords do not match.");
                 return View(model);
             }
-
-            // Kiểm tra xem email đã tồn tại chưa
             if (_context.Users.Any(u => u.Email == model.Email))
             {
                 ModelState.AddModelError(string.Empty, "Email is already registered.");
                 return View(model);
             }
-
-            // Gán vai trò mặc định là "User"
             model.Role = "User";
-
-            // Mã hóa mật khẩu trước khi lưu
-            model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
-
-            // Thêm người dùng vào cơ sở dữ liệu
+            model.Password = model.Password;
             var user = new User
             {
-                UserName = model.Name,
+                UserName = model.UserName,
                 Email = model.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
-                Role = "User", 
+                Password = model.Password,
+                Role = "User",
+                Birth = null,
                 Address = null,
                 Phone = null,
+                Image = null,
+                Gender = null
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-
-            // Đăng nhập ngay sau khi đăng ký thành công
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, model.Name ?? string.Empty),
-                new Claim(ClaimTypes.Email, model.Email ?? string.Empty),
-                new Claim(ClaimTypes.Role, model.Role ?? "User")
+                new Claim(ClaimTypes.Name, model.UserName ?? string.Empty, ClaimValueTypes.String),
+                new Claim(ClaimTypes.Email, model.Email ?? string.Empty, ClaimValueTypes.String),
+                new Claim(ClaimTypes.Role, model.Role ?? "User", ClaimValueTypes.String)
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -120,12 +111,8 @@ public class AccountController : Controller
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties
             );
-
-            // Điều hướng về trang chủ sau khi đăng ký thành công
             return RedirectToAction("Index", "Home");
         }
-
-        // Trả về view với thông báo lỗi
         return View(model);
     }
 
@@ -136,4 +123,69 @@ public class AccountController : Controller
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Login");
     }
+
+
+    public async Task<IActionResult> UserInfor()
+    {
+        var userName = User.Identity != null ? User.Identity.Name : null;
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+        return View(user);
+    }
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> Edit()
+    {
+        var userName = User.Identity != null ? User.Identity.Name : null;
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return View(user);
+    }
+
+    // Xử lý cập nhật thông tin người dùng
+    [Authorize]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(User model)
+    {
+        if (ModelState.IsValid)
+        {
+            var userName = User.Identity != null ? User.Identity.Name : null;
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Cập nhật thông tin người dùng
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+            user.Phone = model.Phone;
+            user.Address = model.Address;
+            user.Gender = model.Gender;
+
+            // Nếu có thay đổi mật khẩu
+            if (!string.IsNullOrEmpty(model.Password))
+            {
+                user.Password = model.Password;
+            }
+
+            // Cập nhật thông tin người dùng trong cơ sở dữ liệu
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("UserInfor"); // Quay lại trang thông tin người dùng
+        }
+
+        return View(model);
+    }
+
+
+
+
 }

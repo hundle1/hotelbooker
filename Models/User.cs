@@ -4,31 +4,32 @@ namespace HotelBooker.Models
 {
     public class User
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Name is required")]
         public string? UserName { get; set; }
 
         public string? Address { get; set; }
 
-        [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email format")]
         public string? Email { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         public string? Phone { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
+        public DateTime? Birth { get; set; }
+
         [Required]
-        public string? Role { get; set; }
+        public string? Role { get; set; } = "User";
+        public string? Image { get; set; } = null;
+        public string? Gender { get; set; } = null;
 
         public UserStatus Status { get; set; } = UserStatus.Active;
-        public void HashPassword()
-        {
-            Password = BCrypt.Net.BCrypt.HashPassword(Password);
-        }
     }
     public enum UserStatus
     {

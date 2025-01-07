@@ -42,7 +42,7 @@ using (var scope = app.Services.CreateScope())
         {
             UserName = "trexbairong",
             Email = "trexbairong@gmail.com",
-            Password = BCrypt.Net.BCrypt.HashPassword("123456"),
+            Password = "123456",
             Role = "Admin",
             Status = UserStatus.Active
         });
