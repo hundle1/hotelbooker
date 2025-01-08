@@ -23,6 +23,7 @@
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li><a asp-area="Admin" asp-controller="Rooms" asp-action="Index">Admin Management</a></li>
+                                    <li>/</li>
                                 }
                                 <li>
                                     <form asp-controller="User" asp-action="Logout" method="post">
