@@ -1,0 +1,39 @@
+@model IEnumerable<HotelBooker.Models.User>
+
+@{
+    ViewData["Title"] = "User Manager";
+}
+
+<div class="container" style="padding-top: 150px; display: flex; gap: 20px; padding-top:50px; display:flex; flex-direction:column;">
+<h1>@ViewData["Title"]</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Phone</td>
+                    <td>@user.Role</td>
+                    <td>@user.Status</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "UserManager", new { id = user.Id })" class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("Delete", "UserManager", new { id = user.Id })" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

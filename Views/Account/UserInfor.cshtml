@@ -44,9 +44,9 @@
                     <div class="mt-4">
                         <h3 class="mb-3">Background Information</h3>
                         <p><strong>Gender:</strong> @if (string.IsNullOrEmpty(Model.Gender)) { <span class="text-muted">Please update</span> } else { @Model.Gender }</p>
+                        <p><strong>Birthday:</strong> @if (Model.Birth == null) { <span class="text-muted">Please update</span> } else { @Model.Birth?.ToString("dd/MM/yyyy") }</p>
                         <p><strong>Phone number:</strong> @if (string.IsNullOrEmpty(Model.Phone)) { <span class="text-muted">Please update</span> } else { @Model.Phone }</p>
                         <p><strong>Address:</strong> @if (string.IsNullOrEmpty(Model.Address)) { <span class="text-muted">Please update</span> } else { @Model.Address }</p>
-                        <p><strong>Birthdate:</strong> @if (Model.Birth == null) { <span class="text-muted">Please update</span> } else { @Model.Birth?.ToString("dd/MM/yyyy") }</p>
                     </div>
                 </div>
             </div>
