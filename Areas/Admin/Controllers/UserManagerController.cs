@@ -1,11 +1,13 @@
+using HotelBooker.Data;
 using HotelBooker.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HotelBooker.Data; // Add this line if HotelBookerContext is in the Data namespace
 
 namespace HotelBooker.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]  // Chỉ cho phép Admin truy cập
     public class UserManagerController : Controller
     {
         private readonly HotelBookerContext _context;
@@ -15,23 +17,23 @@ namespace HotelBooker.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/UserManager
+        // GET: Admin/UserManager/Index
         public async Task<IActionResult> Index()
         {
             var users = await _context.Users.ToListAsync();
             return View(users);
         }
 
-        // GET: Admin/UserManager/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Admin/UserManager/Detail/5
+        public async Task<IActionResult> Detail(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+
             if (user == null)
             {
                 return NotFound();
@@ -41,25 +43,27 @@ namespace HotelBooker.Areas.Admin.Controllers
         }
 
         // GET: Admin/UserManager/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
             var user = await _context.Users.FindAsync(id);
+
             if (user == null)
             {
                 return NotFound();
             }
+
             return View(user);
         }
 
         // POST: Admin/UserManager/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Address,Email,Phone,Password,Birth,Role,Image,Gender,Status")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Email,Phone,Role,Status")] User user)
         {
             if (id != user.Id)
             {
@@ -75,7 +79,7 @@ namespace HotelBooker.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!_context.Users.Any(e => e.Id == user.Id))
                     {
                         return NotFound();
                     }
@@ -90,15 +94,15 @@ namespace HotelBooker.Areas.Admin.Controllers
         }
 
         // GET: Admin/UserManager/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+
             if (user == null)
             {
                 return NotFound();
@@ -113,14 +117,12 @@ namespace HotelBooker.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.Id == id);
         }
     }
 }
