@@ -21,6 +21,16 @@ body {
   margin-bottom: 60px;
 }
 
+.btn-visit:hover {
+  opacity: 0.8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.17);
+}
+
+/* Focus effect for both buttons */
+.btn-visit:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.17);
+}
 
 /* nav css  */
 .navbar {
@@ -488,7 +498,7 @@ body {
 .sidebar .close-btn {
     position: absolute;
     top: 30px;
-    right: 25px;
+    right: 10px;
     background: none;
     border: none;
     font-size: 20px;

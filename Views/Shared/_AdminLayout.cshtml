@@ -56,8 +56,7 @@
     <header>
         <div id="sidebar" class="sidebar "
             style="display:flex; flex-wrap:wrap; justify-content:space-between; flex-direction:column;">
-            <button class="close-btn" style="color: black;" onclick="toggleSidebar()"><i
-                    class="fa fa-bars"></i></button>
+            <button class="close-btn" style="color: black;" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
             <nav style="margin-top: 70px;">
                 <ul id="navigation">
                     <li class="nav-item">
@@ -81,6 +80,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link " asp-area="Admin" asp-controller="UserManager" asp-action="Index">
+                            <i style="margin-left: -6px;" class="fa fa-newspaper-o"></i> <span class="text">User Index</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">
                             <i style="margin-left: 0px;" class="fa fa-lock"></i> <span class="text">Privacy</span>
                         </a>
@@ -89,7 +94,7 @@
             </nav>
             <div class="">
                 <a class="nav-link back-home-hov" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i style="margin-left: 2px;" class="fa fa-arrow-left"> </i> <span class="text">Back to Home
+                    <i class="fa fa-arrow-left"> </i> <span class="text">Back to Home
                         (Travelix) </span>
                 </a>
             </div>

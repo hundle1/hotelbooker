@@ -35,14 +35,15 @@
             </div>
         </div>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 10px; max-height: 600px; overflow-y: auto; width: 20%; border-left: 1px solid gray; padding-left: 10px;">
+    <div style="display: flex; flex-direction: column; gap: 10px; max-height: 600px; overflow-y: auto; width: 20%; border-left: 1px solid gray; padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;">
         <h2>Best 5 Stars Hotels</h2>
         @foreach (var hotel in Model.Where(h => h.HotelRate == 5))
         {
             <div style="cursor: pointer; border: 1px solid gray; padding: 10px; display: flex; flex-direction: column; gap: 10px; width: 280px; font-size: 12px;">
                 @if (!string.IsNullOrEmpty(hotel.HotelImage))
                 {
-                    <img src="@hotel.HotelImage" alt="@hotel.HotelName" style="width: auto; height: 100px; object-fit: cover;">
+                    <img src="@hotel.HotelImage" alt="@hotel.HotelName" style="width: auto; height: 140px; object-fit: cover;">
                 }
                 <div style="font-weight: bold; font-size: 14px; margin-bottom: 5px;">
                     @hotel.HotelName
@@ -57,15 +58,15 @@
                         <strong>Phone:</strong> @hotel.HotelContact
                     </div>
                 </div>
-                <div style="display: flex; justify-content: space-around;  ">
-                    <a style="color:white;" href="/World/Detail/@hotel.Id">
-                        <button class="star-btn star-btn-primary">
+                <div style="display: flex; justify-content: space-around; gap: 20px; padding: 10px;">
+                    <a href="/World/Detail/@hotel.Id" style="text-decoration: none;">
+                        <button class="btn-visit" style="background-color: #7600bb; color: white; border: none; border-radius: 8px; font-size: 12px; cursor: pointer; transition: background-color 0.3s ease;">
                             Booking
                         </button>
                     </a>
-                
-                    <a href="@hotel.HotelWebsite" target="_blank" style="color: white;">
-                        <button class="star-btn star-btn-blue">
+                    
+                    <a href="@hotel.HotelWebsite" target="_blank" style="text-decoration: none;">
+                        <button class="btn-visit" style="background-color: #1e90ff; color: white; border: none; border-radius: 8px; font-size: 12px; cursor: pointer; transition: background-color 0.3s ease;">
                             Visit Website
                         </button>
                     </a>

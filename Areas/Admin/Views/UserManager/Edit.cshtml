@@ -1,0 +1,42 @@
+@model HotelBooker.Models.User
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="container" style="padding-top: 150px; display: flex; gap: 20px; padding-top:50px; display:flex; flex-direction:column; font-family: Arial, Helvetica, sans-serif;">
+    <h1>@ViewData["Title"]</h1>
+    <form asp-action="Edit">
+        <div class="form-group">
+            <label asp-for="UserName" class="control-label"></label>
+            <input asp-for="UserName" class="form-control" readonly />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" readonly />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="control-label"></label>
+            <input asp-for="Phone" class="form-control" readonly />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Role" class="control-label">Role</label>
+            <select asp-for="Role" class="form-control">
+                <option value="Admin" selected="@(Model.Role == "Admin" ? "selected" : null)">Admin</option>
+                <option value="User" selected="@(Model.Role == "User" ? "selected" : null)">User</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="control-label"></label>
+            <select asp-for="Status" class="form-control">
+                <option value="Active" selected="@(Model.Status == UserStatus.Active ? "selected" : null)">Active</option>
+                <option value="Inactive" selected="@(Model.Status == UserStatus.Inactive ? "selected" : null)">Inactive</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="@Url.Action("Index", "UserManager")" class="btn btn-secondary">Back to List</a>
+    </form>
+</div>

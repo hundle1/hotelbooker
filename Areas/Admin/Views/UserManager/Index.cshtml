@@ -1,0 +1,61 @@
+@model IEnumerable<HotelBooker.Models.User>
+
+@{
+    ViewData["Title"] = "User Manager";
+}
+
+<div class="container" style="padding-top: 150px; display: flex; gap: 20px; padding-top:50px; display:flex; flex-direction:column; font-family: Arial, Helvetica, sans-serif;">
+    <h1>@ViewData["Title"]</h1>
+    <table class="table">
+        <thead style="text-align: center;">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody style="text-align: center;">
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td style="width: 90px;">
+                        @if (!string.IsNullOrEmpty(user.Image))
+                        {
+                            <img src="@user.Image" alt="@user.UserName's @user.Image" width="90px" height="90px" class="img-thumbnail" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/img/default-avatar.jpg")" alt="Default Image" width="90px" height="90px" class="img-thumbnail" />
+                        }
+                    </td>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Phone</td>
+                    <td>
+                        @if (user.Role == "Admin")
+                        {
+                            <div style="color: blue;">
+                                <i class="fa fa-user-plus"></i> @user.Role
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="color: rgb(0, 175, 29);">
+                                <i class="fa fa-user"></i> @user.Role
+                            </div>
+                        }
+                    </td>
+                    <td>@user.Status</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "UserManager", new { id = user.Id })" class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("Delete", "UserManager", new { id = user.Id })" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

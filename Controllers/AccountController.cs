@@ -87,11 +87,11 @@ public class AccountController : Controller
                 Email = model.Email,
                 Password = model.Password,
                 Role = "User",
-                Birth = null,
-                Address = null,
-                Phone = null,
-                Image = null,
-                Gender = null
+                Birth = model.Birth,  // Add Birth here
+                Address = model.Address,
+                Phone = model.Phone,
+                Image = model.Image,
+                Gender = model.Gender
             };
 
             _context.Users.Add(user);
@@ -169,6 +169,7 @@ public class AccountController : Controller
             user.Phone = model.Phone;
             user.Address = model.Address;
             user.Gender = model.Gender;
+            user.Birth = model.Birth;  // Update Birth field
 
             // Xử lý cập nhật mật khẩu
             if (!string.IsNullOrEmpty(model.Password))
@@ -203,8 +204,4 @@ public class AccountController : Controller
 
         return View(model);
     }
-
-
-
-
 }
