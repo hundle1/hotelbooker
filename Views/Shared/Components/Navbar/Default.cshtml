@@ -19,7 +19,7 @@
                         {
                             if (User.IsInRole("Admin"))
                             {
-                                <li><a asp-area="" asp-controller="Account" asp-action="UserInfor">Hello @User.Identity.Name</a></li>
+                                <li style="color: white;"><a asp-area="" asp-controller="Account" asp-action="UserInfor">Hello @User.Identity.Name</a> /</li>
                                 <li><a asp-area="Admin" asp-controller="Rooms" asp-action="Index">Admin Management</a></li>
                             }
                             else if(User.IsInRole("User"))

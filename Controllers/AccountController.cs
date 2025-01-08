@@ -149,12 +149,13 @@ public class AccountController : Controller
     // Xử lý cập nhật thông tin người dùng
     [Authorize]
     [HttpPost]
+    [ActionName("Edit")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(User model)
+    public async Task<IActionResult> Edit(User model, IFormFile? Image)
     {
         if (ModelState.IsValid)
         {
-            var userName = User.Identity != null ? User.Identity.Name : null;
+            var userName = User.Identity?.Name;
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
 
             if (user == null)
@@ -169,13 +170,31 @@ public class AccountController : Controller
             user.Address = model.Address;
             user.Gender = model.Gender;
 
-            // Nếu có thay đổi mật khẩu
+            // Xử lý cập nhật mật khẩu
             if (!string.IsNullOrEmpty(model.Password))
             {
                 user.Password = model.Password;
             }
 
-            // Cập nhật thông tin người dùng trong cơ sở dữ liệu
+            // Xử lý ảnh đại diện
+            if (Image != null && Image.Length > 0)
+            {
+                // Đường dẫn lưu ảnh
+                var uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img");
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(Image.FileName);
+                var filePath = Path.Combine(uploads, fileName);
+
+                // Lưu ảnh vào server
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Image.CopyToAsync(fileStream);
+                }
+
+                // Cập nhật đường dẫn ảnh vào database
+                user.Image = "/img/" + fileName;
+            }
+
+            // Cập nhật dữ liệu người dùng trong cơ sở dữ liệu
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
