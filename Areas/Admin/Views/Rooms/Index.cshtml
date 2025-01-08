@@ -4,6 +4,127 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="container" style="padding-top: 100px;">
-    <p style="color:black;">this is Dashboardasdasdsad asdsada dwefbasdubfasdh ifh asidf niasnfia nsdoiu</p>
+<!-- Container for Dashboard -->
+<div class="container" style="padding-top: 150px; display: flex; gap: 20px; padding-top:50px; display:flex; flex-direction:column; font-family: Arial, Helvetica, sans-serif;">
+
+
+    <!-- Dashboard Title -->
+    <h1 class="text-center" style="font-size: 36px; font-weight: bold;">@ViewData["Title"]</h1>
+    <p class="text-center" style="font-size: 20px; color: #555;">This is your dashboard where you can view various statistics and data.</p>
+
+    <!-- Row for Cards displaying statistics -->
+    <div class="row" style="margin-bottom: 30px;">
+        <!-- Total Revenue -->
+        <div class="col-md-3">
+            <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 28px; font-weight: 600;">Total Revenue</h5>
+                    <p class="card-text" style="font-size: 30px; color: #28a745;">$25,000</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Accounts -->
+        <div class="col-md-3">
+            <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 28px; font-weight: 600;">User Accounts</h5>
+                    <p class="card-text" style="font-size: 30px; color: #007bff;">1,230</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Rooms -->
+        <div class="col-md-3">
+            <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 28px; font-weight: 600;">Total Rooms</h5>
+                    <p class="card-text" style="font-size: 30px; color: #ffc107;">80</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="col-md-3">
+            <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 28px; font-weight: 600;">Project Progress</h5>
+                    <p class="card-text" style="font-size: 30px; color: #dc3545;">75%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row for Charts -->
+    <div class="row">
+        <!-- Revenue Trend Chart -->
+        <div class="col-md-6" style="margin-bottom: 30px;">
+            <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 28px; font-weight: 600;">Revenue Trend</h5>
+                    <canvas id="revenueChart" style="height: 400px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Growth Chart -->
+        <div class="col-md-6" style="margin-bottom: 30px;">
+            <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="font-size: 28px; font-weight: 600;">User Growth</h5>
+                    <canvas id="userGrowthChart" style="height: 400px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Add the necessary scripts for Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Revenue Trend Chart
+    var ctx1 = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Months
+            datasets: [{
+                label: 'Revenue',
+                data: [5000, 7000, 8000, 6000, 10000, 9000], // Revenue data
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 3,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: { ticks: { autoSkip: true, maxTicksLimit: 6 } },
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    // User Growth Chart
+    var ctx2 = document.getElementById('userGrowthChart').getContext('2d');
+    var userGrowthChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Months
+            datasets: [{
+                label: 'Users',
+                data: [100, 150, 200, 300, 500, 650], // User data
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: { ticks: { autoSkip: true, maxTicksLimit: 6 } },
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
