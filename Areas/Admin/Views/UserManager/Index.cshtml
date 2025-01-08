@@ -25,7 +25,7 @@
                     <td style="width: 90px;">
                         @if (!string.IsNullOrEmpty(user.Image))
                         {
-                            <img src="@user.Image" alt="@user.UserName's @user.Image" width="90px" height="90px" class="img-thumbnail" />
+                            <img src="~/img/@user.Image" alt="@user.UserName's @user.Image" width="90px" height="90px" class="img-thumbnail" />
                         }
                         else
                         {

@@ -1365,3 +1365,138 @@ white-space: pre-wrap;
   transform: scale(1.2); /* Phóng to biểu tượng khi hover */
   color: #ffcc00; /* Thay đổi màu biểu tượng khi hover */
 }
+
+/* Search */
+@media (max-width: 1023px)
+{.search {
+  padding: 60px 0;
+}}
+
+.search {
+  width: 100%;
+  background: var(--bg-section);
+  position: relative;
+}
+
+@media (max-width: 1023px)
+{
+  .search__container__tabs {
+    position: relative;
+    bottom: 100%;
+    cursor: pointer;
+}
+}
+
+.search__container__tabs {
+  position: absolute;
+  bottom: 100%;
+  cursor: pointer;
+}
+
+@media (min-width: 740px) and (max-width: 1023px)
+{.wide {
+    width: 644px;
+}}
+
+.grid {
+  display: block;
+  padding: 0;
+}
+
+
+@media (max-width: 1023px)
+{.search__container__tabs .row {
+    height: 62px;
+}}
+
+.search__container__tabs .row {
+    justify-content: space-between;
+    align-items: center;
+    height: 94px;
+    margin-left: 1px;
+}
+
+@media (min-width: 740px)
+{.row {
+    margin-left: -8px;
+    margin-right: -8px;
+}}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1023px)
+{.search__container__tab.active {
+  background-color: var(--yellow);
+  color: var(--white-color);
+}}
+
+.search__container__tab:hover, .search__container__tab:active, .search__container__tab.active {
+  background-color: var(--yellow);
+  color: var(--white-color);
+}
+
+@media (max-width: 1023px)
+{.search__container__tab:first-child, .search__container__tab:last-child {
+    border-radius: 0;
+    padding-left: 7px;
+}}
+
+@media (max-width: 1023px)
+{.search__container__tab {
+    width: 47%;
+    margin: 5px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+}}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.search__container__tab {
+  height: 100%;
+  transition: all .3s ease;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.search__container__tab.active img {
+  filter: brightness(200%) grayscale(100%);
+}
+
+.search__container__tab img {
+  margin-right: 10px;
+}
+
+img{
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}
+
+@media (max-width: 1023px)
+{.search__container {
+    margin-top: 200px;
+    position: relative;
+    padding: 0 10px;
+}}
+
+.search__container {
+    height: 192px;
+}
+
+.search__container--item {
+  padding-right: 15px;
+}
+
+@media (min-width: 740px)
+{.m-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}}
