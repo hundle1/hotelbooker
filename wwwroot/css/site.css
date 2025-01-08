@@ -1481,3 +1481,38 @@ img{
   padding-right: 15px;
 }
 
+
+.header__topbar__container--register {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa các phần tử */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 200px;
+}
+
+.header__topbar__container--register li,
+.header__topbar__container--register li a {
+  color: white; /* Màu chữ trắng */
+  font-size: 11px; /* Kích thước chữ */
+  font-weight: 600; /* Đậm chữ */
+}
+
+.header__topbar__container--register form button {
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0; /* Xóa padding mặc định */
+}
+
+.header__topbar__container--register li a {
+  text-decoration: none; /* Bỏ gạch chân cho các liên kết */
+}
+
+.header__topbar__container--register li form button:hover {
+  color: #ccc; /* Thêm hiệu ứng hover */
+}

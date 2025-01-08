@@ -15,26 +15,28 @@
                 </div>
                 <div class="l-6 m-4 c-4">
                     <ul class="header__topbar__container--register">
-                        @if (User.Identity?.IsAuthenticated ?? false)
-                        {
-                            if (User.IsInRole("Admin"))
+                        <ul class="header__topbar__container--register">
+                            @if (User.Identity?.IsAuthenticated ?? false)
                             {
-                                <li style="color: white;"><a asp-area="" asp-controller="Account" asp-action="UserInfor">Hello @User.Identity.Name</a> /</li>
-                                <li><a asp-area="Admin" asp-controller="Rooms" asp-action="Index">Admin Management</a></li>
+                                <li>Hello @User.Identity.Name</li>
+                                <li>/</li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a asp-area="Admin" asp-controller="Rooms" asp-action="Index">Admin Management</a></li>
+                                }
+                                <li>
+                                    <form asp-controller="User" asp-action="Logout" method="post">
+                                        <button type="submit">LOG OUT</button>
+                                    </form>
+                                </li>
                             }
-                            else if(User.IsInRole("User"))
+                            else
                             {
-                                <li><a asp-area="" asp-controller="UserInfor" asp-action="Index">Hello @User.Identity.Name</a></li>
+                                <li><a asp-controller="User" asp-action="Login">Login</a></li>
+                                <li>|</li>
+                                <li><a asp-controller="User" asp-action="SignUp">Sign Up</a></li>
                             }
-                            <li style="color: white;"> / </li>
-                            <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
-                        }
-                        else
-                        {
-                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-                            <li>|</li>
-                            <li><a asp-controller="Account" asp-action="SignUp">Sign Up</a></li>
-                        }
+                        </ul>
                     </ul>
                 </div>
             </div>
@@ -86,6 +88,7 @@
             </div>
         </div>
     </nav>
+
     <div class="header__menu">
         <div class="header__menu__overlay"></div>
         <div class="header__menu__body--content">
@@ -99,6 +102,7 @@
             <i class="fas fa-times" id="menu_close"></i>
         </div>
     </div>
+    
     <div class="scroll-top">
         <i class="fas fa-arrow-up"></i>
     </div>
