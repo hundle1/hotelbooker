@@ -24,8 +24,8 @@
                     <p class="text-muted">Click để phóng to</p>
                 </div>
             }
-            <p><strong>Tình trạng:</strong> <span class="badge bg-success text-white">Active</span></p>
             <p><strong>Vai trò: </strong><span class="badge text-bg-info" style="color: #1E90FF; font-weight: bold;"><i class="fas fa-user-tag" style="color: #1E90FF;"></i> Admin</span></p>
+            <p><strong>Tình trạng:</strong> <span class="badge bg-success text-white">Active</span></p>
         </div>
         <div class="col-md-8">
             <div class="card shadow-sm">
@@ -41,17 +41,16 @@
                         </div>
                     </div>
                     <p><strong>Email:</strong> <span style="color: #007BFF;"><i class="fas fa-envelope"></i> @Model.Email</span></p>
-
                     <div class="mt-4">
-                        <h5 class="mb-3">Thông tin bổ sung:</h5>
-                        <p><strong>Địa chỉ:</strong> @if (string.IsNullOrEmpty(Model.Address)) { <span class="text-muted">Hãy cập nhật thêm</span> } else { @Model.Address }</p>
-                        <p><strong>Số điện thoại:</strong> @if (string.IsNullOrEmpty(Model.Phone)) { <span class="text-muted">Hãy cập nhật thêm</span> } else { @Model.Phone }</p>
-                        <p><strong>Giới tính:</strong> @if (string.IsNullOrEmpty(Model.Gender)) { <span class="text-muted">Hãy cập nhật thêm</span> } else { @Model.Gender }</p>
+                        <h3 class="mb-3">Background Information</h3>
+                        <p><strong>Gender:</strong> @if (string.IsNullOrEmpty(Model.Gender)) { <span class="text-muted">Please update</span> } else { @Model.Gender }</p>
+                        <p><strong>Phone number:</strong> @if (string.IsNullOrEmpty(Model.Phone)) { <span class="text-muted">Please update</span> } else { @Model.Phone }</p>
+                        <p><strong>Address:</strong> @if (string.IsNullOrEmpty(Model.Address)) { <span class="text-muted">Please update</span> } else { @Model.Address }</p>
+                        <p><strong>Birthdate:</strong> @if (Model.Birth == null) { <span class="text-muted">Please update</span> } else { @Model.Birth?.ToString("dd/MM/yyyy") }</p>
                     </div>
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
 

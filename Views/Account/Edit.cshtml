@@ -13,7 +13,7 @@
             <!-- Thông tin bên trái -->
             <div class="col-md-6">
                 <div class="mb-3">
-                    <label for="UserName" class="form-label"><h4>Tên người dùng</h4></label>
+                    <label for="UserName" class="form-label"><h4>User Name</h4></label>
                     <input type="text" class="form-control" id="UserName" name="UserName" value="@Model.UserName" required />
                 </div>
                 <div class="mb-3">
@@ -21,12 +21,16 @@
                     <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" required />
                 </div>
                 <div class="mb-3">
-                    <label for="Phone" class="form-label"><h4>Số điện thoại</h4></label>
+                    <label for="Phone" class="form-label"><h4>Phone number</h4></label>
                     <input type="text" class="form-control" id="Phone" name="Phone" value="@Model.Phone" />
                 </div>
                 <div class="mb-3">
-                    <label for="Address" class="form-label"><h4>Địa chỉ</h4></label>
+                    <label for="Address" class="form-label"><h4>Address</h4></label>
                     <input type="text" class="form-control" id="Address" name="Address" value="@Model.Address" />
+                </div>
+                <div class="mb-3">
+                    <label for="Birth">Birthdate</label>
+                    <input type="date" class="form-control" id="Birth" name="Birth" value="@Model.Birth?.ToString("yyyy-MM-dd")" />
                 </div>
                 <div class="mb-3">
                     <label for="Gender" class="form-label">Giới tính</label>
@@ -39,7 +43,7 @@
                 <div class="mb-3">
                     <input type="password" class="form-control" id="Password" name="Password" style="display: none;"/>
                 </div>
-                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
 
             <!-- Ảnh đại diện bên phải -->
