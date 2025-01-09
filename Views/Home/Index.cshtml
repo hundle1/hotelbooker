@@ -25,79 +25,74 @@
         </div>
     </div>
 </div>
-<div class="search">
-    <div class="grid wide">
-        <div class="search__container__tabs grid wide">
+<div class="main-container">
+        <!-- Hotel Search Section -->
+        <div class="hotel-search">
+            <h3>Hotel Search &#x1F3E8;</h3>
+        </div>
+
+        <!-- Tabs Section -->
+        <div class="tabs">
+            <div class="tab active">Hotels</div>
+            <div class="tab">Car Rentals</div>
+            <div class="tab">Flights</div>
+            <div class="tab">Trips</div>
+            <div class="tab">Cruises</div>
+            <div class="tab">Activities</div>
+        </div>
+
+        <!-- Search Form Section -->
+        <form id="hotel-form" onsubmit="return validateForm()">
+            <!-- Destination Section -->
             <div class="row">
-                <div class="search__container__tab d-flex active">
-                    <img src="~/img/iconhotel.webp" alt="">
-                    <span>Hotels</span>
-                </div>
-                <div class="search__container__tab d-flex">
-                    <img src="~/img/car.webp" alt="">
-                    <span>Car rentals</span>
-                </div>
-                <div class="search__container__tab d-flex">
-                    <img src="~/img/fly.webp" alt="">
-                    <span>Flights</span>
-                </div>
-                <div class="search__container__tab d-flex">
-                    <img src="~/img/trip.webp" alt="">
-                    <span>Trips</span>
-                </div>
-                <div class="search__container__tab d-flex">
-                    <img src="~/img/cruises.webp" alt="">
-                    <span>Cuises</span>
-                </div>
-                <div class="search__container__tab d-flex">
-                    <img src="~/img/activities.webp" alt="">
-                    <span>Activities</span>
+                <div class="form-group destination">
+                    <label for="destination">Destination</label>
+                    <input type="text" placeholder="City" class="form-control" id="destination" name="destination" required>
                 </div>
             </div>
-        </div>
-        <div class="search__container">
-            <div class="row">
-                <div class="search__container--item l-4 m-6 c-12">
-                    <div>
-                        <span>Destination</span>
-                    </div>
-                    <input type="text">
+
+            <!-- Check-in, Check-out, Rooms, Guests (Same Row) -->
+            <div class="row horizontal">
+                <div class="form-group">
+                    <label for="checkin-date">Check-in</label>
+                    <input type="date" class="form-control" id="checkin-date" name="checkin-date" onkeydown="return false" required>
                 </div>
-                <div class="search__container--item l-2 m-6 c-12">
-                    <div>
-                        <span>Check in</span>
-                    </div>
-                    <input type="text" placeholder="DD-MM-YYYY">
+                <div class="form-group">
+                    <label for="checkout-date">Check-out</label>
+                    <input type="date" class="form-control" id="checkout-date" name="checkout-date" onkeydown="return false" required>
                 </div>
-                <div class="search__container--item l-2 m-6 c-12">
-                    <div>
-                        <span>Check out</span>
-                    </div>
-                    <input type="text">
-                </div>
-                <div class="search__container--item l-1 m-3 c-6">
-                    <div>
-                        <span>Adults</span>
-                    </div>
-                    <select name="" id="">
-                        <option>01</option>
-                        <option>02</option>
-                        <option>03</option>
+                <div class="form-group">
+                    <label for="rooms">Rooms</label>
+                    <select class="form-select" id="rooms">
+                        <option value="1">1</option>
                     </select>
                 </div>
-                <div class="search__container--item l-1 m-3 c-6">
-                    <div>
-                        <span>CHILDREN</span>
-                    </div>
-                    <select name="" id="">
-                        <option>0</option>
-                        <option>01</option>
-                        <option>02</option>
+                <div class="form-group">
+                    <label for="guests">Guests</label>
+                    <select class="form-select" id="guests" onchange="javascript: dynamicDropdown(this.options[this.selectedIndex].value);">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
                     </select>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <!-- Submit Button -->
+            <div class="row">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Search hotels</button>
+                </div>
+                <div id="error" class="error text-danger"></div>
+            </div>
+        </form>
+</div>
+
 </div>
 <div class="about_area">
     <div class="container">
