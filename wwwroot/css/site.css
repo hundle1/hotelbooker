@@ -1586,3 +1586,105 @@ input {
   font-weight: 700;
   margin-right: 10px;
 }
+
+
+/* Login và sign up  */
+
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.auth-header p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.auth-form .form-group {
+  margin-bottom: 15px;
+}
+
+.auth-form .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.auth-form .form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.auth-form .form-control:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form-remember {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-block {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-block:hover {
+  background-color: #0056b3;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.auth-footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+.alert-success {
+  text-align: center;
+  padding: 10px;
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+}
+
+
+/* login sign up  */
