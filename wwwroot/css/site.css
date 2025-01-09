@@ -1469,6 +1469,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 5px;
   transition: border-color 0.3s;
+  width: 120%;
 }
 
 input[type="text"]:focus,
@@ -1559,4 +1560,8 @@ select:focus {
   color: #ccc; /* Thêm hiệu ứng hover */
 }
 
-
+.col.text-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

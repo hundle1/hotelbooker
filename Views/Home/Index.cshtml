@@ -54,54 +54,56 @@
         </div>
         <!-- Search Form Section -->
         <form id="hotel-form" onsubmit="return validateForm()" style="padding-top: 60px;">
-            <!-- Destination Section -->
-            <div class="row">
-                <div class="form-group destination">
-                    <label for="destination">Destination</label>
-                    <input type="text" placeholder="City" class="form-control" id="destination" name="destination" required>
-                </div>
-            </div>
+    <!-- Destination Section -->
+    <div class="row">
+        <div class="form-group destination">
+            <label for="destination">Destination</label>
+            <input type="text" placeholder="City" class="form-control" id="destination" name="destination" required>
+        </div>
+    </div>
 
-            <!-- Check-in, Check-out, Rooms, Guests (Same Row) -->
-            <div class="row horizontal">
-                <div class="form-group">
-                    <label for="checkin-date">Check-in</label>
-                    <input type="date" class="form-control" id="checkin-date" name="checkin-date" onkeydown="return false" required>
-                </div>
-                <div class="form-group">
-                    <label for="checkout-date">Check-out</label>
-                    <input type="date" class="form-control" id="checkout-date" name="checkout-date" onkeydown="return false" required>
-                </div>
-                <div class="form-group">
-                    <label for="rooms">Rooms</label>
-                    <select class="form-select" id="rooms">
-                        <option value="1">1</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="guests">Guests</label>
-                    <select class="form-select" id="guests" onchange="javascript: dynamicDropdown(this.options[this.selectedIndex].value);">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
-                </div>
-            </div>
+    <!-- Check-in, Check-out, Rooms, Guests (Same Row) -->
+    <div class="row horizontal">
+        <div class="form-group flex-grow-1">
+    <label for="checkin-date">Check-in</label>
+    <input type="date" class="form-control" id="checkin-date" name="checkin-date" onkeydown="return false" required>
+</div>
+<div class="form-group flex-grow-1">
+    <label for="checkout-date">Check-out</label>
+    <input type="date" class="form-control" id="checkout-date" name="checkout-date" onkeydown="return false" required>
+</div>
 
-            <!-- Submit Button -->
-            <div class="row">
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">Search hotels</button>
-                </div>
-                <div id="error" class="error text-danger"></div>
-            </div>
-        </form>
+        <div class="form-group">
+            <label for="rooms">Rooms</label>
+            <select class="form-select" id="rooms">
+                <option value="1">1</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="guests">Guests</label>
+            <select class="form-select" id="guests" onchange="javascript: dynamicDropdown(this.options[this.selectedIndex].value);">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="row">
+        <div class="col text-center">
+            <button type="submit" class="btn btn-primary">Search hotels</button>
+        </div>
+        <div id="error" class="error text-danger"></div>
+    </div>
+</form>
+
 </div>
 
 </div>
