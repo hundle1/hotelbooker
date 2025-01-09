@@ -18,8 +18,6 @@
                         <ul class="header__topbar__container--register">
                             @if (User.Identity?.IsAuthenticated ?? false)
                             {
-                                <li><a asp-controller="User"  asp-action="UserInfor">Hello @User.Identity.Name</a></li>
-                                <li>/</li>
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li><a asp-area="Admin" asp-controller="Rooms" asp-action="Index">Admin Management</a></li>

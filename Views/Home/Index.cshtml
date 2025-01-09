@@ -26,23 +26,34 @@
     </div>
 </div>
 <div class="main-container">
-        <!-- Hotel Search Section -->
-        <div class="hotel-search">
-            <h3>Hotel Search &#x1F3E8;</h3>
-        </div>
-
         <!-- Tabs Section -->
         <div class="tabs">
-            <div class="tab active">Hotels</div>
-            <div class="tab">Car Rentals</div>
-            <div class="tab">Flights</div>
-            <div class="tab">Trips</div>
-            <div class="tab">Cruises</div>
-            <div class="tab">Activities</div>
+            <div class="tab con-top-bottom active con-left" style="border-left: 1px solid #000;">Hotels</div>
+            <div class="tab con-top-bottom">Car Rentals</div>
+            <div class="tab con-top-bottom">Flights</div>
+            <div class="tab con-top-bottom">Trips</div>
+            <div class="tab con-top-bottom">Cruises</div>
+            <div class="tab con-top-bottom active con-right">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <span>
+                        <a asp-controller="User"  asp-action="UserInfor" style="font-weight: bold;">
+                            <i class="fa fa-user"></i> Hello @User.Identity.Name
+                        </a>
+                        </span>
+                }
+                else
+                {
+                    <div>
+                        <a asp-action="Login" asp-controller="User">Login</a>
+                        /
+                        <a asp-action="SignUp" asp-controller="User">Sign Up</a>
+                    </div>
+                }
+            </div>
         </div>
-
         <!-- Search Form Section -->
-        <form id="hotel-form" onsubmit="return validateForm()">
+        <form id="hotel-form" onsubmit="return validateForm()" style="padding-top: 60px;">
             <!-- Destination Section -->
             <div class="row">
                 <div class="form-group destination">

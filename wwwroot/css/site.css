@@ -1389,25 +1389,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between; /* Ensure space between items */
-  min-height: 400px;
+  min-height: 330px;
+  position: absolute;
+  top: 21%;
 }
 
-/* Hotel Search Section */
-.hotel-search {
-  text-align: center;
-  margin-bottom: 20px;
 
-}
-
-.hotel-search h3 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-}
-
-.hotel-search .icon {
-  font-size: 3rem;
-  margin-top: 10px;
-}
 
 /* Tabs Section */
 .tabs {
@@ -1416,22 +1403,41 @@ body {
   margin-bottom: 20px;
   font-size: 1.1rem;
   width: 100%;
+  position: absolute;
+  top: 3%;
+}
+
+.con-left{
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 5px;
+}
+
+.con-right{
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 5px;
+}
+
+.con-top-bottom{
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
 }
 
 .tab {
-  padding: 10px 20px;
+  padding: 20px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
+  min-width: 200px;
+  text-align: center;
 }
 
 .tab:hover {
   background-color: #ffd700;
-  color: white;
+  color: #000;
 }
 
 .tab.active {
   background-color: #ffd700;
-  color: white;
+  color: #000;
 }
 
 /* Form Styles */
@@ -1488,20 +1494,7 @@ select:focus {
 }
 
 /* Submit Button */
-button[type="submit"] {
-  background-color: #5b5a92;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  width: 100%;
-  margin-top: 20px;
-}
 
-button[type="submit"]:hover {
-  background-color: #ffd700;
-}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
@@ -1565,3 +1558,5 @@ button[type="submit"]:hover {
 .header__topbar__container--register li form button:hover {
   color: #ccc; /* Thêm hiệu ứng hover */
 }
+
+
