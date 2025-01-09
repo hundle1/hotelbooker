@@ -210,5 +210,15 @@ namespace HotelBooker.Controllers
                 }
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> UserInfor()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+            return View(user);
+        }
     }
 }

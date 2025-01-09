@@ -1565,3 +1565,251 @@ button[type="submit"]:hover {
 .header__topbar__container--register li form button:hover {
   color: #ccc; /* Thêm hiệu ứng hover */
 }
+<<<<<<< HEAD
+=======
+.search__container--item input, .search__container--item select {
+  height: 46px;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 600;
+  color: #929191;
+  padding: 15px;
+}
+
+input[type="text" i] {
+  padding-block: 1px;
+  padding-inline: 2px;
+}
+
+input {
+  text-rendering: auto;
+  color: fieldtext;
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  appearance: auto;
+  -webkit-rtl-ordering: logical;
+  cursor: text;
+  background-color: field;
+  margin: 0em;
+  padding: 1px 0px;
+  border-width: 2px;
+  border-style: inset;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+  padding-block: 1px;
+  padding-inline: 2px;
+}
+
+@media (max-width: 1023px)
+{.search__container--btn {
+    margin-left: 62%;
+    margin-bottom: 25px;}
+}
+.search__container--btn {
+    height: 53px;
+    background-color: var(--btn-black);
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    border-radius: 53px;
+    line-height: 53px;
+    margin-top: 30px;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+}
+.search__container--btn a {
+  color: var(--white-color);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+
+/* Login và sign up  */
+
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.auth-header p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.auth-form .form-group {
+  margin-bottom: 15px;
+}
+
+.auth-form .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.auth-form .form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.auth-form .form-control:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form-remember {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-block {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-block:hover {
+  background-color: #0056b3;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.auth-footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+.alert-success {
+  text-align: center;
+  padding: 10px;
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+}
+
+
+/* login sign up  */
+
+
+
+/* user profile  */
+
+.user-profile {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.profile-header h2 {
+  font-size: 24px;
+  color: #333;
+  margin: 0;
+}
+
+.profile-details {
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.detail-item label {
+  font-weight: bold;
+  color: #555;
+}
+
+.detail-item span {
+  color: #333;
+}
+
+.profile-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-actions .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-actions .btn:hover {
+  background-color: #0056b3;
+}
+
+/* user profile end  */
+>>>>>>> c46544fffe6430eb580767ec65aa1fc7c462b89d
