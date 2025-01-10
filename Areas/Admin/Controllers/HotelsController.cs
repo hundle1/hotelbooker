@@ -14,9 +14,44 @@ namespace HotelBooker.Areas.Admin.Controllers
         }
 
         // GET: Admin/Hotel
-        public async Task<IActionResult> Index()
+        // GET: Admin/Hotel
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             var hotels = await _hotelService.GetAllHotelsAsync();
+
+            // Tìm kiếm
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                hotels = hotels.Where(h => (h.HotelName != null && h.HotelName.Contains(searchString))
+                                        || (h.HotelRate?.ToString() != null && h.HotelRate.Value.ToString().Contains(searchString))
+                                        || (h.NumberOfRoom?.ToString() != null && h.NumberOfRoom.Value.ToString().Contains(searchString))).ToList();
+            }
+
+            // Sắp xếp
+            switch (sortOrder)
+            {
+                case "name-asc":
+                    hotels = hotels.OrderBy(h => h.HotelName).ToList();
+                    break;
+                case "name-desc":
+                    hotels = hotels.OrderByDescending(h => h.HotelName).ToList();
+                    break;
+                case "rate-asc":
+                    hotels = hotels.OrderBy(h => h.HotelRate).ToList();
+                    break;
+                case "rate-desc":
+                    hotels = hotels.OrderByDescending(h => h.HotelRate).ToList();
+                    break;
+                case "room-asc":
+                    hotels = hotels.OrderBy(h => h.NumberOfRoom).ToList();
+                    break;
+                case "room-desc":
+                    hotels = hotels.OrderByDescending(h => h.NumberOfRoom).ToList();
+                    break;
+                default:
+                    break;
+            }
+
             return View(hotels);
         }
 
