@@ -1391,8 +1391,8 @@ body {
   justify-content: space-between; /* Ensure space between items */
   min-height: 330px;
   position: absolute;
-  top: 21%;
-}
+  top: 17.9%;
+ }
 
 
 
@@ -1586,4 +1586,112 @@ select:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* features_room_end */
+.package__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  opacity: .27;
+}
+.package__container {
+  position: relative;
+}
+.package__container .wide {
+  z-index: 99;
+}
+.offers {
+  background-color: #f3f6f9;
+}
+.package__container___body {
+  background-color: var(--white-color);
+  margin: auto;
+  padding: 65px 90px;
+}
+.body--content__cta {
+  text-align: center;
+}
+.package__container___body--content h2 {
+  font-size: 30px;
+  color: var(--black);
+  text-transform: uppercase;
+}
+.item_rating {
+  margin-top: 10px;
+}
+.item_rating i:first-child {
+  color: #ffeb8d;
+}
+.item_rating i {
+  font-size: 18px;
+  margin-right: 4px;
+  color: #a5a5a5;
+}
+.fa, .fas {
+  font-weight: 900;
+}
+.fa, .far, .fas {
+  font-family: "Font Awesome 5 Free";
+}
+.fa, .fab, .fad, .fal, .far, .fas {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+.package__container___body--content p {
+  font-weight: 600;
+  line-height: 2.29;
+  margin-top: 14px;
+}
+.home__container__slider--btn, .item--btn {
+  display: inline-block;
+  height: 53px;
+  border-radius: 27px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.home__container__slider--btn a, .item--btn a {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 53px;
+  padding-left: 46px;
+  padding-right: 46px;
+  white-space: nowrap;
+  position: relative;
+}
+.home__container__slider--btn span, .item--btn span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 5.75px;
+    height: 5.63px;
+    background: #fff;
+    border-radius: 50%;
+    margin-right: 2px;
+    margin-left: 5px;
+}
+.btn__bgc {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: var(--bg-btn);
+  transition: all 400ms ease;
+  cursor: pointer;
 }

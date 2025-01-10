@@ -1,0 +1,18 @@
+@model User
+
+<div class="container-xxl" style="padding-top: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: Arial, Helvetica, sans-serif;">
+    <h2>Delete User</h2>
+    <p>Are you sure you want to delete this user?</p>
+    <div class="card">
+        <div class="card-body">
+            <h4>@Model.UserName</h4>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
+            <p><strong>Address:</strong> @Model.Address</p>
+        </div>
+    </div>
+    <form method="post" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="@Url.Action("Index", "UserManage", new { area = "Admin" })" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
