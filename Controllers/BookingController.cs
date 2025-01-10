@@ -111,7 +111,7 @@ namespace HotelBooker.Controllers
         {
             // Ví dụ, bạn có thể tính tổng giá dựa trên số đêm và giá phòng
             var nights = (checkOutDate - checkInDate).Days;
-            double pricePerNight = hotel.HotelRate ?? 100; // Giá phòng cơ bản, bạn có thể thay đổi logic này
+            double pricePerNight = hotel.HotelRate ?? 1000; // Giá phòng cơ bản, bạn có thể thay đổi logic này
             return pricePerNight * nights;
         }
     }

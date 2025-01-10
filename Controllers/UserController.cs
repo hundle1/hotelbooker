@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using HotelBooker.Models;
 using System.Threading.Tasks;
 using HotelBooker.ViewModels;
+using HotelBooker.Services;
 
 namespace HotelBooker.Controllers
 {
@@ -12,11 +13,14 @@ namespace HotelBooker.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
+        private readonly HotelService _hotelService;
+
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, HotelService hotelService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _hotelService = hotelService;
         }
 
         // GET: /User/Login
@@ -218,8 +222,16 @@ namespace HotelBooker.Controllers
             {
                 return RedirectToAction("Login");
             }
+
+            // Fetch orders related to the user (assuming you have an Order model with UserId)
+            var orders = await _hotelService.GetOrdersByUserIdAsync(user.Id);  // Assuming this method exists to fetch orders
+
+            // Pass orders to the view via ViewData or ViewModel
+            ViewData["Orders"] = orders;
+
             return View(user);
         }
+
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
@@ -261,6 +273,7 @@ namespace HotelBooker.Controllers
 
             return View(model);
         }
+        
 
     }
 }

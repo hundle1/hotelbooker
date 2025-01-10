@@ -81,5 +81,13 @@ namespace HotelBooker.Services
                     .FirstOrDefaultAsync(u => u.Id == hotel.UserId);
             }
         }
+        public async Task<List<Order>> GetOrdersByUserIdAsync(string userId)
+        {
+            return await _context.Order
+                                .Where(o => o.UserId == userId)
+                                .Include(o => o.Hotel)
+                                .ToListAsync();
+        }
+
     }
 }
