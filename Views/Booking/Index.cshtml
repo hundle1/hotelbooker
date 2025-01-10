@@ -1,0 +1,29 @@
+@model dynamic
+
+@{
+    ViewData["Title"] = "Booking - " + Model.Hotel.HotelName;
+}
+
+<div class="container">
+    <h2>@Model.Hotel.HotelName - Room: @Model.RoomNumber</h2>
+    <p><strong>Location:</strong> @Model.Hotel.HotelLocation</p>
+    <p><strong>Rating:</strong> @Model.Hotel.HotelRate &#9733;</p>
+    <p><strong>User:</strong> @Model.User.UserName</p>
+
+    <form method="post" asp-action="Complete">
+        <input type="hidden" name="hotelId" value="@Model.Hotel.Id" />
+        <input type="hidden" name="roomNumber" value="@Model.RoomNumber" />
+
+        <div class="form-group">
+            <label for="checkInDate">Check-in Date:</label>
+            <input type="date" id="checkInDate" name="checkInDate" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="checkOutDate">Check-out Date:</label>
+            <input type="date" id="checkOutDate" name="checkOutDate" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Complete Booking</button>
+    </form>
+</div>

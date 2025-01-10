@@ -1,0 +1,75 @@
+@model IEnumerable<HotelBooker.Models.Room>
+
+@{
+    ViewData["Title"] = "Booking";
+}
+<div style="background-color: black; width: 100%; height: 150px;"></div>
+<div class="container-xxl" style="padding-top: 50px; display: flex; gap: 20px;">
+    <div style="width: 20%; border-right: 1px solid #ccc; padding-right: 20px;">
+        <h3>Filter</h3>
+        <form method="get" asp-action="Index" asp-controller="Book">
+            <div class="form-group">
+                <label for="priceRange">Pricing</label>
+                <select id="priceRange" name="PriceRange" class="form-control">
+                    <option value="">-- ALL --</option>
+                    <option value="1">0 - 500 USD</option>
+                    <option value="2">500 - 1000 USD</option>
+                    <option value="3">Above 1000+ USD</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="availability">Status</label>
+                <select id="availability" name="Status" class="form-control">
+                    <option value="">-- ALL --</option>
+                    <option value="true">Available</option>
+                    <option value="false">In Used</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Filt Now</button>
+        </form>
+    </div>
+    <div style="width: 80%;">
+        <h1>List of Rooms</h1>
+        <form method="get" asp-action="Index" asp-controller="Book" style="margin-bottom: 20px;">
+            <div class="input-group">
+                <input type="search" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Tìm phòng..."
+                    class="form-control" />
+                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            </div>
+        </form>
+        <div class="row">
+            @foreach (var room in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <a href="/Book/Detail/@room.Id" class="card item-hov text-decoration-none text-dark"
+                        style="width: 100%; height: 550px; display: block;">
+                        <img src="@Url.Content("~/img/" + room.RoomImage)" class="card-img-top" alt="@room.RoomName"
+                            style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 align="center" style="padding-top: 10px;">Status: @(room.Status ? "In Used" : "Available")
+                            </h5>
+                            <h4 class="card-title" style="font-family: sans-serif;">@room.RoomName</h4>
+                            Price: @room.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-US"))<br />
+                            Category: @room.Services<br />
+                            <p class="card-text">
+                                <div class="furniture-list">
+                                    @if (!string.IsNullOrEmpty(room.Furniture))
+                                    {
+                                        @foreach (var furniture in room.Furniture.Split(','))
+                                        {
+                                            <div class="furniture-item" style="font-family: sans-serif;">@furniture</div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="furniture-item" style="font-family: sans-serif; color: gray;">No furniture available</div>
+                                    }
+                                </div>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

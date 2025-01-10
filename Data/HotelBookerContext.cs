@@ -19,7 +19,8 @@ namespace HotelBooker.Data
         // Các bảng khác
         public DbSet<Room> Room { get; set; } = default!;
         public DbSet<Hotel> Hotel { get; set; } = default!;
-
+        public DbSet<Order> Order { get; set; } = default!;
+        
         // Hàm lọc phòng (nếu có)
         internal string? GetFilteredRooms(string searchString, string priceRange, string status)
         {
