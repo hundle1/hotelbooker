@@ -18,12 +18,40 @@ namespace HotelBooker.Areas.Admin.Controllers
         }
 
         // GET: Admin/UserManage
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, string sortOrder)
         {
-            var users = await _context.Users.ToListAsync();
-            var userManager = _context.GetService<UserManager<User>>();
-            
+            // Lấy danh sách người dùng từ cơ sở dữ liệu
+            var users = from u in _context.Users
+                        select u;
+
+            // Tìm kiếm theo tên người dùng hoặc email
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(u => (u.UserName != null && u.UserName.Contains(searchString)) || (u.Email != null && u.Email.Contains(searchString)));
+            }
+
+            // Sắp xếp theo tên hoặc số điện thoại
+            switch (sortOrder)
+            {
+                case "name-asc":
+                    users = users.OrderBy(u => u.UserName);
+                    break;
+                case "name-desc":
+                    users = users.OrderByDescending(u => u.UserName);
+                    break;
+                case "phone-asc":
+                    users = users.OrderBy(u => u.PhoneNumber);
+                    break;
+                case "phone-desc":
+                    users = users.OrderByDescending(u => u.PhoneNumber);
+                    break;
+                default:
+                    users = users.OrderBy(u => u.UserName);
+                    break;
+            }
+
             // Lấy vai trò của tất cả người dùng
+            var userManager = _context.GetService<UserManager<User>>();
             var userRoles = new Dictionary<string, List<string>>();
             foreach (var user in users)
             {
@@ -32,8 +60,9 @@ namespace HotelBooker.Areas.Admin.Controllers
             }
             ViewBag.UserRoles = userRoles;
 
-            return View(users);
+            return View(await users.ToListAsync());
         }
+
 
 
         // GET: Admin/UserManage/Details/5
