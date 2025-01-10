@@ -55,28 +55,6 @@ namespace HotelBooker.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Hotel",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    HotelName = table.Column<string>(type: "TEXT", maxLength: 60, nullable: false),
-                    HotelImage = table.Column<string>(type: "TEXT", nullable: true),
-                    HotelDescription = table.Column<string>(type: "TEXT", nullable: true),
-                    HotelLocation = table.Column<string>(type: "TEXT", nullable: true),
-                    HotelRate = table.Column<int>(type: "INTEGER", nullable: true),
-                    NumberOfRoom = table.Column<int>(type: "INTEGER", nullable: true),
-                    HotelServices = table.Column<string>(type: "TEXT", nullable: true),
-                    HotelContact = table.Column<string>(type: "TEXT", nullable: true),
-                    HotelEmail = table.Column<string>(type: "TEXT", nullable: true),
-                    HotelWebsite = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Hotel", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Room",
                 columns: table => new
                 {
@@ -207,6 +185,34 @@ namespace HotelBooker.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Hotel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    HotelName = table.Column<string>(type: "TEXT", maxLength: 60, nullable: false),
+                    HotelImage = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelDescription = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelLocation = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelRate = table.Column<int>(type: "INTEGER", nullable: true),
+                    NumberOfRoom = table.Column<int>(type: "INTEGER", nullable: true),
+                    HotelServices = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelContact = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelEmail = table.Column<string>(type: "TEXT", nullable: true),
+                    HotelWebsite = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hotel", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Hotel_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
                 {
@@ -275,6 +281,11 @@ namespace HotelBooker.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Hotel_UserId",
+                table: "Hotel",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Order_HotelId",
                 table: "Order",
                 column: "HotelId");
@@ -313,10 +324,10 @@ namespace HotelBooker.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Hotel");
 
             migrationBuilder.DropTable(
-                name: "Hotel");
+                name: "AspNetUsers");
         }
     }
 }

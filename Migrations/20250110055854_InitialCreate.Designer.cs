@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooker.Migrations
 {
     [DbContext(typeof(HotelBookerContext))]
-    [Migration("20250110044054_InitialCreate")]
+    [Migration("20250110055854_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -58,7 +58,12 @@ namespace HotelBooker.Migrations
                     b.Property<int?>("NumberOfRoom")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Hotel");
                 });
@@ -353,6 +358,15 @@ namespace HotelBooker.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("HotelBooker.Models.Hotel", b =>
+                {
+                    b.HasOne("User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("HotelBooker.Models.Order", b =>

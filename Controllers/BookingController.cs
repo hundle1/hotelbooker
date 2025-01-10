@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using HotelBooker.Services; // Add this line
 
 namespace HotelBooker.Controllers
 {
@@ -14,42 +15,42 @@ namespace HotelBooker.Controllers
         private readonly HotelBookerContext _context;
         private readonly UserManager<User> _userManager;
 
-        public BookingController(HotelBookerContext context, UserManager<User> userManager)
+        private readonly HotelService _hotelService;
+
+        public BookingController(HotelBookerContext context, UserManager<User> userManager, HotelService hotelService)
         {
             _context = context;
             _userManager = userManager;
+            _hotelService = hotelService;
         }
 
         [HttpPost]
         public IActionResult Index(string roomNumber)
         {
-            // Lưu thông tin phòng đã chọn vào ViewBag
-            ViewBag.SelectedRoom = roomNumber;
-
-            // Chuyển hướng đến view Booking/Index
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Index(int hotelId, string roomNumber)
-        {
-            var hotel = await _context.Hotel.FindAsync(hotelId);
-            var user = await _userManager.GetUserAsync(User);
-
-            if (hotel == null || user == null)
+            // Lấy thông tin khách sạn từ ViewData
+            var hotel = ViewData["Hotel"] as Hotel;
+            if (hotel == null)
             {
                 return NotFound();
             }
 
-            // Thông tin phòng và khách sạn
-            var bookingInfo = new
-            {
-                Hotel = hotel,
-                RoomNumber = roomNumber,
-                User = user
-            };
+            // Gửi thông tin phòng (roomNumber) và khách sạn đến View
+            ViewBag.RoomNumber = roomNumber;
+            return View(hotel);
+        }
 
-            return View(bookingInfo);
+         [HttpGet]
+        public async Task<IActionResult> Index(int hotelId, string roomNumber)
+        {
+            var hotel = await _hotelService.GetHotelByIdAsync(hotelId);
+            if (hotel == null)
+            {
+                return NotFound();
+            }
+
+            // Truyền thông tin khách sạn và phòng vào view
+            ViewBag.RoomNumber = roomNumber;
+            return View(hotel);
         }
 
 
