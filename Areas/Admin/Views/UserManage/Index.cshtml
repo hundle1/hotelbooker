@@ -1,0 +1,62 @@
+@using HotelBooker.Models
+@model IEnumerable<User>
+
+<div class="container-xxl" style="padding-top: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: Arial, Helvetica, sans-serif;">
+    <h2>User Management</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr align="center">
+                <th>#</th>
+                <th>Image</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th style="width:200px;">Address</th>
+                <th>Birth Date</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                int index = 1;
+                foreach (var user in Model)
+                {
+                    <tr align="center">
+                        <td>@index</td>
+                        <td>
+                            <img src="@user.ImageURL" alt="User Image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;" />
+                        </td>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>@user.Address</td>
+                        <td>@user.Birth?.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            @if (ViewBag.UserRoles is Dictionary<string, List<string>> userRoles && userRoles.ContainsKey(user.Id))
+                            {
+                                foreach (var role in userRoles[user.Id])
+                                {
+                                    <span class="badge badge-primary">@role</span>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", "UserManage", new { area = "Admin", id = user.Id })" class="btn btn-info btn-sm">Details</a>
+                            <a href="@Url.Action("Edit", "UserManage", new { area = "Admin", id = user.Id })" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="@Url.Action("Delete", "UserManage", new { area = "Admin", id = user.Id })" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    index++;
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="9" class="text-center">No users found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
