@@ -18,7 +18,7 @@
         <div class="card-body" style="">
             <div style="display:flex; justify-content: space-between; width: 100%; padding-bottom: 40px;">
                 <div style="width:70%; display: flex; flex-direction: column; gap: 20px; jusstify-content: center; align-items: center;">
-                <h2><strong>Rooms:</strong> @Model.NumberOfRoom</h2>
+                    <h2><strong>Rooms:</strong> @Model.NumberOfRoom</h2>
                     <div id="room-buttons" style="display: flex; flex-direction: row; gap: 20px;">
                         @{
                             int totalRooms = Model.NumberOfRoom ?? 0;
@@ -32,15 +32,7 @@
                                 <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 5px;">
                                     @for (int i = col * roomsPerColumn + 1; i <= Math.Min((col + 1) * roomsPerColumn, totalRooms); i++)
                                     {
-                                        // Skip rooms from A111 to A200
-                                        if ((i >= 111 && i <= 200) || (i >= 911))
-                                        {
-                                            continue;
-                                        }
-
                                         string roomLabel = $"{prefixes[currentPrefixIndex]}{roomStart}";
-
-                                        // Increment room number and move to next prefix after reaching the max number
                                         if (roomStart == 110)
                                         {
                                             roomStart = 201;
@@ -53,36 +45,13 @@
                                         {
                                             roomStart = 401;
                                         }
-                                        else if (roomStart == 410)
-                                        {
-                                            roomStart = 501;
-                                        }
-                                        else if (roomStart == 510)
-                                        {
-                                            roomStart = 601;
-                                        }
-                                        else if (roomStart == 610)
-                                        {
-                                            roomStart = 701;
-                                        }
-                                        else if (roomStart == 710)
-                                        {
-                                            roomStart = 801;
-                                        }
-                                        else if (roomStart == 810)
-                                        {
-                                            roomStart = 901;
-                                        }
-                                        else if (roomStart == 910)
-                                        {
-                                            currentPrefixIndex++;
-                                            roomStart = 101;
-                                        }
                                         else{
                                             roomStart++;
                                         }
 
-                                        <button class="btn btn-outline-primary" style="width: 70px; height: 50px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                                        <button class="btn btn-outline-primary" 
+                                                style="width: 70px; height: 50px; font-family: system-ui;" 
+                                                onclick="selectRoom('@roomLabel')">
                                             @roomLabel
                                         </button>
                                     }
@@ -90,7 +59,17 @@
                             }
                         }
                     </div>
-                    <a class="btn btn-primary" style="color: aliceblue; margin-top: 30px;">Book Now</a>
+                    <!-- Display selected room -->
+                    <div id="selected-room" style="margin-top: 20px; font-weight: bold; color: green;">
+                        <p><strong>Selected Room: </strong><span id="selected-room-text">None</span></p>
+                    </div>
+
+                    <!-- Nút Book Now -->
+                    <form action="@Url.Action("Index", "Booking")" method="get" id="booking-form" style="display: none;">
+                        <input type="hidden" name="hotelId" value="@Model.Id" />
+                        <input type="hidden" name="roomNumber" id="room-number" />
+                        <button class="btn btn-primary" style="color: aliceblue; margin-top: 30px;" type="submit">Book Now</button>
+                    </form>
                 </div>
                 <div style="border-left: 1px solid gray; width: 30%; padding-left: 20px;">
                     <img src="@Model.HotelImage" class="img-fluid rounded shadow-lg" alt="@Model.HotelImage" style="max-width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
@@ -110,3 +89,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    // JavaScript function to handle room selection
+    function selectRoom(roomLabel) {
+        document.getElementById('selected-room-text').textContent = roomLabel;  // Show the selected room
+        document.getElementById('room-number').value = roomLabel;  // Set the hidden input value
+        document.getElementById('booking-form').style.display = 'block';  // Show the Book Now button
+    }
+</script>

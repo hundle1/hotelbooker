@@ -71,5 +71,23 @@ namespace HotelBooker.Services
         {
             return await _context.Hotel.AnyAsync(h => h.Id == id);
         }
+
+        public async Task IncludeUserAsync(Hotel hotel)
+        {
+            // Tải thông tin User từ bảng User
+            if (hotel.UserId != null)
+            {
+                hotel.User = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Id == hotel.UserId);
+            }
+        }
+        public async Task<List<Order>> GetOrdersByUserIdAsync(string userId)
+        {
+            return await _context.Order
+                                .Where(o => o.UserId == userId)
+                                .Include(o => o.Hotel)
+                                .ToListAsync();
+        }
+
     }
 }

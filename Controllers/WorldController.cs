@@ -1,6 +1,7 @@
 using HotelBooker.Services;
 using Microsoft.AspNetCore.Mvc;
 using HotelBooker.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooker.Controllers
 {
@@ -42,6 +43,11 @@ namespace HotelBooker.Controllers
             {
                 return NotFound();
             }
+
+            // Đảm bảo rằng khi lấy khách sạn, thông tin người dùng cũng được tải
+            await _hotelService.IncludeUserAsync(hotel); // Giả sử có phương thức này để tải User từ bảng User
+
+            ViewData["Hotel"] = hotel;
             return View(hotel);
         }
     }

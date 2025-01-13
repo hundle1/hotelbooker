@@ -25,79 +25,92 @@
         </div>
     </div>
 </div>
-<div class="search">
-    <div class="grid wide">
-        <div class="search__container__tabs grid wide">
-            <div class="row">
-                <div class="search__container__tab d-flex active">
-                    <img src="~/img/iconhotel.webp" alt>
-                    <span>Hotels</span>
-                </div>
-                <div class="search__container__tab d-flex">
-                    <img src="~/img/car.webp" alt="" >
-                    <span>Car rentals</span>
-                </div>
-                <div class="search__container__tab d-flex">
-                    <img src="~/img/fly.webp" alt="" />
-                    <span>Flights</span>
-                </div>
-                <div class="search__container__tab d-flex">
-                    <img src="~/img/trip.webp" alt="" />
-                    <span>Trips</span>
-                </div>
-                <div class="search__container__tab d-flex">
-                    <img src="~/img/cruises.webp" alt="" />
-                    <span>Cuises</span>
-                </div>
-                <div class="search__container__tab d-flex">
-                    <img src="~/img/activities.webp" alt="" />
-                    <span>Activities</span>
-                </div>
+<div class="main-container">
+        <!-- Tabs Section -->
+        <div class="tabs">
+            <div class="tab con-top-bottom active con-left" style="border-left: 1px solid #000;">Hotels</div>
+            <div class="tab con-top-bottom">Car Rentals</div>
+            <div class="tab con-top-bottom">Flights</div>
+            <div class="tab con-top-bottom">Trips</div>
+            <div class="tab con-top-bottom">Cruises</div>
+            <div class="tab con-top-bottom active con-right">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <span>
+                        <a asp-controller="User"  asp-action="UserInfor" style="font-weight: bold;">
+                            <i class="fa fa-user"></i> Hello @User.Identity.Name
+                        </a>
+                        </span>
+                }
+                else
+                {
+                    <div>
+                        <a asp-action="Login" asp-controller="User">Login</a>
+                        /
+                        <a asp-action="SignUp" asp-controller="User">Sign Up</a>
+                    </div>
+                }
             </div>
         </div>
-        <div class="search__container">
-            <div class="row">
-                <div class="search__container--item l-4 m-6 c-12">
-                    <div>
-                        <span>Destination</span>
-                    </div>
-                    <input type="text" />
-                </div>
-                <div class="search__container--item l-2 m-6 c-12">
-                    <div>
-                        <span>Check in</span>
-                    </div>
-                    <input type="text" placeholder="DD-MM-YYYY" />
-                </div>
-                <div class="search__container--item l-2 m-6 c-12">
-                    <div>
-                        <span>Check out</span>
-                    </div>
-                    <input type="text" />
-                </div>
-                <div class="search__container--item l-1 m-3 c-6">
-                    <div>
-                        <span>Adults</span>
-                    </div>
-                    <select name="" id="">
-                        <option>01</option>
-                        <option>02</option>
-                        <option>03</option>
-                    </select>
-                </div>
-                <div class="search__container--item l-1 m-3 c-6">
-                    <div>
-                        <span>CHILDREN</span>
-                    </div>
-                    <select name="" id="">
-                        <option>0</option>
-                        <option>01</option>
-                        <option>02</option>
-                    </select>
-                </div>
-            </div>
+        <!-- Search Form Section -->
+        <form id="hotel-form" onsubmit="return validateForm()" style="padding-top: 60px;">
+    <!-- Destination Section -->
+    <div class="row">
+        <div class="form-group destination">
+            <label for="destination">Destination</label>
+            <input type="text" placeholder="City" class="form-control" id="destination" name="destination" required>
         </div>
     </div>
+
+    <!-- Check-in, Check-out, Rooms, Guests (Same Row) -->
+    <div class="row horizontal">
+        <div class="form-group flex-grow-1">
+    <label for="checkin-date">Check-in</label>
+    <input type="date" class="form-control" id="checkin-date" name="checkin-date" onkeydown="return false" required>
+</div>
+<div class="form-group flex-grow-1">
+    <label for="checkout-date">Check-out</label>
+    <input type="date" class="form-control" id="checkout-date" name="checkout-date" onkeydown="return false" required>
+</div>
+
+        <div class="form-group">
+            <label for="rooms">Rooms</label>
+            <select class="form-select" id="rooms">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="guests">Guests</label>
+            <select class="form-select" id="guests" onchange="javascript: dynamicDropdown(this.options[this.selectedIndex].value);">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="row">
+        <div class="col text-center">
+            <button type="submit" class="btn btn-primary">Search hotels</button>
+        </div>
+        <div id="error" class="error text-danger"></div>
+    </div>
+</form>
+
+</div>
+
 </div>
 <div class="about_area">
     <div class="container">
@@ -132,7 +145,7 @@
 
 <!-- features_room_startt -->
 <div class="features_room">
-    <div class="container">
+    <div class="container" style="display:flex; justify-content: center;">
         <div class="row">
             <div class="col-xl-12">
                 <div class="section_title text-center mb-100">
@@ -193,45 +206,35 @@
         </div>
     </div>
 </div>
-<!-- features_room_end -->
-<div class="room-container">
-    <div class="container">
-        <div class="row">
-            @foreach (var room in Model)
-            {
-                <div class="col-md-4 mb-4">
-                    <div class="card item-hov" style="width: 100%; height: 550px;">
-                        <img src="@Url.Content("~/img/" + room.RoomImage)" class="card-img-top" alt="@room.RoomName"
-                            style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 align="center" style="padding-top: 10px;">Status: @(room.Status ? "In Used" : "Available")
-                            </h5>
-                            <h4 class="card-title" style="font-family: sans-serif;">@room.RoomName</h4>
-                            Price: @room.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-US"))<br />
-                            Category: @room.Services<br />
-                            <p class="card-text">
-                                <div class="furniture-list">
-                                    @if (!string.IsNullOrEmpty(room.Furniture))
-                                    {
-                                        @foreach (var furniture in room.Furniture.Split(','))
-                                        {
-                                            <div class="furniture-item" style="font-family: sans-serif;">@furniture</div>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <div class="furniture-item" style="font-family: sans-serif; color: gray;">No furniture available</div>
-                                    }
-                                </div>
-                            </p>
+<div class="package">
+    <div class="package__background"></div>
+    <div class="package__container">
+            <div class="grid wide">
+                <div class="package__container___body">
+                    <div class="package__container___body--content">
+                        <div class="body--content__cta">
+                            <h2>maldives deluxe package</h2>
+                            <div class="item_rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu,<br> vitae cursus mi hendrerit nec. Proin bibendum, augue faucibus tincidunt ultrices, tortor
+                                augue gravida lectus, et efficitur enim justo vel ligula.</p>
                         </div>
-                        <div align="center" style="padding-bottom: 20px;">
-                            <a href="/Book/Details/@room.Id" class="btn btn-primary">Read More</a>
-                            <a href="#" class="btn btn-success">Book Now</a>
+                        <div class="item--btn">
+                            <div class="btn__bgc"></div>
+                            <a href="#">Book Now
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
                         </div>
                     </div>
                 </div>
-            }
+            </div>
         </div>
-    </div>
 </div>
+

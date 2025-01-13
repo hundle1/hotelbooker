@@ -20,6 +20,8 @@ namespace HotelBooker.Models
         public string? HotelContact { get; set; }
         public string? HotelEmail { get; set; }
         public string? HotelWebsite { get; set; }
-
+        
+        public string? UserId { get; set; }
+        public User? User { get; set; } 
     }
 }

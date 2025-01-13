@@ -1,0 +1,46 @@
+@using HotelBooker.Models
+@model User
+
+<div class="container-xxl" style="padding-top: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: Arial, Helvetica, sans-serif;">
+    <h2>User Details</h2>
+    <div class="form-group">
+        <label>Username:</label>
+        <p>@Model.UserName</p>
+    </div>
+    <div class="form-group">
+        <label>Email:</label>
+        <p>@Model.Email</p>
+    </div>
+    <div class="form-group">
+        <label>Address:</label>
+        <p>@Model.Address</p>
+    </div>
+    <div class="form-group">
+        <label>Birth:</label>
+        <p>@Model.Birth?.ToString("dd/MM/yyyy")</p>
+    </div>
+    <div class="form-group">
+        <label>Role:</label>
+        <p>
+            @if (ViewBag.Roles is List<string> roles)
+            {
+                foreach (var role in roles)
+                {
+                    <span class="badge badge-primary">@role</span>
+                }
+            }
+            else
+            {
+                <span>No Roles Assigned</span>
+            }
+        </p>
+    </div>
+    <div class="form-group">
+        <label>Status:</label>
+        <p>@Model.Status</p>
+    </div>
+    <div>
+        <a href="/Admin/UserManage/Edit/@Model.Id" class="btn btn-warning">Edit</a>
+        <a href="/Admin/UserManage/Delete/@Model.Id" class="btn btn-danger">Delete</a>
+    </div>
+</div>

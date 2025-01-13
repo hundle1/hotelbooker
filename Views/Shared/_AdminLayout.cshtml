@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="~/css/animate.css">
     <link rel="stylesheet" href="~/css/slicknav.css">
     <link rel="stylesheet" href="~/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css'/>
     <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
@@ -66,25 +67,24 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " asp-area="Admin" asp-controller="Hotels" asp-action="Index">
-                            <i style="margin-left: -5px;" class="fa fa-image"></i> <span class="text">Hotels Manage</span>
+                            <i style="margin-left: -5px;" class="fa fa-image"></i> <span class="text">Manage Hotels</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " asp-area="Admin" asp-controller="Rooms" asp-action="HotelRooms">
-                            <i style="margin-left: -3px;" class="fa fa-book"></i> <span class="text">Rooms Manage</span>
+                            <i style="margin-left: -3px;" class="fa fa-book"></i> <span class="text">Manage Rooms</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="Admin" asp-controller="UserManage" asp-action="Index">
+                            <i style="margin-left: -3px;" class="fa fa-user"></i> <span class="text">Manage User</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " asp-area="Admin" asp-controller="Rooms" asp-action="Discount">
-                            <i style="margin-left: -6px;" class="fa fa-newspaper-o"></i> <span class="text">Discount</span>
+                            <i style="margin-left: -8px;" class="fa fa-newspaper-o"></i> <span class="text">Discount</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " asp-area="Admin" asp-controller="UserManager" asp-action="Index">
-                            <i style="margin-left: -6px;" class="fa fa-newspaper-o"></i> <span class="text">User Index</span>
-                        </a>
-                    </li>
-
                     <li class="nav-item">
                         <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">
                             <i style="margin-left: 0px;" class="fa fa-lock"></i> <span class="text">Privacy</span>

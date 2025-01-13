@@ -1,0 +1,72 @@
+@model HotelBooker.Models.Hotel
+
+@{
+    ViewData["Title"] = "Booking - " + Model.HotelName;
+}
+<div style="background-color: black; width: 100%; height: 150px; display: flex; align-items: center; justify-content: center; margin-bottom: 50px;"></div>
+<div class="container-xl" style="padding: 0px 50px 50px 50px; display: flex; gap: 20px; flex-direction: column; max-width: 800px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+    <h1 style="color: white; font-size: 32px;">Hotel Booking</h1>
+    <h2 style="color: #333; font-weight: bold;">@Model.HotelName - Room: @ViewBag.RoomNumber</h2>
+    <p style="font-size: 18px; color: #555;"><strong>Location:</strong> @Model.HotelLocation</p>
+    <p style="font-size: 18px; color: #555;"><strong>Rating:</strong> @Model.HotelRate &#9733;</p>
+    @if (Model.User != null)
+    {
+        <p style="font-size: 18px; color: #555;"><strong>User:</strong> @Model.User.UserName</p>
+    }
+
+    <form method="post" asp-action="Complete" style="display: flex; flex-direction: column; gap: 20px;">
+        <input type="hidden" name="hotelId" value="@Model.Id" />
+        <input type="hidden" name="roomNumber" value="@ViewBag.RoomNumber" />
+
+        <!-- Check-in Date -->
+        <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="checkInDate" style="font-size: 18px; font-weight: bold; color: #333;">Check-in Date:</label>
+            <input 
+                type="date" 
+                id="checkInDate" 
+                name="checkInDate" 
+                class="form-control" 
+                required 
+                style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;width: 100%;"
+                onchange="calculateTotalPrice()" />
+        </div>
+
+        <!-- Check-out Date -->
+        <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="checkOutDate" style="font-size: 18px; font-weight: bold; color: #333;">Check-out Date:</label>
+            <input 
+                type="date" 
+                id="checkOutDate" 
+                name="checkOutDate" 
+                class="form-control" 
+                required 
+                style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;width: 100%;"
+                onchange="calculateTotalPrice()" />
+        </div>
+
+        <!-- Total Price -->
+        <div id="totalPriceContainer" style="font-size: 20px; font-weight: bold; color: #333; padding: 10px 0; display: none;">
+            Total Price: <span id="totalPrice" style="color: #007bff;">$0</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="padding: 10px 20px; font-size: 18px; font-weight: bold; background-color: #007bff; border: none; border-radius: 4px;">Complete Booking</button>
+    </form>
+</div>
+
+<script>
+    function calculateTotalPrice() {
+        const checkInDate = new Date(document.getElementById('checkInDate').value);
+        const checkOutDate = new Date(document.getElementById('checkOutDate').value);
+
+        if (checkInDate && checkOutDate && checkOutDate > checkInDate) {
+            const nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+            const pricePerNight = @Model.HotelRate ?? 1000;
+            const totalPrice = pricePerNight * nights;
+
+            document.getElementById('totalPrice').textContent = `$${totalPrice.toFixed(2)}`;
+            document.getElementById('totalPriceContainer').style.display = 'block';
+        } else {
+            document.getElementById('totalPriceContainer').style.display = 'none';
+        }
+    }
+</script>

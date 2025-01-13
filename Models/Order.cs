@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace HotelBooker.Models
@@ -5,13 +6,28 @@ namespace HotelBooker.Models
     public class Order
     {
         public int Id { get; set; }
-        public int HotelId { get; set; }
-        [StringLength(60, MinimumLength = 3)]
+
         [Required]
-        public required string? CustomerName { get; set; }
-        [DataType(DataType.Date)]
-        public required DateTime CheckInDate { get; set; }
-        public required DateTime CheckOutDate { get; set; }
-        public string? ServiceWanted { get; set; }
+        public int HotelId { get; set; }
+        public Hotel? Hotel { get; set; }
+
+        [Required]
+        public string? RoomNumber { get; set; }
+
+        [Required]
+        public string? UserId { get; set; }
+        public User? User { get; set; }
+
+        [Required]
+        public DateTime BookingDate { get; set; }
+
+        [Required]
+        public DateTime CheckInDate { get; set; }
+
+        [Required]
+        public DateTime CheckOutDate { get; set; }
+
+        [Required]
+        public double TotalPrice { get; set; }
     }
 }
