@@ -53,22 +53,36 @@
 </div>
 
 <script>
+    function validateCheckInDate() {
+        const checkInDateInput = document.getElementById('checkInDate');
+        const checkInDate = new Date(checkInDateInput.value);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Đặt giờ, phút, giây, và mili giây về 0
+
+        // Kiểm tra nếu check-in date hợp lệ
+        if (checkInDate && checkInDate >= today) {
+            // Ngày hợp lệ
+            checkInDateInput.setCustomValidity(""); // Xóa lỗi
+        } else {
+            // Ngày không hợp lệ
+            checkInDateInput.setCustomValidity("Check-in date must be today or a future date.");
+        }
+    }
+
     function calculateTotalPrice() {
         const checkInDate = new Date(document.getElementById('checkInDate').value);
         const checkOutDate = new Date(document.getElementById('checkOutDate').value);
 
         // Kiểm tra nếu ngày check-in và check-out hợp lệ
         if (checkInDate && checkOutDate && checkOutDate >= checkInDate) {
-            // Tính số đêm giữa check-out và check-in
-            let nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24); 
+            let nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
 
             // Nếu số đêm là 0 (cùng ngày), tính 1 đêm
             if (nights === 0) {
                 nights = 1;
             }
 
-            // Lấy giá phòng từ model, nếu không có thì mặc định là 100 đô
-            const pricePerNight = 100; 
+            const pricePerNight = 100;
             const totalPrice = pricePerNight * nights;
 
             // Cập nhật giá và hiển thị
@@ -77,6 +91,14 @@
         } else {
             document.getElementById('totalPriceContainer').style.display = 'none';
         }
-        document.getElementById('totalPriceContainer').style.display = 'block';
     }
+
+    // Gắn sự kiện onchange vào ô nhập ngày check-in
+    document.getElementById('checkInDate').addEventListener('change', function () {
+        validateCheckInDate();
+        calculateTotalPrice();
+    });
+
+    // Gắn sự kiện onchange vào ô nhập ngày check-out
+    document.getElementById('checkOutDate').addEventListener('change', calculateTotalPrice);
 </script>

@@ -58,6 +58,8 @@
                                 <th>Room Number</th>
                                 <th>Check-in Date</th>
                                 <th>Check-out Date</th>
+                                <th>Total Price</th>
+                                <th colspan="2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,6 +70,13 @@
                                     <td>@order.RoomNumber</td>
                                     <td>@order.CheckInDate.ToString("MM/dd/yyyy")</td>
                                     <td>@order.CheckOutDate.ToString("MM/dd/yyyy")</td>
+                                    <td>@order.TotalPrice</td>
+                                    <td>
+                                        <button class="btn btn-danger">Delete Order</button>
+                                        <a asp-controller="Pay" asp-action="Pay">
+                                            <button class="btn btn-success">Pre Pay</button>
+                                        </a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>

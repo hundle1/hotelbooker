@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using HotelBooker.Data;
 using HotelBooker.Models;
+using HotelBooker.Utils.ConfigOptions.VNPay;
 using HotelBooker.Services; // Thêm dòng này để sử dụng RoomService
 using HotelBooker.Controllers; // Add this line to use UserController
 using Microsoft.AspNetCore.Identity; // Add this line to use UserManager
@@ -21,10 +22,8 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<HotelBookerContext>()
     .AddDefaultTokenProviders();
 
-// Đăng ký dịch vụ RoomService vào container DI
-builder.Services.AddScoped<RoomService>();  // Thêm dòng này
-builder.Services.AddScoped<HotelService>();  // Đảm bảo dịch vụ được đăng ký ở đây
-
+ // Đảm bảo dịch vụ được đăng ký ở đây
+AddScoped();
 // Add services to the container
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation(); // Hỗ trợ reload khi thay đổi Views
@@ -89,3 +88,10 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+void AddScoped()
+{
+    builder.Services.AddScoped<RoomService>(); 
+    builder.Services.AddScoped<HotelService>(); 
+    builder.Services.AddTransient<IVNPayService, VNPayService>();
+    builder.Services.Configure<VNPayConfigOptions>(builder.Configuration.GetSection("VnPay"));
+}

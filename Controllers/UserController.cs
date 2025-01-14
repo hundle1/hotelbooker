@@ -222,16 +222,10 @@ namespace HotelBooker.Controllers
             {
                 return RedirectToAction("Login");
             }
-
-            // Fetch orders related to the user (assuming you have an Order model with UserId)
             var orders = await _hotelService.GetOrdersByUserIdAsync(user.Id);  // Assuming this method exists to fetch orders
-
-            // Pass orders to the view via ViewData or ViewModel
             ViewData["Orders"] = orders;
-
             return View(user);
         }
-
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
@@ -251,7 +245,6 @@ namespace HotelBooker.Controllers
             {
                 return RedirectToAction("Login");
             }
-
             // Cập nhật thông tin không bao gồm mật khẩu và vai trò
             user.ImageURL = model.ImageURL;
             user.Address = model.Address;
@@ -259,21 +252,16 @@ namespace HotelBooker.Controllers
             user.UserName = model.UserName;
             user.Email = model.Email;
             user.PhoneNumber = model.PhoneNumber;
-
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
                 return RedirectToAction("UserInfor");
             }
-
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
-
             return View(model);
         }
-        
-
     }
 }
