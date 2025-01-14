@@ -119,7 +119,7 @@ namespace HotelBooker.Controllers
             {
                 return 100; // Nếu check-in và check-out cùng ngày thì giá là 100 USD
             }
-            double pricePerNight = hotel.HotelRate ?? 100; // Nếu không có giá, mặc định là 100 USD mỗi đêm
+            double pricePerNight = 100; // Nếu không có giá, mặc định là 100 USD mỗi đêm
             return pricePerNight * nights; // Tính tổng số tiền theo số ngày
         }
     }
