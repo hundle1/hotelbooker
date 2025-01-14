@@ -1,20 +1,22 @@
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 
-public class User : IdentityUser
-{
-    // Trạng thái hoạt động của người dùng
-    public UserStatus Status { get; set; } = UserStatus.Active; // Mặc định là Active
+namespace HotelBooker.Models {
+    public class User : IdentityUser
+    {
+        // Trạng thái hoạt động của người dùng
+        public UserStatus Status { get; set; } = UserStatus.Active; // Mặc định là Active
 
-    // Thông tin cá nhân bổ sung
-    public DateTime? Birth { get; set; }
-    public string? Address { get; set; }
-    public string? ImageURL { get; set; }
+        // Thông tin cá nhân bổ sung
+        public DateTime? Birth { get; set; }
+        public string? Address { get; set; }
+        public string? ImageURL { get; set; }
+    }
+
+    // Enum trạng thái người dùng
+    public enum UserStatus
+    {
+        Active,
+        Inactive
+    }
 }
 
-// Enum trạng thái người dùng
-public enum UserStatus
-{
-    Active,
-    Inactive
-}

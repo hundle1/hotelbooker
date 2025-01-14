@@ -2,8 +2,7 @@
 @using HotelBooker.Models
 @model IEnumerable<User>
 
-<div class="container"
-    style="padding-top: 150px; display: flex; gap: 20px; flex-direction: column;">
+<div class="container" style="padding-top: 150px; display: flex; gap: 20px; flex-direction: column;">
     <h2 class="text-center" style="font-size: 2rem; font-weight: bold;">User Management</h2>
     
     <!-- Thanh tìm kiếm -->
@@ -90,8 +89,10 @@
                                style="font-size: 14px; padding: 8px 16px; margin-right: 5px;">Details</a>
                             <a href="@Url.Action("Edit", "UserManage", new { area = "Admin", id = user.Id })" class="btn btn-warning btn-sm" 
                                style="font-size: 14px; padding: 8px 16px; margin-right: 5px;">Edit</a>
-                            <a href="@Url.Action("Delete", "UserManage", new { area = "Admin", id = user.Id })" class="btn btn-danger btn-sm" 
-                               style="font-size: 14px; padding: 8px 16px;">Delete</a>
+                            @if (User.Identity != null && user.UserName != User.Identity.Name) {
+                                <a href="@Url.Action("Delete", "UserManage", new { area = "Admin", id = user.Id })" class="btn btn-danger btn-sm" 
+                                   style="font-size: 14px; padding: 8px 16px;">Delete</a>
+                            }
                         </td>
                     </tr>
                     index++;

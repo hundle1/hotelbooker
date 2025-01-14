@@ -11,9 +11,10 @@ namespace HotelBooker.Areas.Admin.Controllers
     public class UserManageController : Controller
     {
         private readonly HotelBookerContext _context;
-
-        public UserManageController(HotelBookerContext context)
+        private readonly UserManager<User> _userManager;
+        public UserManageController(HotelBookerContext context, UserManager<User> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -142,10 +143,29 @@ namespace HotelBooker.Areas.Admin.Controllers
         // GET: Admin/UserManage/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-            if (user == null) return NotFound();
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Kiểm tra quyền Admin
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser != null && currentUser.Id == user.Id)
+            {
+                return RedirectToAction(nameof(Index)); // Nếu là chính mình, không cho xóa
+            }
+
+            // Kiểm tra nếu không phải Admin
+            if (currentUser == null || !await _userManager.IsInRoleAsync(currentUser, "Admin"))
+            {
+                return RedirectToAction(nameof(Index)); // Nếu không phải Admin, không cho xóa
+            }
 
             return View(user);
         }
