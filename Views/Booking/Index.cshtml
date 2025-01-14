@@ -9,6 +9,7 @@
     <h2 style="color: #333; font-weight: bold;">@Model.HotelName - Room: @ViewBag.RoomNumber</h2>
     <p style="font-size: 18px; color: #555;"><strong>Location:</strong> @Model.HotelLocation</p>
     <p style="font-size: 18px; color: #555;"><strong>Rating:</strong> @Model.HotelRate &#9733;</p>
+    <img src="@Model.HotelImage" class="img-fluid rounded shadow-lg" alt="@Model.HotelImage" style="max-width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
     @if (Model.User != null)
     {
         <p style="font-size: 18px; color: #555;"><strong>User:</strong> @Model.User.UserName</p>
@@ -27,8 +28,7 @@
                 name="checkInDate" 
                 class="form-control" 
                 required 
-                style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;width: 100%;"
-                onchange="calculateTotalPrice()" />
+                style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;width: 100%;" onchange="calculateTotalPrice()" />
         </div>
 
         <!-- Check-out Date -->
@@ -40,12 +40,11 @@
                 name="checkOutDate" 
                 class="form-control" 
                 required 
-                style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;width: 100%;"
-                onchange="calculateTotalPrice()" />
+                style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;width: 100%;" onchange="calculateTotalPrice()" />
         </div>
 
         <!-- Total Price -->
-        <div id="totalPriceContainer" style="font-size: 20px; font-weight: bold; color: #333; padding: 10px 0; display: none;">
+        <div id="totalPriceContainer" style="font-size: 20px; font-weight: bold; color: #333; padding: 10px 0;">
             Total Price: <span id="totalPrice" style="color: #007bff;">$0</span>
         </div>
 
@@ -58,15 +57,26 @@
         const checkInDate = new Date(document.getElementById('checkInDate').value);
         const checkOutDate = new Date(document.getElementById('checkOutDate').value);
 
-        if (checkInDate && checkOutDate && checkOutDate > checkInDate) {
-            const nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
-            const pricePerNight = @Model.HotelRate ?? 1000;
+        // Kiểm tra nếu ngày check-in và check-out hợp lệ
+        if (checkInDate && checkOutDate && checkOutDate >= checkInDate) {
+            // Tính số đêm giữa check-out và check-in
+            let nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24); 
+
+            // Nếu số đêm là 0 (cùng ngày), tính 1 đêm
+            if (nights === 0) {
+                nights = 1;
+            }
+
+            // Lấy giá phòng từ model, nếu không có thì mặc định là 100 đô
+            const pricePerNight = @Model.HotelRate ?? 100; 
             const totalPrice = pricePerNight * nights;
 
+            // Cập nhật giá và hiển thị
             document.getElementById('totalPrice').textContent = `$${totalPrice.toFixed(2)}`;
             document.getElementById('totalPriceContainer').style.display = 'block';
         } else {
             document.getElementById('totalPriceContainer').style.display = 'none';
         }
+        document.getElementById('totalPriceContainer').style.display = 'block';
     }
 </script>

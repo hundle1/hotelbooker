@@ -24,6 +24,7 @@ namespace HotelBooker.Controllers
             _hotelService = hotelService;
         }
 
+        // POST: Booking/Index
         [HttpPost]
         public IActionResult Index(string roomNumber)
         {
@@ -38,8 +39,8 @@ namespace HotelBooker.Controllers
             ViewBag.RoomNumber = roomNumber;
             return View(hotel);
         }
-
-         [HttpGet]
+        // GET: Booking/Index
+        [HttpGet]
         public async Task<IActionResult> Index(int hotelId, string roomNumber)
         {
             var hotel = await _hotelService.GetHotelByIdAsync(hotelId);
@@ -50,10 +51,13 @@ namespace HotelBooker.Controllers
 
             // Truyền thông tin khách sạn và phòng vào view
             ViewBag.RoomNumber = roomNumber;
+
+            // Không truyền giá vào ViewBag nếu chưa có ngày
+            ViewBag.PricePerNight = hotel.HotelRate ?? 100;  // Nếu không có giá, mặc định là 100 USD mỗi đêm
+            ViewBag.TotalPrice = 0; // Đặt giá trị tổng là 0 khi chưa có ngày
+
             return View(hotel);
         }
-
-
         // POST: Booking/Complete
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,6 +71,7 @@ namespace HotelBooker.Controllers
                 return NotFound();
             }
 
+            // Tính toán tổng số tiền từ ngày check-in và check-out
             double totalPrice = CalculateTotalPrice(hotel, checkInDate, checkOutDate);
 
             // Tạo đơn đặt phòng mới
@@ -82,13 +87,12 @@ namespace HotelBooker.Controllers
                 CheckOutDate = checkOutDate,
                 TotalPrice = totalPrice
             };
-
+            // Lưu đơn đặt phòng vào cơ sở dữ liệu
             _context.Add(order);
             await _context.SaveChangesAsync();
-
+            // Chuyển hướng người dùng đến trang Order để xem đơn đặt phòng đã tạo
             return RedirectToAction("Order", new { orderId = order.Id });
         }
-
         // GET: Booking/Order
         [HttpGet]
         public async Task<IActionResult> Order(int orderId)
@@ -105,14 +109,18 @@ namespace HotelBooker.Controllers
 
             return View(order);
         }
-
         // Helper function để tính tổng giá
         private double CalculateTotalPrice(Hotel hotel, DateTime checkInDate, DateTime checkOutDate)
         {
-            // Ví dụ, bạn có thể tính tổng giá dựa trên số đêm và giá phòng
+            // Tính số ngày giữa check-in và check-out
             var nights = (checkOutDate - checkInDate).Days;
-            double pricePerNight = hotel.HotelRate ?? 1000; // Giá phòng cơ bản, bạn có thể thay đổi logic này
-            return pricePerNight * nights;
+            // Nếu số ngày là 1, đặt giá mặc định là 100 USD
+            if (nights == 1)
+            {
+                return 100; // Nếu check-in và check-out cùng ngày thì giá là 100 USD
+            }
+            double pricePerNight = hotel.HotelRate ?? 100; // Nếu không có giá, mặc định là 100 USD mỗi đêm
+            return pricePerNight * nights; // Tính tổng số tiền theo số ngày
         }
     }
 }
