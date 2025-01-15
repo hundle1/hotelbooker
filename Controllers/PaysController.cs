@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HotelBooker.Controllers
 {
-    public class PayController : Controller
+    public class PaysController : Controller
     {
         private readonly IVNPayService _vnPayService;
-        public PayController(IVNPayService vnPayService)
+        public PaysController(IVNPayService vnPayService)
         {
             _vnPayService = vnPayService;
         }
