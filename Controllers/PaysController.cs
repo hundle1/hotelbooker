@@ -1,15 +1,24 @@
 using HotelBooker.ViewModels.VNPay;
 using HotelBooker.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using HotelBooker.Models;
+using Microsoft.EntityFrameworkCore;
+using HotelBooker.Data;
 
 namespace HotelBooker.Controllers
 {
     public class PaysController : Controller
     {
+        private readonly UserManager<User> _userManager;
         private readonly IVNPayService _vnPayService;
-        public PaysController(IVNPayService vnPayService)
+
+        private readonly HotelBookerContext _dbContext;
+        public PaysController(IVNPayService vnPayService, UserManager<User> userManager, HotelBookerContext dbContext)
         {
             _vnPayService = vnPayService;
+            _userManager = userManager;
+            _dbContext = dbContext;
         }
 
         public static Dictionary<string, string> vnp_TransactionStatus = new Dictionary<string, string>()
@@ -29,10 +38,24 @@ namespace HotelBooker.Controllers
             return View();
         }
 
-        public IActionResult Pay()
+        public IActionResult Pay(double? amount)
         {
-            return View();
+            var currentUser = _userManager.GetUserAsync(User).Result;
+            if (currentUser == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            double? amountInVND = amount.HasValue ? amount.Value * 24500 : (double?)null;
+            var model = new CheckoutViewModel
+            {
+                FullName = currentUser.UserName,
+                Address = currentUser.Email,
+                PhoneNumber = currentUser.PhoneNumber,
+                Amount = amountInVND?.ToString("N0")
+            };
+            return View(model);
         }
+
 
         [HttpPost]
         public IActionResult Pay(CheckoutViewModel request)
@@ -61,26 +84,58 @@ namespace HotelBooker.Controllers
             return View(request);
         }
 
-        public IActionResult PaymentSuccess()
+        public IActionResult PaymentSuccess(string orderId)
         {
+            // Chuyển orderId từ string sang long (hoặc int tùy kiểu dữ liệu của bạn)
+            if (long.TryParse(orderId, out long parsedOrderId))
+            {
+                // Lấy thông tin đơn hàng từ cơ sở dữ liệu theo Id
+                var order = _dbContext.Order.FirstOrDefault(o => o.Id == parsedOrderId);
+                
+                if (order != null)
+                {
+                    // Kiểm tra và cập nhật trạng thái đơn hàng
+                    order.Status = true;  // Đặt trạng thái thành 'đã thanh toán'
+                    
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    _dbContext.SaveChanges();  
+                }
+                else
+                {
+                    // Nếu không tìm thấy đơn hàng trong cơ sở dữ liệu
+                    ViewBag.ErrorMessage = "Order not found.";
+                }
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Invalid order ID.";
+            }
+
             return View();
         }
+
 
         public IActionResult PaymentFail()
         {
             return View();
         }
-
         public IActionResult PaymentCallBack()
         {
             var response = _vnPayService.PaymentExecute(Request.Query);
+
+            // Kiểm tra mã phản hồi của VNPay
             if (response.VNPayResponseCode == "00")
             {
-                // Processed successfully
-                return RedirectToAction(nameof(PaymentSuccess));
+                // Lấy orderId từ response hoặc session
+                var orderId = response.OrderId?.ToString();
+
+                // Debug: Kiểm tra orderId trước khi chuyển hướng
+                Console.WriteLine($"Payment successful. Redirecting to PaymentSuccess with OrderId: {orderId}");
+
+                return RedirectToAction(nameof(PaymentSuccess), new { orderId = orderId });
             }
 
-            // Get the message corresponding to VNPayResponseCode from the dictionary
+            // Nếu có lỗi, hiển thị thông báo lỗi
             if (vnp_TransactionStatus.TryGetValue(response.VNPayResponseCode!, out var message))
             {
                 TempData["Message"] = $"Payment error: {message}";
@@ -89,7 +144,6 @@ namespace HotelBooker.Controllers
             {
                 TempData["Message"] = $"Unknown payment error: {response.VNPayResponseCode}";
             }
-
             return RedirectToAction(nameof(PaymentFail));
         }
     }

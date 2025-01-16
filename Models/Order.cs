@@ -29,5 +29,7 @@ namespace HotelBooker.Models
 
         [Required]
         public double TotalPrice { get; set; }
+
+        public bool Status { get; set; }
     }
 }

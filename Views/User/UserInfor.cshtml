@@ -43,7 +43,7 @@
     </div>
 
     <!-- Bottom Div - Orders Section -->
-    <div style="margin-top: 20px; width: 100%; height: 500px; background-color: #cccccc81; display: flex; flex-direction: column;padding: 30px; border: 1px solid #ccc; border-radius: 10px;">
+    <div style="margin-top: 20px; width: 100%; min-height: 500px; background-color: #cccccc81; display: flex; flex-direction: column; padding: 30px; border: 1px solid #ccc; border-radius: 10px;">
         <p style="font-size: 18px; font-weight: bold;">Order List</p>
         <div>
             @if (ViewData["Orders"] != null)
@@ -55,10 +55,10 @@
                         <thead>
                             <tr align="center">
                                 <th>Hotel</th>
-                                <th>Room Number</th>
                                 <th>Check-in Date</th>
                                 <th>Check-out Date</th>
                                 <th>Total Price</th>
+                                <th>Status</th>
                                 <th colspan="2">Action</th>
                             </tr>
                         </thead>
@@ -67,13 +67,28 @@
                             {
                                 <tr align="center">
                                     <td>@(order.Hotel != null ? order.Hotel.HotelName : "N/A")</td>
-                                    <td>@order.RoomNumber</td>
                                     <td>@order.CheckInDate.ToString("MM/dd/yyyy")</td>
                                     <td>@order.CheckOutDate.ToString("MM/dd/yyyy")</td>
                                     <td>@order.TotalPrice</td>
                                     <td>
-                                        <button class="btn btn-danger">Delete Order</button>
-                                        <a asp-controller="Pays" asp-action="Pay">
+                                        @if (order.Status)
+                                        {
+                                            <span class="badge bg-success">Paid</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Pending</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <form asp-action="DeleteOrder" asp-controller="User" method="post" style="display:inline;">
+                                            <input type="hidden" name="orderId" value="@order.Id" />
+                                            <button type="submit" class="btn btn-danger" 
+                                                    onclick="return confirm('Are you sure you want to delete this order?');">
+                                                Delete
+                                            </button>
+                                        </form>
+                                        <a asp-controller="Pays" asp-action="Pay" asp-route-amount="@(order.TotalPrice * 24500)">
                                             <button class="btn btn-success">Pre Pay</button>
                                         </a>
                                     </td>
@@ -152,7 +167,14 @@
         cursor: pointer;
     }
 </style>
-
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
 <script>
     document.querySelector('.profile-avatar').addEventListener('click', function () {
         const modal = document.getElementById('imageModal');

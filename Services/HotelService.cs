@@ -88,6 +88,26 @@ namespace HotelBooker.Services
                                 .Include(o => o.Hotel)
                                 .ToListAsync();
         }
+        public async Task<bool> DeleteOrderByIdAsync(int orderId)
+        {
+            try
+            {
+                // Tìm order theo ID
+                var order = await _context.Order.FindAsync(orderId);
+                if (order == null)
+                {
+                    return false; // Không tìm thấy order
+                }
 
+                // Xóa order khỏi database
+                _context.Order.Remove(order);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false; // Xảy ra lỗi trong quá trình xóa
+            }
+        }
     }
 }

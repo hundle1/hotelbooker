@@ -13,37 +13,31 @@
             <strong>Hotel:</strong> 
             <span style="color: #007bff;">@(Model.Hotel?.HotelName ?? "N/A")</span>
         </p>
-
         <!-- Room Number -->
         <p style="font-size: 18px; color: #555;">
             <strong>Room Number:</strong> 
             <span style="color: #007bff;">@Model.RoomNumber</span>
         </p>
-
         <!-- Location -->
         <p style="font-size: 18px; color: #555;">
             <strong>Location:</strong> 
             <span style="color: #007bff;">@(Model.Hotel?.HotelLocation ?? "N/A")</span>
         </p>
-
         <!-- Check-in Date -->
         <p style="font-size: 18px; color: #555;">
             <strong>Check-in Date:</strong> 
             <span style="color: #007bff;">@Model.CheckInDate.ToString("MM/dd/yyyy")</span>
         </p>
-
         <!-- Check-out Date -->
         <p style="font-size: 18px; color: #555;">
             <strong>Check-out Date:</strong> 
             <span style="color: #007bff;">@Model.CheckOutDate.ToString("MM/dd/yyyy")</span>
         </p>
-
         <!-- Total Price -->
         <p style="font-size: 18px; color: #555;">
             <strong>Total Price:</strong> 
-            <span style="font-weight: bold; color: #28a745;">$@Model.TotalPrice</span>
+            <span style="font-weight: bold; color: #28a745;">$@Model.TotalPrice.ToString("F2")</span>
         </p>
-
         <!-- User -->
         <p style="font-size: 18px; color: #555;">
             <strong>User:</strong> 

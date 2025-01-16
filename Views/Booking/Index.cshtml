@@ -18,7 +18,7 @@
     <form method="post" asp-action="Complete" style="display: flex; flex-direction: column; gap: 20px;">
         <input type="hidden" name="hotelId" value="@Model.Id" />
         <input type="hidden" name="roomNumber" value="@ViewBag.RoomNumber" />
-
+        <input type="hidden" id="hiddenTotalPrice" name="totalPrice" value="0" /> <!-- Thêm input ẩn cho totalPrice -->
         <!-- Check-in Date -->
         <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
             <label for="checkInDate" style="font-size: 18px; font-weight: bold; color: #333;">Check-in Date:</label>
@@ -30,7 +30,6 @@
                 required 
                 style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;width: 100%;" onchange="calculateTotalPrice()" />
         </div>
-
         <!-- Check-out Date -->
         <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
             <label for="checkOutDate" style="font-size: 18px; font-weight: bold; color: #333;">Check-out Date:</label>
@@ -42,23 +41,19 @@
                 required 
                 style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;width: 100%;" onchange="calculateTotalPrice()" />
         </div>
-
         <!-- Total Price -->
         <div id="totalPriceContainer" style="font-size: 20px; font-weight: bold; color: #333; padding: 10px 0;">
             Total Price: <span id="totalPrice" style="color: #007bff;">$0</span>
         </div>
-
         <button type="submit" class="btn btn-primary" style="padding: 10px 20px; font-size: 18px; font-weight: bold; background-color: #007bff; border: none; border-radius: 4px;">Complete Booking</button>
     </form>
 </div>
-
 <script>
     function validateCheckInDate() {
         const checkInDateInput = document.getElementById('checkInDate');
         const checkInDate = new Date(checkInDateInput.value);
         const today = new Date();
         today.setHours(0, 0, 0, 0); // Đặt giờ, phút, giây, và mili giây về 0
-
         // Kiểm tra nếu check-in date hợp lệ
         if (checkInDate && checkInDate >= today) {
             // Ngày hợp lệ
@@ -72,26 +67,26 @@
     function calculateTotalPrice() {
         const checkInDate = new Date(document.getElementById('checkInDate').value);
         const checkOutDate = new Date(document.getElementById('checkOutDate').value);
-
         // Kiểm tra nếu ngày check-in và check-out hợp lệ
         if (checkInDate && checkOutDate && checkOutDate >= checkInDate) {
             let nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
-
             // Nếu số đêm là 0 (cùng ngày), tính 1 đêm
             if (nights === 0) {
                 nights = 1;
             }
-
             const pricePerNight = 100;
             const totalPrice = pricePerNight * nights;
-
             // Cập nhật giá và hiển thị
             document.getElementById('totalPrice').textContent = `$${totalPrice.toFixed(2)}`;
             document.getElementById('totalPriceContainer').style.display = 'block';
+            // Cập nhật giá trị totalPrice vào input ẩn
+            document.getElementById('hiddenTotalPrice').value = totalPrice.toFixed(2);
         } else {
             document.getElementById('totalPriceContainer').style.display = 'none';
         }
     }
+
+
 
     // Gắn sự kiện onchange vào ô nhập ngày check-in
     document.getElementById('checkInDate').addEventListener('change', function () {

@@ -61,19 +61,14 @@ namespace HotelBooker.Controllers
         // POST: Booking/Complete
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Complete(int hotelId, string roomNumber, DateTime checkInDate, DateTime checkOutDate)
+        public async Task<IActionResult> Complete(int hotelId, string roomNumber, DateTime checkInDate, DateTime checkOutDate, double totalPrice)
         {
             var hotel = await _context.Hotel.FindAsync(hotelId);
             var user = await _userManager.GetUserAsync(User);
-
             if (hotel == null || user == null)
             {
                 return NotFound();
             }
-
-            // Tính toán tổng số tiền từ ngày check-in và check-out
-            double totalPrice = CalculateTotalPrice(hotel, checkInDate, checkOutDate);
-
             // Tạo đơn đặt phòng mới
             var order = new Order
             {
@@ -85,7 +80,7 @@ namespace HotelBooker.Controllers
                 BookingDate = DateTime.Now,
                 CheckInDate = checkInDate,
                 CheckOutDate = checkOutDate,
-                TotalPrice = totalPrice
+                TotalPrice = totalPrice // Dùng giá trị totalPrice đã được gửi từ form
             };
             // Lưu đơn đặt phòng vào cơ sở dữ liệu
             _context.Add(order);
@@ -93,6 +88,7 @@ namespace HotelBooker.Controllers
             // Chuyển hướng người dùng đến trang Order để xem đơn đặt phòng đã tạo
             return RedirectToAction("Order", new { orderId = order.Id });
         }
+
         // GET: Booking/Order
         [HttpGet]
         public async Task<IActionResult> Order(int orderId)

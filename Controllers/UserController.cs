@@ -263,5 +263,29 @@ namespace HotelBooker.Controllers
             }
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteOrder(int orderId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // Gọi phương thức từ service để xóa order
+            var success = await _hotelService.DeleteOrderByIdAsync(orderId);
+
+            if (success)
+            {
+                TempData["Message"] = "Order deleted successfully.";
+            }
+            else
+            {
+                TempData["Error"] = "Failed to delete order. Please try again.";
+            }
+
+            return RedirectToAction("UserInfor");
+        }
     }
 }
