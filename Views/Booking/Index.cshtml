@@ -4,96 +4,89 @@
     ViewData["Title"] = "Booking - " + Model.HotelName;
 }
 <div style="background-color: black; width: 100%; height: 150px; display: flex; align-items: center; justify-content: center; margin-bottom: 50px;"></div>
-<div class="container-xl" style="padding: 0px 50px 50px 50px; display: flex; gap: 20px; flex-direction: column; max-width: 800px; margin: auto; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-    <h1 style="color: white; font-size: 32px;">Hotel Booking</h1>
-    <h2 style="color: #333; font-weight: bold;">@Model.HotelName - Room: @ViewBag.RoomNumber</h2>
-    <p style="font-size: 18px; color: #555;"><strong>Location:</strong> @Model.HotelLocation</p>
-    <p style="font-size: 18px; color: #555;"><strong>Rating:</strong> @Model.HotelRate &#9733;</p>
-    <img src="@Model.HotelImage" class="img-fluid rounded shadow-lg" alt="@Model.HotelImage" style="max-width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
-    @if (Model.User != null)
-    {
-        <p style="font-size: 18px; color: #555;"><strong>User:</strong> @Model.User.UserName</p>
-    }
+<div class="container-xl" style="max-width: 1000px; margin: auto; display: flex; gap: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); padding: 20px;">
+    <!-- Hotel Information -->
+    <div style="flex: 1;">
+        <div target="_blank" style="display: block; overflow: hidden; border-radius: 10px;">
+            <img src="@Model.HotelImage" class="img-fluid rounded shadow-lg" alt="Hotel Image" style="width: 100%; height: auto; object-fit: cover; border-radius: 10px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <h1 style="color: #333; font-size: 28px; margin-top: 10px;">@Model.HotelName</h1>
+        <p style="font-size: 16px; color: #555;"><strong>Location:</strong> @Model.HotelLocation</p>
+        <p style="font-size: 16px; color: #555;"><strong>Rating:</strong> @Model.HotelRate &#9733;</p>
+        <p style="font-size: 16px; color: #555;"><strong>Contact:</strong> @Model.HotelContact</p>
+        <p style="font-size: 16px; color: #555;"><strong>Email:</strong> @Model.HotelEmail</p>
+        <p style="font-size: 16px; color: #555;"><strong>Website:</strong> <a href="@Model.HotelWebsite" target="_blank" class="btn btn-outline-primary btn-sm">Visit</a></p>
+    </div>
+    
+    <!-- Booking Form -->
+    <div style="flex: 1; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column;">
+        <h2 style="color: #333; font-weight: bold;">Room: @ViewBag.RoomNumber</h2>
+        <form method="post" asp-action="Complete" style="display: flex; flex-direction: column; gap: 15px; flex-grow: 1;">
+            <input type="hidden" name="hotelId" value="@Model.Id" />
+            <input type="hidden" name="roomNumber" value="@ViewBag.RoomNumber" />
+            <input type="hidden" id="hiddenTotalPrice" name="totalPrice" value="0" />
 
-    <form method="post" asp-action="Complete" style="display: flex; flex-direction: column; gap: 20px;">
-        <input type="hidden" name="hotelId" value="@Model.Id" />
-        <input type="hidden" name="roomNumber" value="@ViewBag.RoomNumber" />
-        <input type="hidden" id="hiddenTotalPrice" name="totalPrice" value="0" /> <!-- Thêm input ẩn cho totalPrice -->
-        <!-- Check-in Date -->
-        <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
-            <label for="checkInDate" style="font-size: 18px; font-weight: bold; color: #333;">Check-in Date:</label>
-            <input 
-                type="date" 
-                id="checkInDate" 
-                name="checkInDate" 
-                class="form-control" 
-                required 
-                style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;width: 100%;" onchange="calculateTotalPrice()" />
-        </div>
-        <!-- Check-out Date -->
-        <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
-            <label for="checkOutDate" style="font-size: 18px; font-weight: bold; color: #333;">Check-out Date:</label>
-            <input 
-                type="date" 
-                id="checkOutDate" 
-                name="checkOutDate" 
-                class="form-control" 
-                required 
-                style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;width: 100%;" onchange="calculateTotalPrice()" />
-        </div>
-        <!-- Total Price -->
-        <div id="totalPriceContainer" style="font-size: 20px; font-weight: bold; color: #333; padding: 10px 0;">
-            Total Price: <span id="totalPrice" style="color: #007bff;">$0</span>
-        </div>
-        <button type="submit" class="btn btn-primary" style="padding: 10px 20px; font-size: 18px; font-weight: bold; background-color: #007bff; border: none; border-radius: 4px;">Complete Booking</button>
-    </form>
+            <!-- Check-in Date -->
+            <label for="checkInDate" class="form-label">Check-in Date:</label>
+            <input type="date" id="checkInDate" name="checkInDate" class="form-control" required style="max-width: 250px;" onchange="validateDates(); calculateTotalPrice()" />
+            
+            <!-- Check-out Date -->
+            <label for="checkOutDate" class="form-label">Check-out Date:</label>
+            <input type="date" id="checkOutDate" name="checkOutDate" class="form-control" required style="max-width: 250px;" onchange="validateDates(); calculateTotalPrice()" />
+            
+            <!-- Total Price -->
+            <div id="totalPriceContainer" style="font-size: 18px; font-weight: bold; color: #333; padding: 10px 0; text-align: right; margin-top: auto;">
+                Total Price: <span id="totalPrice" style="color: #007bff;">$0</span>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="padding: 10px 20px; font-size: 18px; font-weight: bold;">Complete Booking</button>
+        </form>
+    </div>
 </div>
+
 <script>
-    function validateCheckInDate() {
+    function validateDates() {
         const checkInDateInput = document.getElementById('checkInDate');
-        const checkInDate = new Date(checkInDateInput.value);
+        const checkOutDateInput = document.getElementById('checkOutDate');
         const today = new Date();
-        today.setHours(0, 0, 0, 0); // Đặt giờ, phút, giây, và mili giây về 0
-        // Kiểm tra nếu check-in date hợp lệ
-        if (checkInDate && checkInDate >= today) {
-            // Ngày hợp lệ
-            checkInDateInput.setCustomValidity(""); // Xóa lỗi
+        today.setHours(0, 0, 0, 0);
+
+        const minCheckInDate = new Date(today);
+        minCheckInDate.setDate(today.getDate() + 1);
+
+        const minCheckOutDate = new Date(today);
+        minCheckOutDate.setDate(today.getDate() + 2);
+
+        const checkInDate = new Date(checkInDateInput.value);
+        const checkOutDate = new Date(checkOutDateInput.value);
+
+        if (checkInDate < minCheckInDate) {
+            checkInDateInput.setCustomValidity("Check-in date must be at least 1 day after today.");
         } else {
-            // Ngày không hợp lệ
-            checkInDateInput.setCustomValidity("Check-in date must be today or a future date.");
+            checkInDateInput.setCustomValidity("");
+        }
+
+        if (checkOutDate < minCheckOutDate) {
+            checkOutDateInput.setCustomValidity("Check-out date must be at least 2 days after today.");
+        } else if (checkOutDate <= checkInDate) {
+            checkOutDateInput.setCustomValidity("Check-out date must be after check-in date.");
+        } else {
+            checkOutDateInput.setCustomValidity("");
         }
     }
 
     function calculateTotalPrice() {
         const checkInDate = new Date(document.getElementById('checkInDate').value);
         const checkOutDate = new Date(document.getElementById('checkOutDate').value);
-        // Kiểm tra nếu ngày check-in và check-out hợp lệ
-        if (checkInDate && checkOutDate && checkOutDate >= checkInDate) {
+        if (checkInDate && checkOutDate && checkOutDate > checkInDate) {
             let nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
-            // Nếu số đêm là 0 (cùng ngày), tính 1 đêm
-            if (nights === 0) {
-                nights = 1;
-            }
             const pricePerNight = 100;
             const totalPrice = pricePerNight * nights;
-            // Cập nhật giá và hiển thị
             document.getElementById('totalPrice').textContent = `$${totalPrice.toFixed(2)}`;
-            document.getElementById('totalPriceContainer').style.display = 'block';
-            // Cập nhật giá trị totalPrice vào input ẩn
             document.getElementById('hiddenTotalPrice').value = totalPrice.toFixed(2);
+            document.getElementById('totalPriceContainer').style.display = 'block';
         } else {
-            document.getElementById('totalPriceContainer').style.display = 'none';
+            document.getElementById('totalPriceContainer').style.display = 'block';
         }
     }
-
-
-
-    // Gắn sự kiện onchange vào ô nhập ngày check-in
-    document.getElementById('checkInDate').addEventListener('change', function () {
-        validateCheckInDate();
-        calculateTotalPrice();
-    });
-
-    // Gắn sự kiện onchange vào ô nhập ngày check-out
-    document.getElementById('checkOutDate').addEventListener('change', calculateTotalPrice);
 </script>

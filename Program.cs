@@ -87,6 +87,10 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+
+
 void AddScoped()
 {
     builder.Services.AddScoped<RoomService>(); 

@@ -45,6 +45,7 @@ namespace HotelBooker.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+
             double? amountInVND = amount.HasValue ? amount.Value * 24500 : (double?)null;
             var model = new CheckoutViewModel
             {
@@ -55,6 +56,7 @@ namespace HotelBooker.Controllers
             };
             return View(model);
         }
+
 
 
         [HttpPost]
@@ -91,12 +93,12 @@ namespace HotelBooker.Controllers
             {
                 // Lấy thông tin đơn hàng từ cơ sở dữ liệu theo Id
                 var order = _dbContext.Order.FirstOrDefault(o => o.Id == parsedOrderId);
-                
+                        
                 if (order != null)
                 {
                     // Kiểm tra và cập nhật trạng thái đơn hàng
                     order.Status = true;  // Đặt trạng thái thành 'đã thanh toán'
-                    
+                            
                     // Lưu thay đổi vào cơ sở dữ liệu
                     _dbContext.SaveChanges();  
                 }
@@ -113,6 +115,7 @@ namespace HotelBooker.Controllers
 
             return View();
         }
+
 
 
         public IActionResult PaymentFail()
@@ -146,5 +149,36 @@ namespace HotelBooker.Controllers
             }
             return RedirectToAction(nameof(PaymentFail));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PrePay(int orderId)
+        {
+            // Lấy thông tin người dùng
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            // Lấy đơn hàng từ cơ sở dữ liệu
+            var order = await _dbContext.Order.FirstOrDefaultAsync(o => o.Id == orderId);
+            if (order == null || order.UserId != currentUser.Id)
+            {
+                TempData["Error"] = "Đơn hàng không tồn tại hoặc không thuộc về bạn.";
+                return RedirectToAction("UserInfor", "User");
+            }
+
+            // Cập nhật trạng thái đơn hàng thành "Paid"
+            order.Status = true;
+            _dbContext.Update(order);
+            await _dbContext.SaveChangesAsync();
+
+            TempData["Message"] = "Đơn hàng đã được cập nhật thành công và đã được thanh toán.";
+
+            // Chuyển hướng đến trang thanh toán nếu cần thiết (đối với VNPay)
+            return RedirectToAction("Pay", new { amount = order.TotalPrice });
+        }
+
     }
 }

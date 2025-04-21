@@ -31,7 +31,7 @@
                     <label><strong>Phone Number:</strong></label>
                     <span>@(!string.IsNullOrEmpty(Model.PhoneNumber) ? Model.PhoneNumber : "Please Update")</span>
                 </div>
-                <div class="detail-item">
+                <div class="detail-item">  
                     <label><strong>Address:</strong></label>
                     <span>@(!string.IsNullOrEmpty(Model.Address) ? Model.Address : "Please Update")</span>
                 </div>
@@ -66,7 +66,11 @@
                             @foreach (var order in orders)
                             {
                                 <tr align="center">
-                                    <td>@(order.Hotel != null ? order.Hotel.HotelName : "N/A")</td>
+                                    <td>
+                                        <a asp-controller="Booking" asp-action="Order" asp-route-orderId="@order.Id">
+                                            @(order.Hotel != null ? order.Hotel.HotelName : "N/A")
+                                        </a>
+                                    </td>
                                     <td>@order.CheckInDate.ToString("MM/dd/yyyy")</td>
                                     <td>@order.CheckOutDate.ToString("MM/dd/yyyy")</td>
                                     <td>@order.TotalPrice</td>
@@ -108,6 +112,7 @@
             }
         </div>
     </div>
+
 </div>
 
 <!-- Modal for Viewing Image -->

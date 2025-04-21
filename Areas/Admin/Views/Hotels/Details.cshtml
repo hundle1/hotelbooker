@@ -1,0 +1,60 @@
+@model HotelBooker.Models.Hotel
+
+@{
+    ViewData["Title"] = "Hotel Details";
+}
+<a class="btn btn-secondary" style="margin: 40px; " asp-action="Index">Back to List</a>
+
+<div class="container-xxl" style="padding-top: 50px; display: flex; gap: 20px; flex-direction: column;">
+
+    <!-- Hotel Image -->
+    <div class="text-center mb-4">
+        @if (!string.IsNullOrEmpty(Model.HotelImage))
+        {
+            <img src="@Model.HotelImage" class="img-fluid rounded shadow-lg" alt="@Model.HotelName"
+            style="max-width: 70%; height: auto; object-fit: cover; border-radius: 10px;">
+        }
+        else
+        {
+            <div class="alert alert-warning">No image available</div>
+        }
+    </div>
+
+    <!-- Hotel Details -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title text-center text-primary mb-4">@Model.HotelName</h3>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Location:</strong> @Model.HotelLocation</p>
+                    <p><strong>Rate:</strong> @Model.HotelRate ⭐</p>
+                    <p><strong>Number of Rooms:</strong> @Model.NumberOfRoom</p>
+                    <p><strong>Contact:</strong> @Model.HotelContact</p>
+                    <p><strong>Email:</strong> @Model.HotelEmail</p>
+                    <p><strong>Website:</strong> 
+                        @if (!string.IsNullOrEmpty(Model.HotelWebsite))
+                        {
+                            <a href="@Model.HotelWebsite" target="_blank">@Model.HotelWebsite</a>
+                        }
+                        else
+                        {
+                            <span>N/A</span>
+                        }
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Services:</strong> @Model.HotelServices</p>
+                    <p><strong>Description:</strong></p>
+                    <div class="border rounded p-2 bg-light" style="min-height: 100px;">
+                        @Html.Raw(Model.HotelDescription?.Replace("\n", "<br>") ?? "No description available.")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="mt-4 d-flex justify-content-between">
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+    </div>
+</div>
