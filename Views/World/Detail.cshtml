@@ -1,11 +1,13 @@
 @model HotelBooker.Models.Hotel
-
+@using HotelBooker.Models
 @{
     ViewData["Title"] = Model.HotelName;
+    var orders = ViewData["Orders"] as List<Order> ?? new List<Order>();
+    var today = DateTime.Today;
 }
-
 <div style="background-color: black; width: 100%; height: 150px;"></div>
-<div class="container-xl" style="padding-top: 50px; padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+<div class="container-xl"
+    style="padding-top: 50px; padding-left: 20px; padding-right: 20px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
     <div>
         <a asp-area="" asp-controller="Home" asp-action="Index" class="back-hov">Home </a>
         <i class="fa fa-chevron-left arrow-hov"></i>
@@ -17,45 +19,51 @@
         <h1 class="card-title text-center mb-4 bold">@Model.HotelName</h1>
         <div class="card-body" style="">
             <div style="display:flex; justify-content: space-between; width: 100%; padding-bottom: 40px;">
-                <div style="width:70%; display: flex; flex-direction: column; gap: 20px; jusstify-content: center; align-items: center;">
+                <div
+                    style="width:70%; display: flex; flex-direction: column; gap: 20px; jusstify-content: center; align-items: center;">
                     <h2><strong>Rooms:</strong> @Model.NumberOfRoom</h2>
                     <div id="room-buttons" style="display: flex; flex-direction: row; gap: 20px;">
                         @{
                             int totalRooms = Model.NumberOfRoom ?? 0;
                             int columns = (int)Math.Ceiling((double)totalRooms / 50);
                             int roomsPerColumn = (int)Math.Ceiling((double)totalRooms / columns);
-                            string[] prefixes = new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+                            string[] prefixes = new[] {
+                                                "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
+                                                };
                             int currentPrefixIndex = 0;
                             int roomStart = 101;
                             for (int col = 0; col < columns; col++)
                             {
-                                <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 5px;">
-                                    @for (int i = col * roomsPerColumn + 1; i <= Math.Min((col + 1) * roomsPerColumn, totalRooms); i++)
+                                <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                                    @for (int i = col * roomsPerColumn + 1; i <= Math.Min((col + 1) * roomsPerColumn,
+                                                                totalRooms); i++)
                                     {
                                         string roomLabel = $"{prefixes[currentPrefixIndex]}{roomStart}";
-                                        if (roomStart == 110)
-                                        {
-                                            roomStart = 201;
-                                        }
-                                        else if (roomStart == 210)
-                                        {
-                                            roomStart = 301;
-                                        }
-                                        else if (roomStart == 310)
-                                        {
-                                            roomStart = 401;
-                                        }
-                                        else{
-                                            roomStart++;
-                                        }
+                                        if (roomStart == 110) roomStart = 201;
+                                        else if (roomStart == 210) roomStart = 301;
+                                        else if (roomStart == 310) roomStart = 401;
+                                        else roomStart++;
 
-                                        <button class="btn btn-outline-primary" 
-                                                style="width: 70px; height: 50px; font-family: system-ui;" 
-                                                onclick="selectRoom('@roomLabel')">
+                                        // Kiểm tra order cho phòng này
+                                        var matchedOrders = orders
+                                        .Where(o => o.HotelId == Model.Id && o.RoomNumber == roomLabel)
+                                        .ToList();
+                                        bool hasActiveOrder = matchedOrders.Any(o => o.CheckOutDate.Date >= today);
+                                        bool allExpired = matchedOrders.All(o => o.CheckOutDate.Date < today);
+
+                                        // Quyết định class và disabled
+                                        string btnClass = hasActiveOrder && !allExpired
+                                        ? "btn btn-danger"
+                                        : "btn btn-outline-primary";
+                                        bool disabledAttr = hasActiveOrder && !allExpired;
+
+                                        <button class="@btnClass" style="width:70px; height:50px; font-family: system-ui;"
+                                            onclick="selectRoom('@roomLabel')" @(disabledAttr ? "disabled" : "")>
                                             @roomLabel
                                         </button>
                                     }
                                 </div>
+                                currentPrefixIndex++;
                             }
                         }
                     </div>
@@ -65,14 +73,17 @@
                     </div>
 
                     <!-- Nút Book Now -->
-                    <form action="@Url.Action("Index", "Booking")" method="get" id="booking-form" style="display: none;">
+                    <form action="@Url.Action("Index", "Booking")" method="get" id="booking-form"
+                        style="display: none;">
                         <input type="hidden" name="hotelId" value="@Model.Id" />
                         <input type="hidden" name="roomNumber" id="room-number" />
-                        <button class="btn btn-primary" style="color: aliceblue; margin-top: 30px;" type="submit">Book Now</button>
+                        <button class="btn btn-primary" style="color: aliceblue; margin-top: 30px;" type="submit">Book
+                            Now</button>
                     </form>
                 </div>
                 <div style="border-left: 1px solid gray; width: 30%; padding-left: 20px;">
-                    <img src="@Model.HotelImage" class="img-fluid rounded shadow-lg" alt="@Model.HotelImage" style="max-width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                    <img src="@Model.HotelImage" class="img-fluid rounded shadow-lg" alt="@Model.HotelImage"
+                        style="max-width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
                     <div>
                         <p><strong>Location:</strong> @Model.HotelLocation</p>
                         <p><strong>Rating:</strong> @Model.HotelRate &#9733;</p>

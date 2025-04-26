@@ -2,6 +2,9 @@ using HotelBooker.Services;
 using Microsoft.AspNetCore.Mvc;
 using HotelBooker.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HotelBooker.Controllers
 {
@@ -38,16 +41,32 @@ namespace HotelBooker.Controllers
 
         public async Task<IActionResult> Detail(int id)
         {
+            // 1. Lấy thông tin hotel
             var hotel = await _hotelService.GetHotelByIdAsync(id);
             if (hotel == null)
-            {
                 return NotFound();
+
+            // 2. (Nếu cần) load thêm thông tin User của hotel
+            await _hotelService.IncludeUserAsync(hotel);
+
+            // 3. Lấy userId hiện tại
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId != null)
+            {
+                // 4. Lấy tất cả orders của user
+                var userOrders = await _hotelService.GetOrdersByUserIdAsync(userId);
+                // 5. Lọc chỉ những order cùng hotel này
+                var ordersForThisHotel = userOrders
+                    .Where(o => o.HotelId == id)
+                    .ToList();
+                ViewData["Orders"] = ordersForThisHotel;
+            }
+            else
+            {
+                ViewData["Orders"] = new List<Order>();
             }
 
-            // Đảm bảo rằng khi lấy khách sạn, thông tin người dùng cũng được tải
-            await _hotelService.IncludeUserAsync(hotel); // Giả sử có phương thức này để tải User từ bảng User
-
-            ViewData["Hotel"] = hotel;
+            // 6. Trả về view với model là hotel
             return View(hotel);
         }
     }
