@@ -3,17 +3,17 @@
 @{
     ViewData["Title"] = "Dashboard";
 }
-
 <!-- Container for Dashboard -->
-<div class="container" style="padding-top: 150px; display: flex; gap: 20px; padding-top:50px; display:flex; flex-direction:column; font-family: Arial, Helvetica, sans-serif; max-width: 100%;">
-
+<div class="container" style="padding-top: 50px; display: flex; gap: 20px; flex-direction: column; font-family: Arial, Helvetica, sans-serif; max-width: 100%;">
 
     <!-- Dashboard Title -->
     <h1 class="text-center" style="font-size: 36px; font-weight: bold;">
         @ViewData["Title"]
         <span style="font-size: 20px; font-weight: normal; color: #555;"></span>
     </h1>
-    <p class="text-center" style="font-size: 20px; color: #555;">This is your dashboard where you can view various statistics and data.</p>
+    <p class="text-center" style="font-size: 20px; color: #555;">
+        Đây là bảng điều khiển nơi bạn có thể theo dõi các thống kê và dữ liệu tổng quan của hệ thống đặt phòng khách sạn.
+    </p>
 
     <!-- Row for Cards displaying statistics -->
     <div class="row" style="margin-bottom: 30px;">
@@ -21,7 +21,7 @@
         <div class="col-md-3" style="width: 430px;">
             <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-size: 18px; font-weight: 600;">Total Revenue</h5>
+                    <h5 class="card-title">Tổng Doanh Thu</h5>
                     <p class="card-text" style="font-size: 30px; color: #28a745;">$25,000</p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
         <div class="col-md-3" style="width: 430px;">
             <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-size: 18px; font-weight: 600;">User Accounts</h5>
+                    <h5 class="card-title">Người Dùng</h5>
                     <p class="card-text" style="font-size: 30px; color: #007bff;">2</p>
                 </div>
             </div>
@@ -41,7 +41,7 @@
         <div class="col-md-3" style="width: 430px;">
             <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-size: 18px; font-weight: 600;">Total Rooms</h5>
+                    <h5 class="card-title">Tổng Số Phòng</h5>
                     <p class="card-text" style="font-size: 30px; color: #ffc107;">80</p>
                 </div>
             </div>
@@ -51,7 +51,7 @@
         <div class="col-md-3" style="width: 430px;">
             <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-size: 18px; font-weight: 600;">Project Progress</h5>
+                    <h5 class="card-title">Tỉ Lệ Đặt Phòng</h5>
                     <p class="card-text" style="font-size: 30px; color: #dc3545;">75%</p>
                 </div>
             </div>
@@ -64,7 +64,7 @@
         <div class="col-md-6" style="margin-bottom: 30px;">
             <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-size: 18px; font-weight: 600;">Revenue Trend</h5>
+                    <h5 class="card-title">Biểu Đồ Doanh Thu Theo Tháng</h5>
                     <canvas id="revenueChart" style="height: 400px;"></canvas>
                 </div>
             </div>
@@ -74,9 +74,32 @@
         <div class="col-md-6" style="margin-bottom: 30px;">
             <div class="card shadow-lg mb-4" style="border-radius: 15px; padding: 20px;">
                 <div class="card-body">
-                    <h5 class="card-title" style="font-size: 18px; font-weight: 600;">User Growth</h5>
+                    <h5 class="card-title">Tăng Trưởng Người Dùng</h5>
                     <canvas id="userGrowthChart" style="height: 400px;"></canvas>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extra: Welcome and summary -->
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <div class="alert alert-info" style="font-size: 18px; border-radius: 10px;">
+                👋 Chào mừng bạn quay trở lại hệ thống! Hãy tiếp tục theo dõi các chỉ số để cải thiện hoạt động kinh doanh khách sạn của bạn nhé!
+            </div>
+        </div>
+    </div>
+
+    <!-- Extra: Tips or next actions -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm" style="border-radius: 15px; padding: 25px; background-color: #f9f9f9;">
+                <h5 class="mb-3" style="font-weight: bold;">📌 Gợi ý cho bạn:</h5>
+                <ul style="font-size: 16px;">
+                    <li>Xem lại các phòng chưa được đặt trong 30 ngày qua để chạy chương trình khuyến mãi.</li>
+                    <li>Gửi email chào mừng tới người dùng mới để tăng mức độ gắn bó.</li>
+                    <li>Xem thống kê đánh giá khách hàng để cải thiện chất lượng dịch vụ.</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -90,10 +113,10 @@
     var revenueChart = new Chart(ctx1, {
         type: 'line',
         data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Months
+            labels: ['Th1', 'Th2', 'Th3', 'Th4', 'Th5', 'Th6'],
             datasets: [{
-                label: 'Revenue',
-                data: [5000, 7000, 8000, 6000, 10000, 9000], // Revenue data
+                label: 'Doanh Thu',
+                data: [5000, 7000, 8000, 6000, 10000, 9000],
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 3,
                 fill: false
@@ -113,10 +136,10 @@
     var userGrowthChart = new Chart(ctx2, {
         type: 'bar',
         data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Months
+            labels: ['Th1', 'Th2', 'Th3', 'Th4', 'Th5', 'Th6'],
             datasets: [{
-                label: 'Users',
-                data: [100, 150, 200, 300, 500, 650], // User data
+                label: 'Người Dùng',
+                data: [100, 150, 200, 300, 500, 650],
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 2

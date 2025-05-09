@@ -3,11 +3,12 @@
 @{
     ViewData["Title"] = "Hotel Details";
 }
-<a class="btn btn-secondary" style="margin: 40px; " asp-action="Index">Back to List</a>
+
+<a class="btn btn-secondary" style="margin: 40px;" asp-action="Index">Quay lại danh sách</a>
 
 <div class="container-xxl" style="padding-top: 50px; display: flex; gap: 20px; flex-direction: column;">
 
-    <!-- Hotel Image -->
+    <!-- Hình ảnh khách sạn -->
     <div class="text-center mb-4">
         @if (!string.IsNullOrEmpty(Model.HotelImage))
         {
@@ -16,20 +17,20 @@
         }
         else
         {
-            <div class="alert alert-warning">No image available</div>
+            <div class="alert alert-warning">Không có hình ảnh</div>
         }
     </div>
 
-    <!-- Hotel Details -->
+    <!-- Thông tin khách sạn -->
     <div class="card shadow-sm">
         <div class="card-body">
             <h3 class="card-title text-center text-primary mb-4">@Model.HotelName</h3>
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <p><strong>Location:</strong> @Model.HotelLocation</p>
-                    <p><strong>Rate:</strong> @Model.HotelRate ⭐</p>
-                    <p><strong>Number of Rooms:</strong> @Model.NumberOfRoom</p>
-                    <p><strong>Contact:</strong> @Model.HotelContact</p>
+                    <p><strong>Địa điểm:</strong> @Model.HotelLocation</p>
+                    <p><strong>Đánh giá:</strong> @Model.HotelRate ⭐</p>
+                    <p><strong>Số phòng:</strong> @Model.NumberOfRoom</p>
+                    <p><strong>Liên hệ:</strong> @Model.HotelContact</p>
                     <p><strong>Email:</strong> @Model.HotelEmail</p>
                     <p><strong>Website:</strong> 
                         @if (!string.IsNullOrEmpty(Model.HotelWebsite))
@@ -38,23 +39,23 @@
                         }
                         else
                         {
-                            <span>N/A</span>
+                            <span>Không có</span>
                         }
                     </p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>Services:</strong> @Model.HotelServices</p>
-                    <p><strong>Description:</strong></p>
+                    <p><strong>Dịch vụ:</strong> @Model.HotelServices</p>
+                    <p><strong>Mô tả:</strong></p>
                     <div class="border rounded p-2 bg-light" style="min-height: 100px;">
-                        @Html.Raw(Model.HotelDescription?.Replace("\n", "<br>") ?? "No description available.")
+                        @Html.Raw(Model.HotelDescription?.Replace("\n", "<br>") ?? "Không có mô tả.")
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Action Buttons -->
+    <!-- Nút thao tác -->
     <div class="mt-4 d-flex justify-content-between">
-        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Chỉnh sửa</a>
     </div>
 </div>

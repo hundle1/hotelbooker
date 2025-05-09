@@ -1,6 +1,6 @@
 <header class="header" style="z-index: 1;">
     <div class="header__topbar">
-        <div class="grid wide">
+        <div class="" style="max-width: 1380px; margin: 0 auto;">
             <div class="header__topbar__container" style="height: 40px;">
                 <div class="l-6 m-8 c-8">
                     <div class="header__topbar__container--contacts">
@@ -15,27 +15,25 @@
                 </div>
                 <div class="l-6 m-4 c-4">
                     <ul class="header__topbar__container--register">
-                        <ul class="header__topbar__container--register">
-                            @if (User.Identity?.IsAuthenticated ?? false)
+                        @if (User.Identity?.IsAuthenticated ?? false)
+                        {
+                            @if (User.IsInRole("Admin"))
                             {
-                                @if (User.IsInRole("Admin"))
-                                {
-                                    <li><a asp-area="Admin" asp-controller="Rooms" asp-action="Index">Admin Management</a></li>
-                                    <li>/</li>
-                                }
-                                <li>
-                                    <form asp-controller="User" asp-action="Logout" method="post">
-                                        <button type="submit">LOG OUT</button>
-                                    </form>
-                                </li>
+                                <li><a asp-area="Admin" asp-controller="Rooms" asp-action="Index">Quản trị Admin</a></li>
+                                <li>/</li>
                             }
-                            else
-                            {
-                                <li><a asp-controller="User" asp-action="Login">Login</a></li>
-                                <li>|</li>
-                                <li><a asp-controller="User" asp-action="SignUp">Sign Up</a></li>
-                            }
-                        </ul>
+                            <li>
+                                <form asp-controller="User" asp-action="Logout" method="post">
+                                    <button type="submit">ĐĂNG XUẤT</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><a asp-controller="User" asp-action="Login">Đăng nhập</a></li>
+                            <li>|</li>
+                            <li><a asp-controller="User" asp-action="SignUp">Đăng ký</a></li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -59,19 +57,19 @@
                                 <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="World" asp-action="Index">World</a>
+                                <a asp-area="" asp-controller="World" asp-action="Index">Khách Sạn</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="Book" asp-action="Index">Booker</a>
+                                <a asp-area="" asp-controller="Book" asp-action="Index">Phòng</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Blog">Blog</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Blog">News</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Privacy">Thể Lệ</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Contact">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
@@ -80,7 +78,7 @@
                         <div class="header__nav__container--search">
                             <i class="fas fa-search" id="search"></i>
                             <br />
-                            <input type="text" placeholder="Search..." />
+                            <input type="text" placeholder="Tìm kiếm..." />
                         </div>
                     </div>
                 </div>
@@ -92,11 +90,11 @@
         <div class="header__menu__overlay"></div>
         <div class="header__menu__body--content">
             <ul>
-                <li><a class="active" href="pages/home.html">Home</a></li>
-                <li><a href="pages/about.html">About</a></li>
-                <li><a href="pages/offers.html">Offers</a></li>
-                <li><a href="pages/news.html">News</a></li>
-                <li><a href="pages/contact.html">Contact</a></li>
+                <li><a class="active" href="pages/home.html">Trang chủ</a></li>
+                <li><a href="pages/about.html">Giới thiệu</a></li>
+                <li><a href="pages/offers.html">Ưu đãi</a></li>
+                <li><a href="pages/news.html">Tin tức</a></li>
+                <li><a href="pages/contact.html">Liên hệ</a></li>
             </ul>
             <i class="fas fa-times" id="menu_close"></i>
         </div>

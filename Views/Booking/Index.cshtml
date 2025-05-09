@@ -61,15 +61,15 @@
         const checkOutDate = new Date(checkOutDateInput.value);
 
         if (checkInDate < minCheckInDate) {
-            checkInDateInput.setCustomValidity("Check-in date must be at least 1 day after today.");
+            checkInDateInput.setCustomValidity("Ngày nhận phòng phải ít nhất 1 ngày sau hôm nay.");
         } else {
             checkInDateInput.setCustomValidity("");
         }
 
         if (checkOutDate < minCheckOutDate) {
-            checkOutDateInput.setCustomValidity("Check-out date must be at least 2 days after today.");
+            checkOutDateInput.setCustomValidity("Ngày trả phòng phải ít nhất 2 ngày sau hôm nay.");
         } else if (checkOutDate <= checkInDate) {
-            checkOutDateInput.setCustomValidity("Check-out date must be after check-in date.");
+            checkOutDateInput.setCustomValidity("Ngày trả phòng phải sau ngày nhận phòng.");
         } else {
             checkOutDateInput.setCustomValidity("");
         }

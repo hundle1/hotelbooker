@@ -26,7 +26,7 @@ namespace HotelBooker.Services
             return await _context.Hotel.FindAsync(id);
         }
 
-        public async Task CreateHotelAsync(Hotel hotel)
+        public async Task CreateHotelAsync(Hotel hotel, Room room)
         {
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
@@ -109,5 +109,15 @@ namespace HotelBooker.Services
                 return false; // Xảy ra lỗi trong quá trình xóa
             }
         }
+        public async Task CreateHotelWithRoomAsync(Hotel hotel, Room room)
+        {
+            _context.Hotel.Add(hotel);
+            await _context.SaveChangesAsync(); // Save hotel trước để lấy hotel.Id nếu cần
+
+            room.Status = true; // Mặc định phòng mới là còn trống
+            _context.Room.Add(room);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

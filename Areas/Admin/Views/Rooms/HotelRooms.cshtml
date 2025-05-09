@@ -4,26 +4,27 @@
     ViewData["Title"] = "HotelRooms";
 }
 
+
 <div class="container"
     style="padding-top: 150px; display: flex; gap: 20px; padding-top:50px; display:flex; flex-direction:column;">
-    <h1>Room in Hotels</h1>
+    <h1>Danh sách phòng trong khách sạn</h1>
     <div style="width: 100%; margin-bottom: 10px; display: flex; justify-content: space-between;">
         <a style="color: white; text-decoration: none;" class="btn btn-info" asp-area="" asp-controller="Book"
-            asp-action="Index">View In HomePage</a>
+            asp-action="Index">Xem trên trang chủ</a>
         <a style="margin-left: 73%; color: white; text-decoration: none;" class="btn btn-success"
-            asp-action="Create">Create New +</a>
+            asp-action="Create">Thêm mới +</a>
     </div>
     <table class="table table-striped table-hover"
         style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
         <thead class="thead-dark" style="background-color: #343a40; color: white;">
             <tr>
-                <th scope="col" style="text-align: center;">@Html.DisplayNameFor(model => model.RoomName)</th>
-                <th scope="col" style="text-align: center;">@Html.DisplayNameFor(model => model.Status)</th>
-                <th scope="col" style="text-align: center;">@Html.DisplayNameFor(model => model.ReleaseDate)</th>
-                <th scope="col" style="text-align: center;">@Html.DisplayNameFor(model => model.Services)</th>
-                <th scope="col" style="text-align: center;">@Html.DisplayNameFor(model => model.Price)</th>
-                <th scope="col" style="text-align: center;">@Html.DisplayNameFor(model => model.RoomImage)</th>
-                <th scope="col" style="text-align: center;">Action</th>
+                <th scope="col" style="text-align: center;">Tên phòng</th>
+                <th scope="col" style="text-align: center;">Trạng thái</th>
+                <th scope="col" style="text-align: center;">Ngày mở</th>
+                <th scope="col" style="text-align: center;">Dịch vụ</th>
+                <th scope="col" style="text-align: center;">Giá</th>
+                <th scope="col" style="text-align: center;">Hình ảnh</th>
+                <th scope="col" style="text-align: center;">Thao tác</th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +35,7 @@
                         @Html.DisplayFor(modelItem => item.RoomName)
                     </td>
                     <td style="text-align: center; vertical-align: middle;">
-                        @(item.Status ? "InUsed" : "Available")
+                        @(item.Status ? "Đang sử dụng" : "Còn trống")
                     </td>
                     <td style="text-align: center; vertical-align: middle;">
                         @Html.DisplayFor(modelItem => item.ReleaseDate)
@@ -43,16 +44,16 @@
                         @Html.DisplayFor(modelItem => item.Services)
                     </td>
                     <td style="text-align: center; vertical-align: middle; color: #28a745; font-weight: bold;">
-                        $@Html.DisplayFor(modelItem => item.Price)
+                        @Html.DisplayFor(modelItem => item.Price) ₫
                     </td>
                     <td style="text-align: center; vertical-align: middle;">
                         <img src="@Url.Content("~/img/" + item.RoomImage)" alt="@item.RoomName"
                             style="width: 80px; height: auto; border-radius: 8px; object-fit: cover;" />
                     </td>
                     <td style="text-align: center; vertical-align: middle;">
-                        <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a class="btn btn-secondary btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">📝 Sửa</a>
+                        <a class="btn btn-secondary btn-sm" asp-action="Details" asp-route-id="@item.Id">🔎 Chi tiết</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">🗑️ Xoá</a>
                     </td>
                 </tr>
             }

@@ -3,14 +3,14 @@
 @model IEnumerable<User>
 
 <div class="container" style="padding-top: 50px; display: flex; gap: 20px; flex-direction: column;">
-    <h2 class="text-center" style="font-size: 2rem; font-weight: bold;">User Management</h2>
+    <h2 class="text-center" style="font-size: 2rem; font-weight: bold;">Quản lý người dùng</h2>
     
     <!-- Thanh tìm kiếm -->
     <form method="get" style="margin-bottom: 20px; display: flex; justify-content: space-between; width: 100%; max-width: 600px;">
         <input type="text" name="searchString" value="@Context.Request.Query["searchString"]"
-            class="form-control" placeholder="Search by username or email"
+            class="form-control" placeholder="Tìm theo tên người dùng hoặc email"
             style="height: 40px; font-size: 16px;" />
-        <input type="submit" value="Search" class="btn btn-primary" 
+        <input type="submit" value="Tìm kiếm" class="btn btn-primary" 
             style="height: 40px; font-size: 16px; margin-left: 10px;" />
     </form>
 
@@ -19,12 +19,12 @@
         style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
         <thead class="thead-dark" style="background-color: #343a40; color: white;">
             <tr>
-                <th scope="col" style="text-align: center;">#</th>
-                <th scope="col" style="text-align: center;">Image</th>
+                <th scope="col" style="text-align: center;">STT</th>
+                <th scope="col" style="text-align: center;">Ảnh</th>
                 <th scope="col" style="text-align: center;">
                     <a asp-controller="UserManage" asp-action="Index" asp-route-sortOrder="name-asc"
                     style="text-decoration: none; color: white; padding: 0 5px;">
-                        Username
+                        Tên người dùng
                     </a>
                     <a asp-controller="UserManage" asp-action="Index" asp-route-sortOrder="name-desc"
                     style="text-decoration: none; color: white; padding: 0 5px;">
@@ -35,16 +35,16 @@
                 <th scope="col" style="text-align: center;">
                     <a asp-controller="UserManage" asp-action="Index" asp-route-sortOrder="phone-asc"
                     style="text-decoration: none; color: white; padding: 0 5px;">
-                        Phone Number
+                        Số điện thoại
                     </a>
                     <a asp-controller="UserManage" asp-action="Index" asp-route-sortOrder="phone-desc"
                     style="text-decoration: none; color: white; padding: 0 5px;">
                         <i class="fa fa-sort" style="color: white;"></i>
                     </a>
                 </th>
-                <th scope="col" style="text-align: center;">Birth Date</th>
-                <th scope="col" style="text-align: center;">Role</th>
-                <th scope="col" style="text-align: center;">Actions</th>
+                <th scope="col" style="text-align: center;">Ngày sinh</th>
+                <th scope="col" style="text-align: center;">Vai trò</th>
+                <th scope="col" style="text-align: center;">Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -86,12 +86,12 @@
                         </td>
                         <td style="text-align: center; vertical-align: middle;">
                             <a href="@Url.Action("Details", "UserManage", new { area = "Admin", id = user.Id })" class="btn btn-primary btn-sm" 
-                               style="font-size: 14px; padding: 8px 16px; margin-right: 5px;">Details</a>
+                               style="font-size: 14px; padding: 8px 16px; margin-right: 5px;">Chi tiết</a>
                             <a href="@Url.Action("Edit", "UserManage", new { area = "Admin", id = user.Id })" class="btn btn-warning btn-sm" 
-                               style="font-size: 14px; padding: 8px 16px; margin-right: 5px;">Edit</a>
+                               style="font-size: 14px; padding: 8px 16px; margin-right: 5px;">Chỉnh sửa</a>
                             @if (User.Identity != null && user.UserName != User.Identity.Name) {
                                 <a href="@Url.Action("Delete", "UserManage", new { area = "Admin", id = user.Id })" class="btn btn-danger btn-sm" 
-                                   style="font-size: 14px; padding: 8px 16px;">Delete</a>
+                                   style="font-size: 14px; padding: 8px 16px;">Xóa</a>
                             }
                         </td>
                     </tr>
@@ -101,7 +101,7 @@
             else
             {
                 <tr>
-                    <td colspan="8" class="text-center">No users found.</td>
+                    <td colspan="8" class="text-center">Không tìm thấy người dùng nào.</td>
                 </tr>
             }
         </tbody>

@@ -2,10 +2,10 @@
 @model User
 
 <div class="container-xxl" style="padding-top: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: Arial, Helvetica, sans-serif;">
-    <h2>Edit User Role</h2>
+    <h2>Chỉnh sửa vai trò người dùng</h2>
     <form method="post">
         <div class="form-group">
-            <label>Username</label>
+            <label>Tên đăng nhập</label>
             <input asp-for="UserName" class="form-control" disabled />
         </div>
         <div class="form-group">
@@ -13,7 +13,7 @@
             <input asp-for="Email" class="form-control" disabled />
         </div>
         <div class="form-group">
-            <label for="role">Role</label>
+            <label for="role">Vai trò</label>
             <select name="role" id="roleSelect" class="form-control">
                 @if (ViewBag.Roles is List<string> roles)
                 {
@@ -25,63 +25,30 @@
                 }
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Update Role</button>
+        <button type="submit" class="btn btn-primary">Cập nhật vai trò</button>
     </form>
 
     <div id="permissionsDiv" style="display:none; margin-top: 30px; width: 80%; border: 1px solid #ccc; padding: 20px; background-color: #f9f9f9;">
-        <h4>User Permissions</h4>
+        <h4>Quyền hạn của người dùng</h4>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Permission</th>
-                    <th>Status</th>
+                    <th>Chức năng</th>
+                    <th>Trạng thái</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Create Room</td>
-                    <td><i class="bi bi-check-circle" style="color: green;"></i></td>
-                </tr>
-                <tr>
-                    <td>Edit Room</td>
-                    <td><i class="bi bi-check-circle" style="color: green;"></i></td>
-                </tr>
-                <tr>
-                    <td>Create Hotel</td>
-                    <td><i class="bi bi-check-circle" style="color: green;"></i></td>
-                </tr>
-                <tr>
-                    <td>Access Admin Panel</td>
-                    <td><i class="bi bi-x-circle" style="color: red;"></i></td>
-                </tr>
-                <tr>
-                    <td>View Orders</td>
-                    <td><i class="bi bi-check-circle" style="color: green;"></i></td>
-                </tr>
-                <tr>
-                    <td>Edit Orders</td>
-                    <td><i class="bi bi-x-circle" style="color: red;"></i></td>
-                </tr>
-                <tr>
-                    <td>Delete User</td>
-                    <td><i class="bi bi-x-circle" style="color: red;"></i></td>
-                </tr>
-                <tr>
-                    <td>Ban User</td>
-                    <td><i class="bi bi-x-circle" style="color: red;"></i></td>
-                </tr>
-                <tr>
-                    <td>Access Dashboard</td>
-                    <td><i class="bi bi-check-circle" style="color: green;"></i></td>
-                </tr>
-                <tr>
-                    <td>Manage Users</td>
-                    <td><i class="bi bi-x-circle" style="color: red;"></i></td>
-                </tr>
-                <tr>
-                    <td>Interact with Website </td>
-                    <td><i class="bi bi-x-circle" style="color: green;"></i></td>
-                </tr>
+                <tr><td>Tạo phòng</td><td><i class="bi bi-check-circle" style="color: green;"></i></td></tr>
+                <tr><td>Chỉnh sửa phòng</td><td><i class="bi bi-check-circle" style="color: green;"></i></td></tr>
+                <tr><td>Tạo khách sạn</td><td><i class="bi bi-check-circle" style="color: green;"></i></td></tr>
+                <tr><td>Truy cập trang quản trị</td><td><i class="bi bi-x-circle" style="color: red;"></i></td></tr>
+                <tr><td>Xem đơn đặt phòng</td><td><i class="bi bi-check-circle" style="color: green;"></i></td></tr>
+                <tr><td>Chỉnh sửa đơn đặt phòng</td><td><i class="bi bi-x-circle" style="color: red;"></i></td></tr>
+                <tr><td>Xóa người dùng</td><td><i class="bi bi-x-circle" style="color: red;"></i></td></tr>
+                <tr><td>Khóa người dùng</td><td><i class="bi bi-x-circle" style="color: red;"></i></td></tr>
+                <tr><td>Truy cập bảng điều khiển</td><td><i class="bi bi-check-circle" style="color: green;"></i></td></tr>
+                <tr><td>Quản lý người dùng</td><td><i class="bi bi-x-circle" style="color: red;"></i></td></tr>
+                <tr><td>Tương tác với trang web</td><td><i class="bi bi-check-circle" style="color: green;"></i></td></tr>
             </tbody>
         </table>
     </div>
@@ -91,22 +58,18 @@
     <script>
         // Hàm cập nhật quyền hạn dựa trên vai trò
         function updatePermissions(role) {
-            // Hiển thị quyền hạn
             document.getElementById("permissionsDiv").style.display = "block";
             var permissionRows = document.querySelectorAll("#permissionsDiv table tbody tr");
 
-            // Mặc định: Tất cả quyền đều bị hạn chế
             permissionRows.forEach(function(row) {
                 row.querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-x-circle" style="color: red;"></i>';
             });
 
             if (role === "Admin") {
-                // Admin có tất cả quyền
                 permissionRows.forEach(function(row) {
                     row.querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-check-circle" style="color: green;"></i>';
                 });
             } else if (role === "Staff") {
-                // Staff có thể tạo phòng và khách sạn, không vào Admin Panel
                 permissionRows[0].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-check-circle" style="color: green;"></i>';
                 permissionRows[1].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-check-circle" style="color: green;"></i>';
                 permissionRows[2].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-check-circle" style="color: green;"></i>';
@@ -114,36 +77,22 @@
                 permissionRows[8].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-check-circle" style="color: green;"></i>';
                 permissionRows[9].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-check-circle" style="color: green;"></i>';
                 permissionRows[10].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-check-circle" style="color: green;"></i>';
-
             } else if (role === "User") {
-                // User chỉ có quyền xem và đặt phòng
-                permissionRows[0].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-x-circle" style="color: red;"></i>';
-                permissionRows[1].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-x-circle" style="color: red;"></i>';
-                permissionRows[2].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-x-circle" style="color: red;"></i>';
-                permissionRows[3].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-x-circle" style="color: red;"></i>';
                 permissionRows[4].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-check-circle" style="color: green;"></i>';
-                permissionRows[5].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-x-circle" style="color: red;"></i>';
-                permissionRows[6].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-x-circle" style="color: red;"></i>';
-                permissionRows[7].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-x-circle" style="color: red;"></i>';
                 permissionRows[10].querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-check-circle" style="color: green;"></i>';
             } else if (role === "BadGirl") {
-                // BadGirl bị khóa quyền
                 permissionRows.forEach(function(row) {
                     row.querySelector("td:nth-child(2)").innerHTML = '<i class="bi bi-x-circle" style="color: red;"></i>';
                 });
             }
         }
 
-        // Khi trang được tải, cập nhật quyền theo role mặc định
         document.addEventListener("DOMContentLoaded", function() {
             var roleSelect = document.getElementById("roleSelect");
             var selectedRole = roleSelect.value;
-
-            updatePermissions(selectedRole); // Cập nhật quyền theo vai trò đã chọn
-
-            // Lắng nghe sự kiện thay đổi chọn role
+            updatePermissions(selectedRole);
             roleSelect.addEventListener("change", function() {
-                updatePermissions(this.value); // Cập nhật quyền khi role thay đổi
+                updatePermissions(this.value);
             });
         });
     </script>

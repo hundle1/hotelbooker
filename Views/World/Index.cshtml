@@ -18,26 +18,26 @@
             <img src="@Url.Content("~/img/worldmap-bw.png")" alt="" style="width: 100%; height: auto;">
             <div>
                 <div class="map-marker-Asia" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Asia')">
-                    Asia (@hotelsByContinent["Asia"].Count)
+                    Châu Á (@hotelsByContinent["Asia"].Count)
                 </div>
                 <div class="map-marker-Europe" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Europe')">
-                    Europe (@hotelsByContinent["Europe"].Count)
+                    Châu Âu (@hotelsByContinent["Europe"].Count)
                 </div>
                 <div class="map-marker-Africa" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Africa')">
-                    Africa (@hotelsByContinent["Africa"].Count)
+                    Châu Phi (@hotelsByContinent["Africa"].Count)
                 </div>
                 <div class="map-marker-America" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('America')">
-                    America (@hotelsByContinent["America"].Count)
+                    Châu Mỹ (@hotelsByContinent["America"].Count)
                 </div>
                 <div class="map-marker-Australia" style="display: inline; width: auto; cursor: pointer;" onclick="openModal('Australia')">
-                    Australia (@hotelsByContinent["Australia"].Count)
+                    Châu  (@hotelsByContinent["Australia"].Count)
                 </div>
             </div>
         </div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 10px; max-height: 600px; overflow-y: auto; width: 20%; border-left: 1px solid gray; padding-left: 10px;
     font-family: Arial, Helvetica, sans-serif;">
-        <h2>Best 5 Stars Hotels</h2>
+        <h2>Khách Sạn 5 Sao</h2>
         @foreach (var hotel in Model.Where(h => h.HotelRate == 5))
         {
             <div style="cursor: pointer; border: 1px solid gray; padding: 10px; display: flex; flex-direction: column; gap: 10px; width: 280px; font-size: 12px;">
@@ -50,8 +50,8 @@
                 </div>
                 <div style="display: flex; justify-content: space-between; font-size: 12px; color: #555;">
                     <div>
-                        <strong>Rating:</strong> @hotel.HotelRate ★<br/>
-                        <strong>Rooms:</strong> @hotel.NumberOfRoom
+                        <strong>Đánh giá:</strong> @hotel.HotelRate ★<br/>
+                        <strong>Phòng:</strong> @hotel.NumberOfRoom
                     </div>
                     <div>
                         <strong>Email:</strong> @hotel.HotelEmail<br/>
@@ -61,13 +61,13 @@
                 <div style="display: flex; justify-content: space-around; gap: 20px; padding: 10px;">
                     <a href="/World/Detail/@hotel.Id" style="text-decoration: none;">
                         <button class="btn-visit" style="background-color: #7600bb; color: white; border: none; border-radius: 8px; font-size: 12px; cursor: pointer; transition: background-color 0.3s ease;">
-                            Booking
+                            Đặt ngay
                         </button>
                     </a>
                     
                     <a href="@hotel.HotelWebsite" target="_blank" style="text-decoration: none;">
                         <button class="btn-visit" style="background-color: #1e90ff; color: white; border: none; border-radius: 8px; font-size: 12px; cursor: pointer; transition: background-color 0.3s ease;">
-                            Visit Website
+                            Xem Chi Tiết
                         </button>
                     </a>
                 </div>
@@ -95,7 +95,7 @@
         const hotelList = document.getElementById('hotelList');
         const continentTitle = document.getElementById('continentTitle');
 
-        continentTitle.textContent = `Hotels in ${continent}`;
+        continentTitle.textContent = `Khách Sạn Tại ${continent}`;
         hotelList.innerHTML = '';
 
         hotelData[continent].forEach(hotel => {
@@ -148,7 +148,7 @@
             const rightDiv = document.createElement('div');
             rightDiv.innerHTML = `
                     <a href="/World/Detail/${hotel.Id}">
-                        <input type="button" value="View Hotel" style="background-color: #007bff; color: white; border: none; padding: 5px 40px; cursor: pointer; font-weight: bold; font-size: 22px; border-radius: 5px;">
+                        <input type="button" value="Xem Khách Sạn" style="background-color: #007bff; color: white; border: none; padding: 5px 40px; cursor: pointer; font-weight: bold; font-size: 22px; border-radius: 5px;">
                     </a>
             `;
             hotelDetails.appendChild(rightDiv);

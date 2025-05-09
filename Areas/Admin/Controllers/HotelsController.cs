@@ -1,6 +1,8 @@
 using HotelBooker.Models;
+using HotelBooker.Models.ViewModels; // <- thêm dòng này
 using HotelBooker.Services;
 using Microsoft.AspNetCore.Mvc;
+
 namespace HotelBooker.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -13,13 +15,10 @@ namespace HotelBooker.Areas.Admin.Controllers
             _hotelService = hotelService;
         }
 
-        // GET: Admin/Hotel
-        // GET: Admin/Hotel
         public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             var hotels = await _hotelService.GetAllHotelsAsync();
 
-            // Tìm kiếm
             if (!string.IsNullOrEmpty(searchString))
             {
                 hotels = hotels.Where(h => (h.HotelName != null && h.HotelName.Contains(searchString))
@@ -27,7 +26,6 @@ namespace HotelBooker.Areas.Admin.Controllers
                                         || (h.NumberOfRoom?.ToString() != null && h.NumberOfRoom.Value.ToString().Contains(searchString))).ToList();
             }
 
-            // Sắp xếp
             switch (sortOrder)
             {
                 case "name-asc":
@@ -55,7 +53,24 @@ namespace HotelBooker.Areas.Admin.Controllers
             return View(hotels);
         }
 
-        // GET: Admin/Hotel/Details/5
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(HotelRoomViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _hotelService.CreateHotelWithRoomAsync(model.Hotel, model.Room);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
+        }
+
         public async Task<IActionResult> Details(int id)
         {
             var hotel = await _hotelService.GetHotelByIdAsync(id);
@@ -66,26 +81,6 @@ namespace HotelBooker.Areas.Admin.Controllers
             return View(hotel);
         }
 
-        // GET: Admin/Hotel/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Admin/Hotel/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Hotel hotel)
-        {
-            if (ModelState.IsValid)
-            {
-                _ = _hotelService.CreateHotelAsync(hotel);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(hotel);
-        }
-
-        // GET: Admin/Hotel/Edit/5
         public IActionResult Edit(int id)
         {
             var hotel = _hotelService.GetHotelByIdAsync(id).Result;
@@ -96,7 +91,6 @@ namespace HotelBooker.Areas.Admin.Controllers
             return View(hotel);
         }
 
-        // POST: Admin/Hotel/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Hotel hotel)
@@ -114,7 +108,6 @@ namespace HotelBooker.Areas.Admin.Controllers
             return View(hotel);
         }
 
-        // GET: Admin/Hotel/Delete/5
         public IActionResult Delete(int id)
         {
             var hotel = _hotelService.GetHotelByIdAsync(id).Result;
@@ -125,7 +118,6 @@ namespace HotelBooker.Areas.Admin.Controllers
             return View(hotel);
         }
 
-        // POST: Admin/Hotel/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
@@ -133,6 +125,5 @@ namespace HotelBooker.Areas.Admin.Controllers
             _ = _hotelService.DeleteHotelAsync(id);
             return RedirectToAction(nameof(Index));
         }
-
     }
 }

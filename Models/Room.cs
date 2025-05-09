@@ -35,9 +35,6 @@ namespace HotelBooker.Models
 
         public int? DiscountPercent { get; set; }
 
-        // public int HotelId { get; set; }
-
-        // public required Hotel Hotel { get; set; }
 
     }
 }

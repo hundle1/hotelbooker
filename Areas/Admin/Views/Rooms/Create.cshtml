@@ -3,172 +3,125 @@
 @{
     ViewData["Title"] = "Create";
 }
+
 <div class="container" style="padding-top: 150px; display: flex; gap: 20px; padding-top:50px; display:flex; flex-direction:column;">
     <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-        <a asp-action="Index" class="btn btn-dark">Back to List <i class="fa fa-chevron-circle-left"
-            style="color: red;"></i></a>
-        <h1>Public Room Details</h1>
+        <a asp-action="Index" class="btn btn-dark">Quay lại danh sách <i class="fa fa-chevron-circle-left" style="color: red;"></i></a>
+        <h1>Đăng tải thông tin phòng</h1>
         <div style="width:150px;"></div>
     </div>
     <div class="row">
         <div>
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                 <div class="form-group">
                     <h4><label asp-for="RoomName" class="control-label"></label></h4>
-                    <input asp-for="RoomName" class="form-control" />
+                    <input asp-for="RoomName" class="form-control" placeholder="Tên phòng" />
                     <span asp-validation-for="RoomName" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <h4><label class="control-label" asp-for="Status"></label></h4>
                     <div>
                         <button type="button" class="btn btn-primary toggle-status" data-value="false">
-                            Available
+                            Còn trống
                         </button>
                         <input type="hidden" asp-for="Status" value="false" />
                     </div>
                     <span asp-validation-for="Status" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
-                    <h4><label asp-for="ReleaseDate" class="control-label"></label></h4>
+                    <h4><label asp-for="ReleaseDate" class="control-label">Ngày bắt đầu sử dụng</label></h4>
                     <input asp-for="ReleaseDate" class="form-control" />
                     <span asp-validation-for="ReleaseDate" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
-                    <h4><label asp-for="Services" class="control-label"></label></h4>
+                    <h4><label asp-for="Services" class="control-label">Dịch vụ đi kèm</label></h4>
                     <input asp-for="Services" class="form-control" />
                     <span asp-validation-for="Services" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
-                    <h4><label asp-for="Price" class="control-label"></label></h4>
+                    <h4><label asp-for="Price" class="control-label">Giá thuê</label></h4>
                     <input asp-for="Price" class="form-control" />
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
-                    <h4><label asp-for="RoomImage" class="control-label"></label></h4>
+                    <h4><label asp-for="RoomImage" class="control-label">Hình ảnh phòng</label></h4>
                     <div class="image-selection">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="RoomImage" id="room1" value="room1.jpg"
-                                checked>
-                            <label class="form-check-label" for="room1">
-                                <img src="@Url.Content("~/img/room1.jpg")" alt="Room 1" class="img-thumbnail">
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="RoomImage" id="room2" value="room2.jpg">
-                            <label class="form-check-label" for="room2">
-                                <img src="@Url.Content("~/img/room2.jpg")" alt="Room 2" class="img-thumbnail">
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="RoomImage" id="room3" value="room3.jpg">
-                            <label class="form-check-label" for="room3">
-                                <img src="@Url.Content("~/img/room3.jpg")" alt="Room 3" class="img-thumbnail">
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="RoomImage" id="room4" value="room4.jpg">
-                            <label class="form-check-label" for="room4">
-                                <img src="@Url.Content("~/img/room4.jpg")" alt="Room 4" class="img-thumbnail">
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="RoomImage" id="room5" value="room5.jpg">
-                            <label class="form-check-label" for="room5">
-                                <img src="@Url.Content("~/img/room5.jpg")" alt="Room 5" class="img-thumbnail">
-                            </label>
-                        </div>
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="RoomImage" id="room@i" value="room@i.jpg" @(i == 1 ? "checked" : "")>
+                                <label class="form-check-label" for="room@i">
+                                    <img src="@Url.Content($"~/img/room{i}.jpg")" alt="Phòng @i" class="img-thumbnail">
+                                </label>
+                            </div>
+                        }
                     </div>
                     <span asp-validation-for="RoomImage" class="text-danger"></span>
                 </div>
+
                 <div class="form-group" style="margin-top: 60px;">
-                    <h4><label asp-for="Furniture" class="control-label"></label></h4>
+                    <h4><label asp-for="Furniture" class="control-label">Nội thất</label></h4>
                     <div class="d-flex flex-row justify-content-around warping" style="display:flex; flex-wrap:wrap;">
-                        <div class="form-check form-warp">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="First bed"
-                                value="First Bed">
-                            <label class="form-check-label" for="First bed">First Bed </label>
-                        </div>
-                        <div class="form-check form-warp">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="Second bed"
-                                value="Second Bed">
-                            <label class="form-check-label" for="Second bed">Second Bed </label>
-                        </div>
-                        <div class="form-check form-warp">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="sofa" value="Sofa">
-                            <label class="form-check-label" for="sofa">Sofa</label>
-                        </div>
-                        <div class="form-check form-warp">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="Round table"
-                                value="Round Table">
-                            <label class="form-check-label" for="Round table">Round Table</label>
-                        </div>
-                        <div class="form-check form-warp">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="chairs" value="Chairs">
-                            <label class="form-check-label" for="chairs">Chairs</label>
-                        </div>
-                        <div class="form-check form-warp">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="wardrobe"
-                                value="Wardrobe">
-                            <label class="form-check-label" for="wardrobe">Wardrobe</label>
-                        </div>
-                        <div class="form-check form-warp">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="Balcony"
-                                value="Balcony">
-                            <label class="form-check-label" for="Balcony">Balcony</label>
-                        </div>
-                        <div class="form-check form-warp">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="Wifi" value="Wifi">
-                            <label class="form-check-label" for="Wifi">Wifi</label>
-                        </div>
-                        <div class="form-check form-warp">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="AC" value="AC">
-                            <label class="form-check-label" for="AC">AC</label>
-                        </div>
-                        <div class="form-check form-warp">
-                            <input class="form-check-input" type="checkbox" name="Furniture" id="Snacks" value="Snacks">
-                            <label class="form-check-label" for="Snacks">Snacks</label>
-                        </div>
-                        
+                        @{
+                            string[] furnitures = { "Giường đơn", "Giường đôi", "Sofa", "Bàn tròn", "Ghế", "Tủ đồ", "Ban công", "Wifi", "Máy lạnh", "Đồ ăn nhẹ" };
+                            string[] ids = { "First bed", "Second bed", "sofa", "Round table", "chairs", "wardrobe", "Balcony", "Wifi", "AC", "Snacks" };
+                        }
+                        @for (int i = 0; i < furnitures.Length; i++)
+                        {
+                            <div class="form-check form-warp">
+                                <input class="form-check-input" type="checkbox" name="Furniture" id="@ids[i]" value="@furnitures[i]" />
+                                <label class="form-check-label" for="@ids[i]">@furnitures[i]</label>
+                            </div>
+                        }
                     </div>
                     <span asp-validation-for="Furniture" class="text-danger"></span>
                 </div>
+
                 <div class="form-group" style="margin-top: 60px;">
-                    <h4><label asp-for="Description" class="control-label"></label></h4>
+                    <h4><label asp-for="Description" class="control-label">Mô tả chi tiết</label></h4>
                     <textarea id="editor-view" asp-for="Description" class="form-control" rows="5"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <h4><label class="control-label" asp-for="Discount"></label></h4>
+                    <h4><label class="control-label" asp-for="Discount">Khuyến mãi</label></h4>
                     <div>
                         <button type="button" class="btn btn-primary toggle-discount" data-value="false">
-                            None
+                            Không áp dụng
                         </button>
                         <input type="hidden" asp-for="Discount" value="false" />
                     </div>
                     <span asp-validation-for="Discount" class="text-danger"></span>
                 </div>
+
                 <div class="form-group discount-details">
-                    <h4><label asp-for="DiscountStart" class="control-label"></label></h4>
+                    <h4><label asp-for="DiscountStart" class="control-label">Ngày bắt đầu khuyến mãi</label></h4>
                     <input asp-for="DiscountStart" class="form-control" />
                     <span asp-validation-for="DiscountStart" class="text-danger"></span>
                 </div>
+
                 <div class="form-group discount-details">
-                    <h4><label asp-for="DiscountEnd" class="control-label"></label></h4>
+                    <h4><label asp-for="DiscountEnd" class="control-label">Ngày kết thúc khuyến mãi</label></h4>
                     <input asp-for="DiscountEnd" class="form-control" />
                     <span asp-validation-for="DiscountEnd" class="text-danger"></span>
                 </div>
+
                 <div class="form-group discount-details">
-                    <h4><label asp-for="DiscountPercent" class="control-label"></label></h4>
+                    <h4><label asp-for="DiscountPercent" class="control-label">Phần trăm giảm giá (%)</label></h4>
                     <input asp-for="DiscountPercent" class="form-control" />
                     <span asp-validation-for="DiscountPercent" class="text-danger"></span>
                 </div>
-                <div>
-                    <input type="submit" value="Create" class="btn btn-primary"
-                        style="margin-right: 30px; width: 130px;" />
-                </div>
 
+                <div>
+                    <input type="submit" value="Tạo phòng" class="btn btn-primary" style="margin-right: 30px; width: 130px;" />
+                </div>
             </form>
         </div>
     </div>
@@ -194,7 +147,7 @@
                 const currentValue = toggleButton.getAttribute('data-value') === 'true';
                 const newValue = !currentValue;
                 toggleButton.setAttribute('data-value', newValue);
-                toggleButton.textContent = newValue ? 'In Used' : 'Available';
+                toggleButton.textContent = newValue ? 'Đang sử dụng' : 'Còn trống';
                 hiddenInput.value = newValue;
 
                 updateReleaseDateVisibility(newValue);
@@ -203,8 +156,7 @@
             const initialValue = hiddenInput.value === 'true';
             updateReleaseDateVisibility(initialValue);
         });
-    </script>
-    <script>
+
         document.addEventListener('DOMContentLoaded', function () {
             const discountToggleButton = document.querySelector('.toggle-discount');
             const discountHiddenInput = document.querySelector('input[name="Discount"]');
@@ -223,7 +175,7 @@
                 const currentValue = discountToggleButton.getAttribute('data-value') === 'true';
                 const newValue = !currentValue;
                 discountToggleButton.setAttribute('data-value', newValue);
-                discountToggleButton.textContent = newValue ? 'Apply Discount' : 'None';
+                discountToggleButton.textContent = newValue ? 'Áp dụng khuyến mãi' : 'Không áp dụng';
                 discountHiddenInput.value = newValue;
                 updateDiscountDetailsVisibility(newValue);
             });

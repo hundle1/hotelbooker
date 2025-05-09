@@ -7,32 +7,32 @@
 <div style="background-color: black; width: 100%; height: 150px;"></div>
 <div class="container" style="padding-top:50px; display:flex; flex-direction:column;">
     <div>
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="back-hov">Home </a>
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="back-hov">Trang chủ</a>
         <i class="fa fa-chevron-left arrow-hov"></i>
-        <a asp-area="" asp-controller="Book" asp-action="Index" class="back-hov"> Booker </a>
+        <a asp-area="" asp-controller="Book" asp-action="Index" class="back-hov">Đặt phòng</a>
         <i class="fa fa-chevron-left arrow-hov"></i>
         <a style="font-weight: bold; cursor: pointer;">@Model.RoomName</a>
     </div>
     <h1 style="padding: 20px 0px; cursor: pointer;">@Model.RoomName</h1>
     <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-        <p><i class="fa fa-map-marker" style="color: rgb(0, 0, 207); font-size: 32px;"></i> Floor updating...</p>
+        <p><i class="fa fa-map-marker" style="color: rgb(0, 0, 207); font-size: 32px;"></i> Tầng: Đang cập nhật...</p>
         <div style="height: 50px; width:50px; justify-content:center; align-items:center; justify-content:center; display:flex; cursor: pointer;}"
             class="heart-hov">
             <i class="fa fa-heart-o" style="color: rgb(110, 0, 124); font-size: 32px;"></i>
         </div>
     </div>
     <img src="@Url.Content("~/img/" + Model.RoomImage)" alt="@Model.RoomName"
-        style="width: 100%; max-height: auto; object-fit: cover; border-radius: 10px;" />
+        style="width: 80%; max-height: auto; object-fit: cover; border-radius: 10px;" />
     <div class="room-details" style="margin-top: 20px;">
         <div class="info">
             <div style="display: flex; justify-content: space-between;">
                 <h3>
-                    Price: @Model.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-US")) /
-                    <span class="tooltip2">per Night
+                    Giá: @Model.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("en-US")) /
+                    <span class="tooltip2">mỗi đêm
                         <span class="tooltip2-text">
-                            Per Night from 19:00 to 9:00<br>
-                            <i class="fa fa-chevron-circle-right" style="color: green;"></i> Check-in time : 16:00 <br>
-                            <i class="fa fa-chevron-circle-left" style="color: red;"></i> Check-out time : 8:30
+                            Mỗi đêm từ 19:00 đến 9:00<br>
+                            <i class="fa fa-chevron-circle-right" style="color: green;"></i> Giờ nhận phòng: 16:00 <br>
+                            <i class="fa fa-chevron-circle-left" style="color: red;"></i> Giờ trả phòng: 8:30
                         </span>
                     </span>
                 </h3>
@@ -41,17 +41,17 @@
                     <span class="tooltip2"
                         style="border: 2px dashed  #ccc; border-radius: 5px; padding: 5px; width: 230px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
                         <i class="fa fa-gift" style="color: brown; font-size: 30px;"></i>
-                        Adapted Discount
+                        Đã áp dụng giảm giá
                         <div style="display: flex; align-items: center;">
                             <i class="fa fa-percent" style="color: green; font-size: 18px;"></i>
                             <span
                                 style="margin-left: 5px; font-weight: bold; font-size: 16px;">@Model.DiscountPercent%</span>
                         </div>
                         <span class="tooltip3-text" style="height: 400px; width: 350px;">
-                            Discount for @Model.DiscountPercent% of Price<br>
+                            Giảm giá @Model.DiscountPercent% so với giá gốc<br>
                             <div style="display: flex; flex-direction: row; align-items: center;">
                                 <div>
-                                    <i class="fa fa-chevron-circle-right" style="color: green;"></i> Day start :
+                                    <i class="fa fa-chevron-circle-right" style="color: green;"></i> Ngày bắt đầu:
                                 </div>
                                 <div
                                     style="border: 1px solid #ccc; padding: 5px; border-radius: 5px; margin-left: 5px; width: 100%;">
@@ -60,7 +60,7 @@
                             </div>
                             <div style="display: flex; flex-direction: row; align-items: center;">
                                 <div>
-                                    <i class="fa fa-chevron-circle-left" style="color: red;"></i> Day end &nbsp;:
+                                    <i class="fa fa-chevron-circle-left" style="color: red;"></i> Ngày kết thúc:
                                 </div>
                                 <div
                                     style="border: 1px solid #ccc; padding: 5px; border-radius: 5px; margin-left: 5px; width: 100%;">
@@ -71,13 +71,13 @@
                     </span>
                 }
             </div>
-            <h4>Status: @(Model.Status ? "In Used" : "Available") <i class="fa fa-check-circle"
+            <h4>Trạng thái: @(Model.Status ? "Đã có người thuê" : "Còn trống") <i class="fa fa-check-circle"
                     style="color: green; font-size: 18px;"></i></h4>
-            <h4>Category: @Model.Services</h4>
+            <h4>Loại dịch vụ: @Model.Services</h4>
             <p class="textarea">@Html.Raw(Model.Description?.Replace("\n", "<br>") ?? string.Empty)</p>
         </div>
         <div class="furniture-section">
-            <h4>Furnitures:</h4>
+            <h4>Nội thất:</h4>
             <ul class="furniture-list">
                 @if (!string.IsNullOrEmpty(Model.Furniture))
                 {
@@ -88,10 +88,9 @@
                 }
                 else
                 {
-                    <div class="furniture-item" style="font-family: sans-serif; color: gray;">No furniture available</div>
+                    <div class="furniture-item" style="font-family: sans-serif; color: gray;">Không có nội thất</div>
                 }
             </ul>
         </div>
     </div>
-
 </div>

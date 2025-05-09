@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+
 <div class="home">
     <div class="home__background">
         <img src="@Url.Content("~/img/bg_header.webp")" alt="">
@@ -10,12 +11,12 @@
             <div class="home__container__slider">
                 <div class="home__container__slider--content"
                     style="align-items:center; display:flex; flex-direction:column;">
-                    <h1 style="color: white;">Discover</h1>
-                    <h1>the world</h1>
+                    <h1 style="color: white;">HotelBooker</h1>
+                    <h1>Khám phá thế giới</h1>
                 </div>
                 <div class="home__container__slider--btn">
                     <div class="btn__bgc"></div>
-                    <a href="#">explore now
+                    <a href="#">Trải nghiệm ngay 
                         <span></span>
                         <span></span>
                         <span></span>
@@ -26,106 +27,99 @@
     </div>
 </div>
 <div class="main-container">
-        <!-- Tabs Section -->
-        <div class="tabs">
-            <div class="tab con-top-bottom active con-left" style="border-left: 1px solid #000;">Hotels</div>
-            <div class="tab con-top-bottom">Car Rentals</div>
-            <div class="tab con-top-bottom">Flights</div>
-            <div class="tab con-top-bottom">Trips</div>
-            <div class="tab con-top-bottom">Cruises</div>
-            <div class="tab con-top-bottom active con-right">
-                @if (User.Identity?.IsAuthenticated ?? false)
-                {
-                    <span>
-                        <a asp-controller="User"  asp-action="UserInfor" style="font-weight: bold;">
-                            <i class="fa fa-user"></i> Hello @User.Identity.Name
-                        </a>
-                        </span>
-                }
-                else
-                {
-                    <div>
-                        <a asp-action="Login" asp-controller="User">Login</a>
-                        /
-                        <a asp-action="SignUp" asp-controller="User">Sign Up</a>
-                    </div>
-                }
+    <!-- Tabs Section -->
+    <div class="tabs">
+        <div class="tab con-top-bottom active con-left" style="border-left: 1px solid #000;">Khách sạn</div>
+        <div class="tab con-top-bottom">Thuê xe</div>
+        <div class="tab con-top-bottom">Chuyến bay</div>
+        <div class="tab con-top-bottom">Leo núi</div>
+        <div class="tab con-top-bottom">Du thuyền</div>
+        <div class="tab con-top-bottom active con-right">
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <span>
+                    <a asp-controller="User" asp-action="UserInfor" style="font-weight: bold;">
+                        <i class="fa fa-user"></i> Xin chào @User.Identity.Name
+                    </a>
+                </span>
+            }
+            else
+            {
+                <div>
+                    <a asp-action="Login" asp-controller="User">Đăng nhập</a>
+                    /
+                    <a asp-action="SignUp" asp-controller="User">Đăng ký</a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Search Form Section -->
+    <form id="hotel-form" onsubmit="return validateForm()" style="padding-top: 60px;">
+        <div class="row">
+            <div class="form-group destination">
+                <label for="destination">Điểm đến</label>
+                <input type="text" placeholder="Thành phố" class="form-control" id="destination" name="destination" required>
             </div>
         </div>
-        <!-- Search Form Section -->
-        <form id="hotel-form" onsubmit="return validateForm()" style="padding-top: 60px;">
-    <!-- Destination Section -->
-    <div class="row">
-        <div class="form-group destination">
-            <label for="destination">Destination</label>
-            <input type="text" placeholder="City" class="form-control" id="destination" name="destination" required>
-        </div>
-    </div>
 
-    <!-- Check-in, Check-out, Rooms, Guests (Same Row) -->
-    <div class="row horizontal">
-        <div class="form-group flex-grow-1">
-    <label for="checkin-date">Check-in</label>
-    <input type="date" class="form-control" id="checkin-date" name="checkin-date" onkeydown="return false" required>
-</div>
-<div class="form-group flex-grow-1">
-    <label for="checkout-date">Check-out</label>
-    <input type="date" class="form-control" id="checkout-date" name="checkout-date" onkeydown="return false" required>
-</div>
+        <div class="row horizontal">
+            <div class="form-group flex-grow-1">
+                <label for="checkin-date">Ngày nhận</label>
+                <input type="date" class="form-control" id="checkin-date" name="checkin-date" onkeydown="return false" required>
+            </div>
+            <div class="form-group flex-grow-1">
+                <label for="checkout-date">Ngày trả</label>
+                <input type="date" class="form-control" id="checkout-date" name="checkout-date" onkeydown="return false" required>
+            </div>
 
-        <div class="form-group">
-            <label for="rooms">Rooms</label>
-            <select class="form-select" id="rooms">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
+            <div class="form-group">
+                <label for="rooms">Số phòng</label>
+                <select class="form-select" id="rooms">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="guests">Số khách</label>
+                <select class="form-select" id="guests" onchange="javascript: dynamicDropdown(this.options[this.selectedIndex].value);">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="guests">Guests</label>
-            <select class="form-select" id="guests" onchange="javascript: dynamicDropdown(this.options[this.selectedIndex].value);">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-            </select>
-        </div>
-    </div>
 
-    <!-- Submit Button -->
-    <div class="row">
-        <div class="col text-center">
-            <button type="submit" class="btn btn-primary">Search hotels</button>
+        <div class="row">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-primary">Tìm khách sạn</button>
+            </div>
+            <div id="error" class="error text-danger"></div>
         </div>
-        <div id="error" class="error text-danger"></div>
-    </div>
-</form>
-
+    </form>
 </div>
 
-</div>
-<div class="about_area">
+<div class="about_area" style="margin-top: 50px;">
     <div class="container">
         <div class="row">
             <div class="col-xl-5 col-lg-5">
                 <div class="about_info">
-                    <div class="section_title mb-20px">
-                        <span>About Us</span>
-                        <h3>A Luxuries Hotel <br>
-                            with Nature</h3>
+                    <div class="section_title mb-30px">
+                        <span>Về Chúng Tôi</span>
+                        <h3>Khách sạn sang trọng <br>gần gũi thiên nhiên</h3>
                     </div>
-                    <p>Suscipit libero pretium nullam potenti. Interdum, blandit phasellus consectetuer dolor ornare
-                        dapibus enim ut tincidunt rhoncus tellus sollicitudin pede nam maecenas, dolor sem. Neque
-                        sollicitudin enim. Dapibus lorem feugiat facilisi faucibus et. Rhoncus.</p>
-                    <a href="#" class="line-button">Learn More</a>
+                    <p>Chúng tôi cung cấp dịch vụ nghỉ dưỡng cao cấp kết hợp hài hòa với thiên nhiên, mang lại trải nghiệm thư giãn và đáng nhớ cho bạn.</p>
+                    <a href="#" class="line-button">Tìm hiểu thêm</a>
                 </div>
             </div>
             <div class="col-xl-7 col-lg-7">
@@ -141,16 +135,14 @@
         </div>
     </div>
 </div>
-<!-- about_area_end -->
 
-<!-- features_room_startt -->
 <div class="features_room">
     <div class="container" style="display:flex; justify-content: center;">
         <div class="row">
             <div class="col-xl-12">
                 <div class="section_title text-center mb-100">
-                    <span>Featured Rooms</span>
-                    <h3>Choose a Better Room</h3>
+                    <span>Phòng nổi bật</span>
+                    <h3>Chọn phòng tốt hơn</h3>
                 </div>
             </div>
         </div>
@@ -161,10 +153,10 @@
                 <img src="img/rooms/1.png" alt="">
                 <div class="room_heading d-flex justify-content-between align-items-center">
                     <div class="room_heading_inner">
-                        <span>From $250/night</span>
-                        <h3>Superior Room</h3>
+                        <span>Từ $250/đêm</span>
+                        <h3>Phòng Superior</h3>
                     </div>
-                    <a href="#" class="line-button">book now</a>
+                    <a href="#" class="line-button">Đặt ngay</a>
                 </div>
             </div>
         </div>
@@ -173,10 +165,10 @@
                 <img src="img/rooms/2.png" alt="">
                 <div class="room_heading d-flex justify-content-between align-items-center">
                     <div class="room_heading_inner">
-                        <span>From $250/night</span>
-                        <h3>Deluxe Room</h3>
+                        <span>Từ $250/đêm</span>
+                        <h3>Phòng Deluxe</h3>
                     </div>
-                    <a href="#" class="line-button">book now</a>
+                    <a href="#" class="line-button">Đặt ngay</a>
                 </div>
             </div>
         </div>
@@ -185,10 +177,10 @@
                 <img src="img/rooms/3.png" alt="">
                 <div class="room_heading d-flex justify-content-between align-items-center">
                     <div class="room_heading_inner">
-                        <span>From $250/night</span>
-                        <h3>Signature Room</h3>
+                        <span>Từ $250/đêm</span>
+                        <h3>Phòng Signature</h3>
                     </div>
-                    <a href="#" class="line-button">book now</a>
+                    <a href="#" class="line-button">Đặt ngay</a>
                 </div>
             </div>
         </div>
@@ -197,44 +189,43 @@
                 <img src="img/rooms/4.png" alt="">
                 <div class="room_heading d-flex justify-content-between align-items-center">
                     <div class="room_heading_inner">
-                        <span>From $250/night</span>
-                        <h3>Couple Room</h3>
+                        <span>Từ $250/đêm</span>
+                        <h3>Phòng đôi</h3>
                     </div>
-                    <a href="#" class="line-button">book now</a>
+                    <a href="#" class="line-button">Đặt ngay</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="package">
     <div class="package__background"></div>
     <div class="package__container">
-            <div class="grid wide">
-                <div class="package__container___body">
-                    <div class="package__container___body--content">
-                        <div class="body--content__cta">
-                            <h2>maldives deluxe package</h2>
-                            <div class="item_rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu,<br> vitae cursus mi hendrerit nec. Proin bibendum, augue faucibus tincidunt ultrices, tortor
-                                augue gravida lectus, et efficitur enim justo vel ligula.</p>
+        <div class="grid wide">
+            <div class="package__container___body">
+                <div class="package__container___body--content">
+                    <div class="body--content__cta">
+                        <h2>Gói nghỉ dưỡng Maldives cao cấp</h2>
+                        <div class="item_rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="far fa-star"></i>
                         </div>
-                        <div class="item--btn">
-                            <div class="btn__bgc"></div>
-                            <a href="#">Book Now
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </a>
-                        </div>
+                        <p>Một kỳ nghỉ đáng mơ ước giữa thiên nhiên tươi đẹp của Maldives, với các dịch vụ chuẩn quốc tế và trải nghiệm không thể nào quên.</p>
+                    </div>
+                    <div class="item--btn">
+                        <div class="btn__bgc"></div>
+                        <a href="#">Đặt ngay
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
-
