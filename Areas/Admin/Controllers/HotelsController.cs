@@ -61,14 +61,14 @@ namespace HotelBooker.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(HotelRoomViewModel model)
+        public IActionResult Create(Hotel hotel)
         {
             if (ModelState.IsValid)
             {
-                await _hotelService.CreateHotelWithRoomAsync(model.Hotel, model.Room);
+                _ = _hotelService.CreateHotelAsync(hotel);
                 return RedirectToAction(nameof(Index));
             }
-            return View(model);
+            return View(hotel);
         }
 
         public async Task<IActionResult> Details(int id)

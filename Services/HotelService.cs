@@ -26,7 +26,7 @@ namespace HotelBooker.Services
             return await _context.Hotel.FindAsync(id);
         }
 
-        public async Task CreateHotelAsync(Hotel hotel, Room room)
+        public async Task CreateHotelAsync(Hotel hotel)
         {
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
