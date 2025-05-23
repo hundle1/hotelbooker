@@ -44,7 +44,7 @@
 
     <!-- Bottom Div - Orders Section -->
     <div style="margin-top: 20px; width: 100%; min-height: 500px; background-color: #cccccc81; display: flex; flex-direction: column; padding: 30px; border: 1px solid #ccc; border-radius: 10px;">
-        <p style="font-size: 18px; font-weight: bold;">Order List</p>
+        <p style="font-size: 18px; font-weight: bold;">Danh Sách đơn hàng</p>
         <div>
             @if (ViewData["Orders"] != null)
             {
@@ -54,11 +54,10 @@
                     <table class="table">
                         <thead>
                             <tr align="center">
-                                <th>Hotel</th>
-                                <th>Check-in Date</th>
-                                <th>Check-out Date</th>
-                                <th>Total Price</th>
-                                <th>Status</th>
+                                <th>Tên Khách sạn</th>
+                                <th>Check-in</th>
+                                <th>Check-out</th>
+                                <th>Tổng Tiền</th>
                                 <th colspan="2">Action</th>
                             </tr>
                         </thead>
@@ -74,7 +73,7 @@
                                     <td>@order.CheckInDate.ToString("MM/dd/yyyy")</td>
                                     <td>@order.CheckOutDate.ToString("MM/dd/yyyy")</td>
                                     <td>@order.TotalPrice</td>
-                                    <td>
+                                    @* <td>
                                         @if (order.Status)
                                         {
                                             <span class="badge bg-success">Paid</span>
@@ -83,7 +82,7 @@
                                         {
                                             <span class="badge bg-danger">Pending</span>
                                         }
-                                    </td>
+                                    </td> *@
                                     <td>
                                         <form asp-action="DeleteOrder" asp-controller="User" method="post" style="display:inline;">
                                             <input type="hidden" name="orderId" value="@order.Id" />
