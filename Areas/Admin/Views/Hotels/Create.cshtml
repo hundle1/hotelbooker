@@ -1,4 +1,4 @@
-@model HotelBooker.Models.Hotel
+@model HotelBooker.Models.ViewModels.HotelRoomViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -18,26 +18,26 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
-                    <h4><label asp-for="HotelName" class="control-label">Tên khách sạn</label></h4>
-                    <input asp-for="HotelName" class="form-control" />
-                    <span asp-validation-for="HotelName" class="text-danger"></span>
+                    <h4><label asp-for="Hotel.HotelName" class="control-label">Tên khách sạn</label></h4>
+                    <input asp-for="Hotel.HotelName" class="form-control" />
+                    <span asp-validation-for="Hotel.HotelName" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <h4><label asp-for="HotelImage" class="control-label">Ảnh khách sạn</label></h4>
-                    <input asp-for="HotelImage" class="form-control" type="text" placeholder="Nhập URL ảnh" />
-                    <span asp-validation-for="HotelImage" class="text-danger"></span>
+                    <h4><label asp-for="Hotel.HotelImage" class="control-label">Ảnh khách sạn</label></h4>
+                    <input asp-for="Hotel.HotelImage" class="form-control" type="text" placeholder="Nhập URL ảnh" />
+                    <span asp-validation-for="Hotel.HotelImage" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <h4><label asp-for="HotelDescription" class="control-label">Mô tả khách sạn</label></h4>
-                    <textarea id="editor-view" asp-for="HotelDescription" class="form-control" rows="5"></textarea>
-                    <span asp-validation-for="HotelDescription" class="text-danger"></span>
+                    <h4><label asp-for="Hotel.HotelDescription" class="control-label">Mô tả khách sạn</label></h4>
+                    <textarea id="editor-view" asp-for="Hotel.HotelDescription" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Hotel.HotelDescription" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <h4><label asp-for="HotelLocation" class="control-label">Khu vực</label></h4>
-                    <select asp-for="HotelLocation" class="form-control">
+                    <h4><label asp-for="Hotel.HotelLocation" class="control-label">Khu vực</label></h4>
+                    <select asp-for="Hotel.HotelLocation" class="form-control">
                         <option value="">-- Chọn châu lục --</option>
                         <option value="Asia">Châu Á</option>
                         <option value="Europe">Châu Âu</option>
@@ -45,12 +45,12 @@
                         <option value="Australia">Châu Úc</option>
                         <option value="America">Châu Mỹ</option>
                     </select>
-                    <span asp-validation-for="HotelLocation" class="text-danger"></span>
+                    <span asp-validation-for="Hotel.HotelLocation" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <h4><label asp-for="HotelRate" class="control-label">Đánh giá (sao)</label></h4>
-                    <select asp-for="HotelRate" class="form-control">
+                    <h4><label asp-for="Hotel.HotelRate" class="control-label">Đánh giá (sao)</label></h4>
+                    <select asp-for="Hotel.HotelRate" class="form-control">
                         <option value="">-- Chọn số sao --</option>
                         <option value="1">1 sao</option>
                         <option value="2">2 sao</option>
@@ -58,12 +58,12 @@
                         <option value="4">4 sao</option>
                         <option value="5">5 sao</option>
                     </select>
-                    <span asp-validation-for="HotelRate" class="text-danger"></span>
+                    <span asp-validation-for="Hotel.HotelRate" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <h4><label asp-for="NumberOfRoom" class="control-label">Số phòng</label></h4>
-                    <select id="roomDropdown" class="form-control" asp-for="NumberOfRoom">
+                    <h4><label asp-for="Hotel.NumberOfRoom" class="control-label">Số phòng</label></h4>
+                    <select id="roomDropdown" class="form-control" asp-for="Hotel.NumberOfRoom">
                         <option value="">-- Chọn số phòng --</option>
                         <option value="10">10</option>
                         <option value="50">50</option>
@@ -72,38 +72,37 @@
                         <option value="200">200</option>
                         <option value="other">Khác</option>
                     </select>
-                    <input id="customRoomInput" asp-for="NumberOfRoom" class="form-control" type="number"
-                           style="display: none; margin-top: 10px;" placeholder="Nhập số phòng khác" />
-                    <span asp-validation-for="NumberOfRoom" class="text-danger"></span>
+                    <input id="customRoomInput" asp-for="Hotel.NumberOfRoom" class="form-control" type="number"
+                        style="display: none; margin-top: 10px;" placeholder="Nhập số phòng khác" />
+                    <span asp-validation-for="Hotel.NumberOfRoom" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <h4><label asp-for="HotelServices" class="control-label">Dịch vụ</label></h4>
-                    <input asp-for="HotelServices" class="form-control" />
-                    <span asp-validation-for="HotelServices" class="text-danger"></span>
+                    <h4><label asp-for="Hotel.HotelServices" class="control-label">Dịch vụ</label></h4>
+                    <input asp-for="Hotel.HotelServices" class="form-control" />
+                    <span asp-validation-for="Hotel.HotelServices" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <h4><label asp-for="HotelContact" class="control-label">Số điện thoại liên hệ</label></h4>
-                    <input asp-for="HotelContact" class="form-control" />
-                    <span asp-validation-for="HotelContact" class="text-danger"></span>
+                    <h4><label asp-for="Hotel.HotelContact" class="control-label">Số điện thoại liên hệ</label></h4>
+                    <input asp-for="Hotel.HotelContact" class="form-control" />
+                    <span asp-validation-for="Hotel.HotelContact" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <h4><label asp-for="HotelEmail" class="control-label">Email</label></h4>
-                    <input asp-for="HotelEmail" class="form-control" type="email" />
-                    <span asp-validation-for="HotelEmail" class="text-danger"></span>
+                    <h4><label asp-for="Hotel.HotelEmail" class="control-label">Email</label></h4>
+                    <input asp-for="Hotel.HotelEmail" class="form-control" type="email" />
+                    <span asp-validation-for="Hotel.HotelEmail" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <h4><label asp-for="HotelWebsite" class="control-label">Website</label></h4>
-                    <input asp-for="HotelWebsite" class="form-control" type="url" />
-                    <span asp-validation-for="HotelWebsite" class="text-danger"></span>
+                    <h4><label asp-for="Hotel.HotelWebsite" class="control-label">Website</label></h4>
+                    <input asp-for="Hotel.HotelWebsite" class="form-control" type="url" />
+                    <span asp-validation-for="Hotel.HotelWebsite" class="text-danger"></span>
                 </div>
 
                 <div>
-                    <input type="submit" value="Thêm mới" class="btn btn-primary"
-                           style="margin-right: 30px; width: 130px;" />
+                    <input type="submit" value="Thêm mới" class="btn btn-primary" style="margin-right: 30px; width: 130px;" />
                 </div>
 
             </form>
