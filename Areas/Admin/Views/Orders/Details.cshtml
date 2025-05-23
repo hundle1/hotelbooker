@@ -1,0 +1,29 @@
+@model HotelBooker.Models.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<a class="btn btn-secondary" style="margin: 40px;" asp-action="Index">Quay lại danh sách</a>
+
+<div class="container-xxl" style="padding-top: 50px; display: flex; gap: 20px; flex-direction: column;">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="card-title text-center text-primary mb-4">Chi tiết đơn hàng</h3>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Khách sạn:</strong> @Model.Hotel?.HotelName</p>
+                    <p><strong>Số phòng:</strong> @Model.RoomNumber</p>
+                    <p><strong>Người dùng:</strong> @Model.User?.UserName</p>
+                    <p><strong>Ngày đặt:</strong> @Model.BookingDate.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Ngày nhận phòng:</strong> @Model.CheckInDate.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Ngày trả phòng:</strong> @Model.CheckOutDate.ToString("dd/MM/yyyy")</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Tổng giá:</strong> @Model.TotalPrice.ToString("N0") VND</p>
+                    <p><strong>Trạng thái:</strong> @(Model.Status ? "Hoàn thành" : "Chưa hoàn thành")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

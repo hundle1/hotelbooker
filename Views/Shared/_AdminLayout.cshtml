@@ -1,188 +1,179 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@ViewData["Title"] | HotelBooker</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="manifest" href="site.webmanifest"> -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <!-- Place favicon.ico in the root directory -->
-    <!-- CSS here -->
+    <!-- CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HotelBooker.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/css/magnific-popup.css">
     <link rel="stylesheet" href="~/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/themify-icons.css">
-    <link rel="stylesheet" href="~/css/nice-select.css">
-    <link rel="stylesheet" href="~/css/flaticon.css">
-    <link rel="stylesheet" href="~/css/gijgo.css">
-    <link rel="stylesheet" href="~/css/animate.css">
-    <link rel="stylesheet" href="~/css/slicknav.css">
-    <link rel="stylesheet" href="~/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css'/>
-    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
-    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 </head>
 <style>
-    .main-body,
-    footer {
-        margin-left: 250px;
-        max-width: calc(100% - 250px);
-        transition: margin-left 0.3s, max-width 0.3s;
+    .sidebar {
+        width: 260px;
+        transition: width 0.3s ease-in-out;
+        background-color: #4a5568; /* Lighter gray shade */
     }
-    body.sidebar-collapsed .main-body,
-    body.sidebar-collapsed footer {
-        margin-left: 100px;
+    .sidebar.collapsed {
+        width: 100px;
+    }
+    .main-body, footer {
+        margin-left: 260px;
+        max-width: calc(100% - 260px);
+        transition: margin-left 0.3s ease-in-out, max-width 0.3s ease-in-out;
+    }
+    .sidebar-collapsed .main-body, .sidebar-collapsed footer {
+        margin-left: 80px;
         max-width: calc(100% - 80px);
-        transition: margin-left 0.3s, max-width 0.3s;
     }
-    #sidebar {
-        width: 250px;
-        transition: width 0.3s;
+    .nav-link {
+        color: white !important; /* Ensure text stays white */
+        text-decoration: none !important; /* Remove any underline */
+        border: 1px solid transparent; /* Transparent border to maintain size */
+        transition: all 0.2s ease-in-out;
     }
-    #sidebar.collapsed {
-        width: 80px;
+    .nav-link:hover {
+        background-color: #2d3748 !important; /* Darker background on hover */
+        border: 1px solid #a0aec0; /* Light gray border on hover */
+        color: white !important; /* Keep text white on hover */
+        text-decoration: none !important; /* Ensure no underline on hover */
+    }
+    .nav-link .tooltip-text {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        left: 100%;
+        margin-left: 8px;
+        background-color: #2d3748;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+        transition: opacity 0.2s;
+    }
+    .nav-link:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
     }
 </style>
-
-
-<body>
+<body class="bg-gray-100">
     <header>
-        <div id="sidebar" class="sidebar" style="display:flex; flex-wrap:wrap; justify-content:space-between; flex-direction:column;">
-            <button class="close-btn" style="color: black;" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
-            <nav style="margin-top: 70px;">
-                <ul id="navigation">
-                    <li class="nav-item">
-                        <a class="nav-link active-admin" asp-area="Admin" asp-controller="Rooms" asp-action="Index">
-                            <i style="margin-left: -5px;" class="fa fa-home"></i> <span class="text">Dash Board</span>
+        <div id="sidebar" class="sidebar fixed top-0 left-0 h-screen text-white flex flex-col shadow-lg">
+            <div class="flex items-center justify-between p-4 border-b border-gray-600">
+                <span class="text-xl font-bold sidebar-text">HotelBooker</span>
+                <button class="text-white focus:outline-none hover:none" onclick="toggleSidebar()">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+            <nav class="flex-1 overflow-y-auto mt-4">
+                <ul class="p-2">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link flex items-center p-2 rounded-lg transition-colors" asp-area="Admin" asp-controller="Rooms" asp-action="Index">
+                            <i class="fa fa-home mr-3 text-lg"></i>
+                            <span class="sidebar-text whitespace-nowrap truncate text-white">Dash Board</span>
+                            <span class="tooltip-text sidebar-collapsed:visible">Dash Board</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " asp-area="Admin" asp-controller="Hotels" asp-action="Index">
-                            <i style="margin-left: -5px;" class="fa fa-image"></i> <span class="text">Quản lý Hotels</span>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link flex items-center p-2 rounded-lg transition-colors" asp-area="Admin" asp-controller="Hotels" asp-action="Index">
+                            <i class="fa fa-image mr-3 text-lg"></i>
+                            <span class="sidebar-text whitespace-nowrap truncate">Quản lý Hotels</span>
+                            <span class="tooltip-text sidebar-collapsed:visible">Quản lý Hotels</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " asp-area="Admin" asp-controller="Rooms" asp-action="HotelRooms">
-                            <i style="margin-left: -3px;" class="fa fa-book"></i> <span class="text">Quản lý Rooms</span>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link flex items-center p-2 rounded-lg transition-colors" asp-area="Admin" asp-controller="Rooms" asp-action="HotelRooms">
+                            <i class="fa fa-book mr-3 text-lg"></i>
+                            <span class="sidebar-text whitespace-nowrap truncate">Quản lý Rooms</span>
+                            <span class="tooltip-text sidebar-collapsed:visible">Quản lý Rooms</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " asp-area="Admin" asp-controller="UserManage" asp-action="Index">
-                            <i style="margin-left: -3px;" class="fa fa-user"></i> <span class="text">Quản lý User</span>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link flex items-center p-2 rounded-lg transition-colors" asp-area="Admin" asp-controller="UserManage" asp-action="Index">
+                            <i class="fa fa-user mr-3 text-lg"></i>
+                            <span class="sidebar-text whitespace-nowrap truncate">Quản lý User</span>
+                            <span class="tooltip-text sidebar-collapsed:visible">Quản lý User</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " asp-area="Admin" asp-controller="Rooms" asp-action="Discount">
-                            <i style="margin-left: -8px;" class="fa fa-newspaper-o"></i> <span class="text">khuyến Mãi</span>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link flex items-center p-2 rounded-lg transition-colors" asp-area="Admin" asp-controller="Orders" asp-action="Index">
+                            <i class="fa fa-newspaper-o mr-3 text-lg"></i>
+                            <span class="sidebar-text whitespace-nowrap truncate">Đơn hàng</span>
+                            <span class="tooltip-text sidebar-collapsed:visible">Đơn hàng</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">
-                            <i style="margin-left: 0px;" class="fa fa-lock"></i> <span class="text">Privacy</span>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link flex items-center p-2 rounded-lg transition-colors" asp-area="" asp-controller="Home" asp-action="Privacy">
+                            <i class="fa fa-lock mr-3 text-lg"></i>
+                            <span class="sidebar-text whitespace-nowrap truncate">Privacy</span>
+                            <span class="tooltip-text sidebar-collapsed:visible">Privacy</span>
                         </a>
                     </li>
                 </ul>
             </nav>
-            <div class="">
-                <a class="nav-link back-home-hov" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="fa fa-arrow-left"> </i> <span class="text">Về Trang Chủ
-                        (Travelix) </span>
+            <div class="p-4 border-t border-gray-600">
+                <a class="nav-link flex items-center p-2 rounded-lg transition-colors" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fa fa-arrow-left mr-3 text-lg"></i>
+                    <span class="sidebar-text whitespace-nowrap ">Về Trang Chủ</span>
+                    <span class="tooltip-text sidebar-collapsed:visible">Về Trang Chủ</span>
                 </a>
             </div>
         </div>
-
     </header>
-    <div class="main-body" style="max-width: 100%;">
-        <main role="main" class="pb-3">
+    <div class="main-body p-6">
+        <main role="main">
             @RenderBody()
+            @RenderSection("Scripts", required: false)
         </main>
     </div>
-
-    <footer class="border-top footer text-muted" style="position: relative; top: 422px;">
+    <footer class="border-t footer text-muted bg-white p-4">
         <div class="container">
-            &copy; 2024 - HotelBooker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            © 2024 - HotelBooker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-    <!-- JS here -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/isotope.pkgd.min.js"></script>
-    <script src="js/ajax-form.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/imagesloaded.pkgd.min.js"></script>
-    <script src="js/scrollIt.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/nice-select.min.js"></script>
-    <script src="js/jquery.slicknav.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/gijgo.min.js"></script>
-    <!--contact js-->
-    <script src="js/contact.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
     <script>
-        var editor = new FroalaEditor('#editor-view');
         function toggleSidebar() {
             const sidebar = document.getElementById("sidebar");
             const body = document.body;
             sidebar.classList.toggle("collapsed");
             body.classList.toggle("sidebar-collapsed");
+            
+            const textElements = document.querySelectorAll(".sidebar-text");
+            textElements.forEach(element => {
+                element.style.display = sidebar.classList.contains("collapsed") ? "none" : "inline";
+            });
         }
-    </script>
-
-
-    <script src="js/main.js"></script>
-    <script>
-        $('#datepicker').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-                rightIcon: '<span class="fa fa-caret-down"></span>'
-            }
-        });
-        $('#datepicker2').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-                rightIcon: '<span class="fa fa-caret-down"></span>'
-            }
-
-        });
-
-        @* sidebar BarProp  *@
-            function toggleSidebar() {
-                const sidebar = document.getElementById("sidebar");
-                const body = document.body;
-                sidebar.classList.toggle("collapsed");
-                body.classList.toggle("sidebar-collapsed");
-            }
 
         window.onload = () => {
             const sidebar = document.getElementById("sidebar");
             sidebar.classList.add("active");
         };
 
+        // Initialize Froala Editor
+        var editor = new FroalaEditor('#editor-view');
 
+        // Initialize datepickers
+        $('#datepicker').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: { rightIcon: '<span class="fa fa-caret-down"></span>' }
+        });
+        $('#datepicker2').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: { rightIcon: '<span class="fa fa-caret-down"></span>' }
+        });
     </script>
-
 </body>
-
 </html>
